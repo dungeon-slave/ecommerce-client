@@ -1,4 +1,4 @@
-name: market_client
+name: food_app
 description: A new Flutter project.
 publish_to: 'none'
 version: 0.1.0
@@ -9,6 +9,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  main_menu:
+    path: ./features/main_menu
 
 dev_dependencies:
   flutter_test:
