@@ -1,3 +1,4 @@
+import 'package:core_ui/core_ui.dart';
 import 'package:domain/models/dish_model.dart';
 import 'package:flutter/material.dart';
 import 'package:main_menu/src/ui/dish_item.dart';
@@ -15,9 +16,9 @@ class MainMenuState extends State<MainMenu> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 0, 31, 36),
+      backgroundColor: MyColors.dartBreeze,
       body: ListView(
-        padding: const EdgeInsets.all(10),
+        padding: const EdgeInsets.all(Dimens.dishesPadding),
         children: List.generate(
           widget._dishesModels.length,
           (index) => DishItem(

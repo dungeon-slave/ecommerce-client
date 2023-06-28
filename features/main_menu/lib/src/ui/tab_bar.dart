@@ -1,5 +1,6 @@
 import 'package:core/core.dart';
 import 'package:core/di/app_di.dart';
+import 'package:core_ui/core_ui.dart';
 import 'package:domain/usecase/fetch_dishes_usecase.dart';
 import 'package:flutter/material.dart';
 import 'package:main_menu/src/bloc/bloc.dart';
@@ -7,11 +8,6 @@ import 'package:main_menu/src/ui/main_menu.dart';
 
 class MenuTabBar extends StatelessWidget {
   const MenuTabBar({super.key});
-
-  static const _tabStyle = TextStyle(fontSize: 25);
-  static const _bgColor = Color.fromARGB(255, 0, 31, 36);
-  static const _selectedColor = Color.fromARGB(255, 248, 193, 52);
-  static const _unselectedColor = Color.fromARGB(255, 255, 255, 255);
 
   static const Map<int, String> dishesTypes = {
     0: 'Burgers',
@@ -44,12 +40,12 @@ class MenuTabBar extends StatelessWidget {
             length: 3,
             child: Scaffold(
                 appBar: AppBar(
-                  backgroundColor: _bgColor,
+                  backgroundColor: MyColors.dartBreeze,
                   toolbarHeight: 0,
                   bottom: TabBar(
-                    indicatorColor: _selectedColor,
-                    unselectedLabelColor: _unselectedColor,
-                    labelColor: _selectedColor,
+                    indicatorColor: MyColors.smoothYellow,
+                    unselectedLabelColor: MyColors.lightWhite,
+                    labelColor: MyColors.smoothYellow,
                     isScrollable: true,
                     onTap: (value) {
                       BlocProvider.of<MenuBloc>(context)
@@ -59,19 +55,19 @@ class MenuTabBar extends StatelessWidget {
                       Tab(
                         child: Text(
                           dishesTypes[0]!,
-                          style: _tabStyle,
+                          style: Fonts.tabFont,
                         ),
                       ),
                       Tab(
                         child: Text(
                           dishesTypes[1]!,
-                          style: _tabStyle,
+                          style: Fonts.tabFont,
                         ),
                       ),
                       Tab(
                         child: Text(
                           dishesTypes[2]!,
-                          style: _tabStyle,
+                          style: Fonts.tabFont,
                         ),
                       ),
                     ],

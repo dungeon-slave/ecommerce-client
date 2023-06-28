@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:core_ui/core_ui.dart';
 
 class DishItem extends StatefulWidget {
 
@@ -19,43 +20,37 @@ class DishItem extends StatefulWidget {
 
 class DishItemState extends State<DishItem> {
 
-  static const double vertCardMargin = 5;
-  static const double vertCardPadding = 10;
-
   @override
   Widget build(BuildContext context) {
 
     return Container(
-      margin: const EdgeInsets.only(top: vertCardMargin, bottom: vertCardMargin),
-      padding: const EdgeInsets.only(top: vertCardPadding, bottom: vertCardPadding),
+      margin: const EdgeInsets.only(top: Dimens.vertCardMargin, bottom: Dimens.vertCardMargin),
+      padding: const EdgeInsets.only(top: Dimens.vertCardPadding, bottom: Dimens.vertCardPadding),
       decoration: const BoxDecoration(
-        color: Color.fromARGB(255, 34, 34, 34),
-        borderRadius: BorderRadius.all(Radius.circular(10))
+        color: MyColors.dartBreeze,
+        borderRadius: BorderRadius.all(Radius.circular(Dimens.cardRadius)),
       ),
       child: Column(
         children: [
           Text(
             widget._name,
-            style: const TextStyle(
-              color: Color.fromARGB(255, 255, 255, 255),
-              fontSize: 25
-            ),
+            style: Fonts.dishNameFont,
           ),
           Image.network(
             widget._imageRef,
-            width: 200,
-            height: 200,
+            width: Dimens.imageSize,
+            height: Dimens.imageSize,
             loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
               if (loadingProgress == null) {
                 return child;
               }
               return Center(
                 child: Container(
-                    padding: const EdgeInsets.all(50),
-                    width: 200,
-                    height: 200,
+                    padding: const EdgeInsets.all(Dimens.progressPadding),
+                    width: Dimens.imageSize,
+                    height: Dimens.imageSize,
                     child:CircularProgressIndicator(
-                      strokeWidth: 25.0,
+                      strokeWidth: Dimens.progressCircleWidth,
                       value: loadingProgress.expectedTotalBytes != null ? 
                       loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes!
                               : null,
@@ -69,19 +64,13 @@ class DishItemState extends State<DishItem> {
             children: [
               Text(
                 widget._price,
-                style: const TextStyle(
-                  color: Color.fromARGB(255, 248, 193, 52),
-                  fontSize: 24
-                ),
+                style: Fonts.priceFont,
               ),
               ElevatedButton(
                 onPressed: () => {}, 
                 child: const Text(
                   'Add to cart',
-                  style: TextStyle(
-                    color: Color.fromARGB(255, 255, 255, 255),
-                    fontSize: 22
-                  ),
+                  style: Fonts.buttonFont,
                 ),
               ),
             ],
