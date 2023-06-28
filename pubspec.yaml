@@ -1,7 +1,7 @@
 name: food_app
-description: A new Flutter project.
-publish_to: 'none'
 version: 0.1.0
+publish_to: 'none'
+description: Main project package.
 
 environment:
   sdk: '>=3.0.3 <4.0.0'
