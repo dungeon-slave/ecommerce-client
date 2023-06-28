@@ -1,3 +1,3 @@
-abstract class UseCase<Input, Output> {
+abstract class IUseCase<Input, Output> {
   Future<Output> execute(Input input);
 }
