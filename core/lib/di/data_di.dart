@@ -12,7 +12,6 @@ class DataDI {
   }
 
   void _initFirebase() {
-
     appLocator.registerLazySingleton<FirebaseProvider>(
       () => FirebaseProvider(),
     );
@@ -20,8 +19,7 @@ class DataDI {
 
   void _initDishes() {
     appLocator.registerLazySingleton<DishesRepository>(
-      () => DishesRepository(appLocator.get<FirebaseProvider>())
-    );
+        () => DishesRepository(appLocator.get<FirebaseProvider>()));
 
     appLocator.registerLazySingleton<FetchDishesUsecase>(
       () => FetchDishesUsecase(appLocator.get<DishesRepository>()),

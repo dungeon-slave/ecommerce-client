@@ -49,7 +49,7 @@ class MenuTabBar extends StatelessWidget {
                     isScrollable: true,
                     onTap: (value) {
                       BlocProvider.of<MenuBloc>(context)
-                        .add(ChangeTypeEvent(dishesTypes[value]!));
+                          .add(ChangeTypeEvent(dishesTypes[value]!));
                     },
                     tabs: <Widget>[
                       Tab(

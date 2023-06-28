@@ -10,7 +10,7 @@ class MainMenu extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() => MainMenuState();
-} 
+}
 
 class MainMenuState extends State<MainMenu> {
   @override
