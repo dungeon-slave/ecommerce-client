@@ -2,24 +2,16 @@ import 'package:flutter/material.dart';
 
 class DishItem extends StatefulWidget {
 
-  late final String _name;
-  late final ImageProvider<Object> _image;
-  late final String _price;
-  late final String type;
+  final String _name;
+  final String _imageRef;
+  final String _price;
 
-  DishItem({
-    super.key, 
-    required String name, 
-    required ImageProvider<Object> image, 
-    required String type,
-    required String price
-  }) {
-
-    _price = price;
-    _name = name;
-    _image = image;
-    this.type = type;
-  }
+  const DishItem(
+    this._name,
+    this._imageRef, 
+    this._price, 
+    {super.key}
+  );
 
   @override
   State<StatefulWidget> createState() => DishItemState();
@@ -49,11 +41,29 @@ class DishItemState extends State<DishItem> {
               fontSize: 25
             ),
           ),
-          Image(
+          Image.network(
+            widget._imageRef,
             width: 200,
             height: 200,
-            image: widget._image
-          ),
+            loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
+              if (loadingProgress == null) {
+                return child;
+              }
+              return Center(
+                child: Container(
+                    padding: const EdgeInsets.all(50),
+                    width: 200,
+                    height: 200,
+                    child:CircularProgressIndicator(
+                      strokeWidth: 25.0,
+                      value: loadingProgress.expectedTotalBytes != null ? 
+                      loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes!
+                              : null,
+                    ),
+                ),
+              );
+            },
+          ), 
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -64,7 +74,6 @@ class DishItemState extends State<DishItem> {
                   fontSize: 24
                 ),
               ),
-
               ElevatedButton(
                 onPressed: () => {}, 
                 child: const Text(

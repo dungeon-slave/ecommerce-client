@@ -1,7 +1,7 @@
 name: core_ui
-description: A new Flutter package project.
 version: 0.0.1
-homepage:
+publish_to: none
+description: Packkage that contains reusable widgets.
 
 environment:
   sdk: '>=3.0.3 <4.0.0'
