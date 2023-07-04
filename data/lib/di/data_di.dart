@@ -1,7 +1,7 @@
+import 'package:core/di/app_di.dart';
 import 'package:data/providers/firebase_provider.dart';
 import 'package:data/repositories/dishes_repository_impl.dart';
 import 'package:domain/domain.dart';
-import 'app_di.dart';
 
 final DataDI dataDI = DataDI();
 
@@ -19,7 +19,7 @@ class DataDI {
 
   void _initDishes() {
     appLocator.registerLazySingleton<DishesRepository>(
-        () => DishesRepository(appLocator.get<FirebaseProvider>()));
+        () => DishesRepositoryImpl(appLocator.get<FirebaseProvider>()));
 
     appLocator.registerLazySingleton<FetchDishesUsecase>(
       () => FetchDishesUsecase(appLocator.get<DishesRepository>()),

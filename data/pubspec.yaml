@@ -12,8 +12,16 @@ dependencies:
     sdk: flutter
   core:
     path: ../core
+  domain:
+    path: ../domain
+  core_ui:
+    path: ../core_ui
+  freezed_annotation: ^2.2.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.0
+  build_runner: ^2.4.6
+  json_serializable: ^6.7.1
+  freezed: ^2.3.5

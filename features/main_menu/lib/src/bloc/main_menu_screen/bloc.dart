@@ -7,6 +7,7 @@ part 'state.dart';
 
 class MenuBloc extends Bloc<IMenuEvent, IMenuState> {
   final FetchDishesUsecase _fetchDishesUsecase;
+  List<DishModel>? _cachedModels;
 
   MenuBloc(this._fetchDishesUsecase) : super(EmptyState()) {
     on<ChangeTypeEvent>(_changeType);
@@ -15,7 +16,8 @@ class MenuBloc extends Bloc<IMenuEvent, IMenuState> {
   void _changeType(ChangeTypeEvent event, Emitter<IMenuState> emit) async {
     emit(LoadingState());
     try {
-      emit(MenuState(dishes: await _fetchDishesUsecase.execute(event.type)));
+      _cachedModels ??= await _fetchDishesUsecase.execute();
+      emit(MenuState(dishes: _cachedModels!.where((e) => e.type == event.type).toList()));
     } catch (e) {
       emit(ErrorState(errorMessage: e.toString()));
     }

@@ -1,3 +1,4 @@
-library;
+library core_ui;
 
 export 'src/theme/themes.dart';
+export 'src/widgets/app_image.dart';

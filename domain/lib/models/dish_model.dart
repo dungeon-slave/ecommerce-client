@@ -4,5 +4,10 @@ class DishModel {
   final String type;
   final String price;
 
-  DishModel(this.imageRef, this.name, this.type, this.price);
+  DishModel({
+    required this.imageRef, 
+    required this.name, 
+    required this.type, 
+    required this.price
+  });
 }

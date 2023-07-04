@@ -16,15 +16,15 @@ class MainMenuState extends State<MainMenu> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: MyColors.dartBreeze,
+      backgroundColor: AppColors.DART_BREEZE,
       body: ListView(
-        padding: const EdgeInsets.all(Dimens.dishesPadding),
+        padding: const EdgeInsets.all(AppDimens.PADDING_10),
         children: List.generate(
           widget._dishesModels.length,
           (index) => DishItem(
-            widget._dishesModels[index].name,
-            widget._dishesModels[index].imageRef,
-            widget._dishesModels[index].price,
+            name: widget._dishesModels[index].name,
+            imageRef: widget._dishesModels[index].imageRef,
+            price: widget._dishesModels[index].price,
           ),
         ),
       ),

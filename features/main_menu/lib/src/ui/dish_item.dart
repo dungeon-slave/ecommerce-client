@@ -6,7 +6,15 @@ class DishItem extends StatefulWidget {
   final String _imageRef;
   final String _price;
 
-  const DishItem(this._name, this._imageRef, this._price, {super.key});
+  const DishItem({
+    required String name,
+    required String imageRef,
+    required String price,
+    super.key
+  }) : 
+    _name = name,
+    _imageRef = imageRef,
+    _price = price;
 
   @override
   State<StatefulWidget> createState() => DishItemState();
@@ -17,56 +25,40 @@ class DishItemState extends State<DishItem> {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(
-          top: Dimens.vertCardMargin, bottom: Dimens.vertCardMargin),
+        top: AppDimens.MARGIN_5, 
+        bottom: AppDimens.MARGIN_5,
+      ),
       padding: const EdgeInsets.only(
-          top: Dimens.vertCardPadding, bottom: Dimens.vertCardPadding),
+        top: AppDimens.PADDING_10,
+        bottom: AppDimens.PADDING_10,
+      ),
       decoration: const BoxDecoration(
-        color: MyColors.dartBreeze,
-        borderRadius: BorderRadius.all(Radius.circular(Dimens.cardRadius)),
+        color: AppColors.SMOOTH_BROWN,
+        borderRadius: BorderRadius.all(Radius.circular(AppDimens.RADIUS_10)),
       ),
       child: Column(
-        children: [
+        children: <Widget>[
           Text(
             widget._name,
-            style: Fonts.dishNameFont,
+            style: AppFonts.normal25.copyWith(color: AppColors.LIGHT_WHITE),
           ),
-          Image.network(
-            widget._imageRef,
-            width: Dimens.imageSize,
-            height: Dimens.imageSize,
-            loadingBuilder: (BuildContext context, Widget child,
-                ImageChunkEvent? loadingProgress) {
-              if (loadingProgress == null) {
-                return child;
-              }
-              return Center(
-                child: Container(
-                  padding: const EdgeInsets.all(Dimens.progressPadding),
-                  width: Dimens.imageSize,
-                  height: Dimens.imageSize,
-                  child: CircularProgressIndicator(
-                    strokeWidth: Dimens.progressCircleWidth,
-                    value: loadingProgress.expectedTotalBytes != null
-                        ? loadingProgress.cumulativeBytesLoaded /
-                            loadingProgress.expectedTotalBytes!
-                        : null,
-                  ),
-                ),
-              );
-            },
+          AppImage(
+            imageRef: widget._imageRef,
+            width: AppDimens.SIZE_200,
+            height: AppDimens.SIZE_200,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
+            children: <Widget>[
               Text(
                 widget._price,
-                style: Fonts.priceFont,
+                style: AppFonts.normal24.copyWith(color: AppColors.SMOOTH_YELLOW,),
               ),
               ElevatedButton(
                 onPressed: () => {},
-                child: const Text(
-                  'Add to cart',
-                  style: Fonts.buttonFont,
+                child: Text(
+                  AppConstants.ADD_TO_CART,
+                  style: AppFonts.normal22.copyWith(color: AppColors.LIGHT_WHITE,),
                 ),
               ),
             ],

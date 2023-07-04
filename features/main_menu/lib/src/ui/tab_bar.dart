@@ -9,6 +9,7 @@ import 'package:main_menu/src/ui/main_menu.dart';
 class MenuTabBar extends StatelessWidget {
   const MenuTabBar({super.key});
 
+//TODO Move dishesTypes into state
   static const Map<int, String> dishesTypes = {
     0: 'Burgers',
     1: 'Pizza',
@@ -25,49 +26,52 @@ class MenuTabBar extends StatelessWidget {
     if (state is MenuState) {
       return MainMenu(state.dishes);
     }
-    return const Text('Nothing');
+    return const Text(AppConstants.EMPTY_STATE);
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider<MenuBloc>(
-      create: (BuildContext context) =>
-          MenuBloc(appLocator.get<FetchDishesUsecase>())
-            ..add(ChangeTypeEvent(dishesTypes[0]!)),
+      create: (BuildContext context) => MenuBloc(
+        appLocator.get<FetchDishesUsecase>(),
+      ) 
+        //TODO Refactor TabController to custom and when initialize it, call InitEvent
+        ..add(ChangeTypeEvent(dishesTypes[0]!)),
       child: BlocBuilder<MenuBloc, IMenuState>(
         builder: (BuildContext context, IMenuState state) {
           return DefaultTabController(
             length: 3,
             child: Scaffold(
                 appBar: AppBar(
-                  backgroundColor: MyColors.dartBreeze,
+                  backgroundColor: AppColors.DART_BREEZE,
                   toolbarHeight: 0,
                   bottom: TabBar(
-                    indicatorColor: MyColors.smoothYellow,
-                    unselectedLabelColor: MyColors.lightWhite,
-                    labelColor: MyColors.smoothYellow,
+                    indicatorColor: AppColors.SMOOTH_YELLOW,
+                    unselectedLabelColor: AppColors.LIGHT_WHITE,
+                    labelColor: AppColors.SMOOTH_YELLOW,
                     isScrollable: true,
                     onTap: (value) {
-                      BlocProvider.of<MenuBloc>(context)
-                          .add(ChangeTypeEvent(dishesTypes[value]!));
+                      BlocProvider.of<MenuBloc>(context).add(
+                        ChangeTypeEvent(dishesTypes[value]!),
+                      );
                     },
-                    tabs: <Widget>[
+                    tabs: <Tab>[
                       Tab(
                         child: Text(
                           dishesTypes[0]!,
-                          style: Fonts.tabFont,
+                          style: AppFonts.normal25,
                         ),
                       ),
                       Tab(
                         child: Text(
                           dishesTypes[1]!,
-                          style: Fonts.tabFont,
+                          style: AppFonts.normal25,
                         ),
                       ),
                       Tab(
                         child: Text(
                           dishesTypes[2]!,
-                          style: Fonts.tabFont,
+                          style: AppFonts.normal25,
                         ),
                       ),
                     ],
