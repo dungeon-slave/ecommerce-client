@@ -1,1 +1,1 @@
-export 'main_menu_screen/bloc.dart';
+export 'main_menu_screen/main_menu_bloc.dart';

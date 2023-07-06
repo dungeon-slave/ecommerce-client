@@ -6,15 +6,14 @@ class DishItem extends StatefulWidget {
   final String _imageRef;
   final String _price;
 
-  const DishItem({
-    required String name,
-    required String imageRef,
-    required String price,
-    super.key
-  }) : 
-    _name = name,
-    _imageRef = imageRef,
-    _price = price;
+  const DishItem(
+      {required String name,
+      required String imageRef,
+      required String price,
+      super.key})
+      : _name = name,
+        _imageRef = imageRef,
+        _price = price;
 
   @override
   State<StatefulWidget> createState() => DishItemState();
@@ -25,7 +24,7 @@ class DishItemState extends State<DishItem> {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(
-        top: AppDimens.MARGIN_5, 
+        top: AppDimens.MARGIN_5,
         bottom: AppDimens.MARGIN_5,
       ),
       padding: const EdgeInsets.only(
@@ -52,13 +51,17 @@ class DishItemState extends State<DishItem> {
             children: <Widget>[
               Text(
                 widget._price,
-                style: AppFonts.normal24.copyWith(color: AppColors.SMOOTH_YELLOW,),
+                style: AppFonts.normal24.copyWith(
+                  color: AppColors.SMOOTH_YELLOW,
+                ),
               ),
               ElevatedButton(
                 onPressed: () => {},
                 child: Text(
                   AppConstants.ADD_TO_CART,
-                  style: AppFonts.normal22.copyWith(color: AppColors.LIGHT_WHITE,),
+                  style: AppFonts.normal22.copyWith(
+                    color: AppColors.LIGHT_WHITE,
+                  ),
                 ),
               ),
             ],

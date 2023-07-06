@@ -1,3 +1,3 @@
 library main_menu;
 
-export '/src/ui/tab_bar.dart';
+export 'src/ui/dishes_menu.dart';

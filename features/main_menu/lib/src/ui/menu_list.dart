@@ -3,16 +3,16 @@ import 'package:domain/models/dish_model.dart';
 import 'package:flutter/material.dart';
 import 'package:main_menu/src/ui/dish_item.dart';
 
-class MainMenu extends StatefulWidget {
+class MenuList extends StatefulWidget {
   final List<DishModel> _dishesModels;
 
-  const MainMenu(this._dishesModels, {super.key});
+  const MenuList(this._dishesModels, {super.key});
 
   @override
-  State<StatefulWidget> createState() => MainMenuState();
+  State<StatefulWidget> createState() => MenuListState();
 }
 
-class MainMenuState extends State<MainMenu> {
+class MenuListState extends State<MenuList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
