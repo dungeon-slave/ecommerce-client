@@ -73,18 +73,18 @@ class AppImage extends StatelessWidget {
       default:
         {
           return SizedBox(
-              width: _width,
-              height: _height,
-              child: Center(
-                child: Text(
-                  textAlign: TextAlign.center,
-                  AppConstants.UNDEFINED_IMAGE_TYPE,
-                  style: AppFonts.bold25.copyWith(
-                    color: AppColors.RED,
-                  ),
+            width: _width,
+            height: _height,
+            child: Center(
+              child: Text(
+                textAlign: TextAlign.center,
+                AppConstants.UNDEFINED_IMAGE_TYPE,
+                style: AppFonts.bold25.copyWith(
+                  color: AppColors.RED,
                 ),
               ),
-            );
+            ),
+          );
         }
     }
   }

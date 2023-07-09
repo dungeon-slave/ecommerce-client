@@ -21,10 +21,9 @@ class DishesMenuState extends State<DishesMenu> with TickerProviderStateMixin {
   void addEvents(MenuState state, BuildContext context) {
     if (state is TabsListState) {
       _tabController = TabController(
-        length: state.tabsNames.length,
-        vsync: this,
-        animationDuration: Duration.zero
-      );
+          length: state.tabsNames.length,
+          vsync: this,
+          animationDuration: Duration.zero);
       _tabController.addListener(() {
         BlocProvider.of<MenuBloc>(context).add(
           GetDishesTypeEvent(_tabController.index),
@@ -53,16 +52,18 @@ class DishesMenuState extends State<DishesMenu> with TickerProviderStateMixin {
 
   Widget buildMenu(MenuState state) {
     if (state is DishesListState) {
-      return  GestureDetector(
+      return GestureDetector(
         onHorizontalDragEnd: (DragEndDetails details) {
           // Swiping in right direction.
           int sensitivy = 3;
-          if (details.primaryVelocity! > sensitivy && _tabController.index > 0) {
+          if (details.primaryVelocity! > sensitivy &&
+              _tabController.index > 0) {
             --_tabController.index;
           }
 
           // Swiping in left direction.
-          if (details.primaryVelocity! < -sensitivy && _tabController.index < _tabController.length - 1) {
+          if (details.primaryVelocity! < -sensitivy &&
+              _tabController.index < _tabController.length - 1) {
             ++_tabController.index;
           }
         },

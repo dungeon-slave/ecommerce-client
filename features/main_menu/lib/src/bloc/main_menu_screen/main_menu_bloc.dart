@@ -25,9 +25,10 @@ class MenuBloc extends Bloc<MenuEvent, MenuState> {
       for (DishModel model in models) {
         if (dishesByType.containsKey(model.type)) {
           dishesByType[model.type]!.add(model);
-        }
-        else {
-          dishesByType.addAll({model.type : [model]});
+        } else {
+          dishesByType.addAll({
+            model.type: [model]
+          });
         }
       }
       add(GetDishesTypesEvent());
@@ -54,7 +55,8 @@ class MenuBloc extends Bloc<MenuEvent, MenuState> {
 
   void _getDishesType(GetDishesTypeEvent event, Emitter<MenuState> emit) {
     try {
-      emit(CurrentTabState(currentTabName: dishesByType.keys.elementAt(event.selectedIndex)));
+      emit(CurrentTabState(
+          currentTabName: dishesByType.keys.elementAt(event.selectedIndex)));
     } catch (e) {
       emit(ErrorState(errorMessage: e.toString()));
     }
