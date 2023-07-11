@@ -1,4 +1,4 @@
-part of 'main_menu_bloc.dart';
+part of 'dishes_menu_bloc.dart';
 
 abstract class MenuEvent {}
 
@@ -17,3 +17,7 @@ class GetDishesTypeEvent extends MenuEvent {
 
   GetDishesTypeEvent(this.selectedIndex);
 }
+
+//Equtable
+//Один стейт
+//Прогружаемый лист

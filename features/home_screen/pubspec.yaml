@@ -1,19 +1,17 @@
-name: main_menu
+name: home_screen
 version: 0.0.1
 publish_to: none
-description: Main menu feature.
+description: Home screen feature.
 
 environment:
-  sdk: '>=3.0.3 <4.0.0'
+  sdk: '>=3.0.5 <4.0.0'
   flutter: ">=1.17.0"
 
 dependencies:
   flutter:
     sdk: flutter
-  core:
-    path: ../../core
-  domain: 
-    path: ../../domain
+  navigation: 
+    path: ../../navigation
   core_ui:
     path: ../../core_ui
 

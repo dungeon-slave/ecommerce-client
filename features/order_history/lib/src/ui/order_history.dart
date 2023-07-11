@@ -1,12 +1,21 @@
+import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
 
-class OrderHistory extends StatelessWidget {
-  const OrderHistory({super.key});
+class OrderHistoryScreen extends StatelessWidget {
+  const OrderHistoryScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text('Order history, soon...'),
+    return Container(
+      color: AppColors.dartBreeze,
+      child: Center(
+        child: Text(
+          'Order history, soon...',
+          style: AppFonts.normal25.copyWith(
+            color: AppColors.smoothYellow,
+          ),
+        ),
+      ),
     );
   }
 }

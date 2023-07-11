@@ -1,7 +1,7 @@
 import 'package:core_ui/core_ui.dart';
 import 'package:domain/models/dish_model.dart';
 import 'package:flutter/material.dart';
-import 'package:main_menu/src/ui/dish_item.dart';
+import 'package:dishes_menu/src/ui/dish_item.dart';
 
 class MenuList extends StatefulWidget {
   final List<DishModel> _dishesModels;
@@ -16,9 +16,9 @@ class MenuListState extends State<MenuList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.DART_BREEZE,
+      backgroundColor: AppColors.dartBreeze,
       body: ListView(
-        padding: const EdgeInsets.all(AppDimens.PADDING_10),
+        padding: const EdgeInsets.all(AppDimens.padding10),
         children: List.generate(
           widget._dishesModels.length,
           (index) => DishItem(

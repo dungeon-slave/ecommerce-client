@@ -1,7 +1,7 @@
 name: shopping_cart
 version: 0.0.1
 publish_to: none
-description: A new Flutter package project.
+description: Shopping cart feature.
 
 environment:
   sdk: '>=3.0.5 <4.0.0'
@@ -10,6 +10,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  core_ui:
+    path: ../../core_ui
 
 dev_dependencies:
   flutter_test:

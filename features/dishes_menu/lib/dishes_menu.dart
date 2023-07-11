@@ -1,3 +1,3 @@
-library main_menu;
+library dishes_menu;
 
 export 'src/ui/dishes_menu.dart';

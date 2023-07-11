@@ -1,12 +1,21 @@
+import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
 
-class ShoppingCart extends StatelessWidget {
-  const ShoppingCart({super.key});
+class AppSettingsScreen extends StatelessWidget {
+  const AppSettingsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text('Settings, soon...'),
+    return Container(
+      color: AppColors.dartBreeze,
+      child: Center(
+        child: Text(
+          'Settings, soon...',
+          style: AppFonts.normal25.copyWith(
+            color: AppColors.smoothYellow,
+          ),
+        ),
+      ),
     );
   }
 }

@@ -1,8 +1,8 @@
-class AppDimens {
-  static const double PADDING_10 = 10;
-  static const double SIZE_200 = 200;
-  static const double WIDTH_25 = 25;
-  static const double PADDING_50 = 50;
-  static const double MARGIN_5 = 5;
-  static const double RADIUS_10 = 10;
+final class AppDimens {
+  static const double padding10 = 10;
+  static const double size200 = 200;
+  static const double width25 = 25;
+  static const double padding50 = 50;
+  static const double margin5 = 5;
+  static const double radius10 = 10;
 }
