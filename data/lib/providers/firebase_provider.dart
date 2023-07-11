@@ -1,6 +1,6 @@
 import 'package:core_ui/core_ui.dart';
-import 'package:data/entities/dish_entity.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import '../entities/dish_entity/dish_entity.dart';
 
 class FirebaseProvider {
   Future<List<DishEntity>> fetchDishes() async {
