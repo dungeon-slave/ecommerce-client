@@ -17,7 +17,3 @@ class GetDishesTypeEvent extends MenuEvent {
 
   GetDishesTypeEvent(this.selectedIndex);
 }
-
-//Equtable
-//Один стейт
-//Прогружаемый лист
