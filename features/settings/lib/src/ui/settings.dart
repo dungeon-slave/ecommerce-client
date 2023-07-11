@@ -10,7 +10,7 @@ class AppSettingsScreen extends StatelessWidget {
       color: AppColors.dartBreeze,
       child: Center(
         child: Text(
-          'Settings, soon...',
+          'Settings coming soon...',
           style: AppFonts.normal25.copyWith(
             color: AppColors.smoothYellow,
           ),

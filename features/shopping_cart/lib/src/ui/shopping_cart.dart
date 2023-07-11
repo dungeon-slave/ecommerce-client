@@ -10,7 +10,7 @@ class ShoppingCartScreen extends StatelessWidget {
       color: AppColors.dartBreeze,
       child: Center(
         child: Text(
-          'Shopping cart, soon...',
+          'Shopping cart coming soon...',
           style: AppFonts.normal25.copyWith(
             color: AppColors.smoothYellow,
           ),

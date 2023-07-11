@@ -10,7 +10,7 @@ class OrderHistoryScreen extends StatelessWidget {
       color: AppColors.dartBreeze,
       child: Center(
         child: Text(
-          'Order history, soon...',
+          'Order history coming soon...',
           style: AppFonts.normal25.copyWith(
             color: AppColors.smoothYellow,
           ),
