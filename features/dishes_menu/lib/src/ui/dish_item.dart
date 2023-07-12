@@ -39,7 +39,7 @@ class DishItemState extends State<DishItem> {
         children: <Widget>[
           Text(
             widget._name,
-            style: AppFonts.normal25.copyWith(color: AppColors.ligthWhite),
+            style: AppFonts.normal25.copyWith(color: AppColors.lightWhite),
           ),
           AppImage(
             imageRef: widget._imageRef,
@@ -60,7 +60,7 @@ class DishItemState extends State<DishItem> {
                 child: Text(
                   AppConstants.addToCart,
                   style: AppFonts.normal22.copyWith(
-                    color: AppColors.ligthWhite,
+                    color: AppColors.lightWhite,
                   ),
                 ),
               ),

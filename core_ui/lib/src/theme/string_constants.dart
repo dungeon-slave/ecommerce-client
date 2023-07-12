@@ -1,5 +1,6 @@
 final class AppConstants {
-  static const String menuCollection = 'menu';
+  static const String menuCollection = 'dishes_menu';
+  
   static const String addToCart = 'Add to cart';
   static const String undefinedImageType = 'Undefined image type!';
 

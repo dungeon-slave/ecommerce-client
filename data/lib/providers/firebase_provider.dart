@@ -1,24 +1,34 @@
 import 'package:core_ui/core_ui.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import '../entities/dish_entity/dish_entity.dart';
+import 'package:data/entities/dish_entity/dish_entity.dart';
+import 'package:data/entities/dish_type_enity/dish_type_entity.dart';
 
+//??
 class FirebaseProvider {
-  Future<List<DishEntity>> fetchDishes() async {
-    List<DishEntity> dishEntities = [];
+  Future<List<DishTypeEntity>> fetchDishes() async {
+    List<DishTypeEntity> dishTypes = [];
 
     try {
-      final List<QueryDocumentSnapshot<Map<String, dynamic>>> fbMenu =
+      final QueryDocumentSnapshot<Map<String, dynamic>> dishesTypesDoc =
           (await FirebaseFirestore.instance
                   .collection(AppConstants.menuCollection)
                   .get())
-              .docs
-              .toList();
+              .docs[0];
 
-      for (QueryDocumentSnapshot<Map<String, dynamic>> fbDish in fbMenu) {
-        dishEntities.add(DishEntity.fromJson(fbDish.data()));
+      for (DocumentReference value in dishesTypesDoc.data().values.first) {
+        final List<DishEntity> currCollection =
+            (await dishesTypesDoc.reference.collection(value.id).get())
+                .docs
+                .map(
+                  (e) => DishEntity.fromJson(e.data()),
+                )
+                .toList();
+        dishTypes.add(
+          DishTypeEntity(typeName: value.id, dishesEntities: currCollection),
+        );
       }
 
-      return dishEntities;
+      return dishTypes;
     } catch (e) {
       rethrow;
     }

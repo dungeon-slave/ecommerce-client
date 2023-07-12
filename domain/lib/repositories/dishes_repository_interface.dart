@@ -1,5 +1,5 @@
-import '../models/dish_model.dart';
+import 'package:domain/models/dish_type_model.dart';
 
 abstract class DishesRepository {
-  Future<List<DishModel>> fetchDishes();
+  Future<List<DishTypeModel>> fetchDishes();
 }

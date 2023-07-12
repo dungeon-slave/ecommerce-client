@@ -1,7 +1,7 @@
-import '../entities/dish_entity/dish_entity.dart';
-import 'package:data/mappers/dish_mapper.dart';
+import 'package:data/entities/dish_type_enity/dish_type_entity.dart';
+import 'package:domain/models/dish_type_model.dart';
+import 'package:data/mappers/dish_type_mapper.dart';
 import 'package:data/providers/firebase_provider.dart';
-import 'package:domain/models/dish_model.dart';
 import 'package:domain/repositories/dishes_repository_interface.dart';
 
 class DishesRepositoryImpl implements DishesRepository {
@@ -10,9 +10,9 @@ class DishesRepositoryImpl implements DishesRepository {
   DishesRepositoryImpl(this._firebaseProvider);
 
   @override
-  Future<List<DishModel>> fetchDishes() async {
-    final List<DishEntity> result = await _firebaseProvider.fetchDishes();
+  Future<List<DishTypeModel>> fetchDishes() async {
+    final List<DishTypeEntity> result = await _firebaseProvider.fetchDishes();
 
-    return result.map((DishEntity e) => DishMapper.toModel(e)).toList();
+    return result.map((DishTypeEntity e) => DishTypeMapper.toModel(e)).toList();
   }
 }

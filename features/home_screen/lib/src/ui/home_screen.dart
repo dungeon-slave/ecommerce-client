@@ -14,7 +14,7 @@ class HomeScreen extends StatelessWidget {
         ShoppingCartRoute(),
         AppSettingsRoute(),
       ],
-      animationDuration: const Duration(microseconds: 0),
+      animationDuration: Duration.zero,
       bottomNavigationBuilder: (BuildContext context, TabsRouter router) {
         return BottomNavigationBar(
           currentIndex: router.activeIndex,
