@@ -8,7 +8,6 @@ class DishEntity with _$DishEntity {
   const factory DishEntity({
     required String imageRef,
     required String name,
-    required String type,
     required String description,
     required double price,
     required List<String> ingredients,

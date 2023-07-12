@@ -5,15 +5,7 @@ abstract class MenuEvent {}
 class InitEvent extends MenuEvent {}
 
 class ChangeTypeEvent extends MenuEvent {
-  final String type;
+  final int typeIndex;
 
-  ChangeTypeEvent(this.type);
-}
-
-class GetDishesTypesEvent extends MenuEvent {}
-
-class GetDishesTypeEvent extends MenuEvent {
-  final int selectedIndex;
-
-  GetDishesTypeEvent(this.selectedIndex);
+  ChangeTypeEvent(this.typeIndex);
 }

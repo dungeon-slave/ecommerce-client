@@ -19,15 +19,16 @@ class DishesMenuScreenState extends State<DishesMenuScreen>
   late final TabController _tabController;
   final List<Tab> _tabs = [];
 
-  void addEvents(BuildContext context, MenuState state) {
+  void initTabs(BuildContext context, MenuState state) {
     if (state is TabsListState) {
       _tabController = TabController(
+          initialIndex: 0,
           length: state.tabsNames.length,
           vsync: this,
           animationDuration: Duration.zero);
       _tabController.addListener(() {
         BlocProvider.of<MenuBloc>(context).add(
-          GetDishesTypeEvent(_tabController.index),
+          ChangeTypeEvent(_tabController.index),
         );
       });
       for (String tabName in state.tabsNames) {
@@ -41,12 +42,7 @@ class DishesMenuScreenState extends State<DishesMenuScreen>
         );
       }
       BlocProvider.of<MenuBloc>(context).add(
-        GetDishesTypeEvent(0),
-      );
-    }
-    if (state is CurrentTabState) {
-      BlocProvider.of<MenuBloc>(context).add(
-        ChangeTypeEvent(state.currentTabName),
+        ChangeTypeEvent(0),
       );
     }
   }
@@ -65,47 +61,6 @@ class DishesMenuScreenState extends State<DishesMenuScreen>
     }
   }
 
-  Widget buildMenu(MenuState state) {
-    if (state is DishesListState) {
-      return GestureDetector(
-        onHorizontalDragEnd: handleSwipe,
-        child: Scaffold(
-          appBar: AppBar(
-            backgroundColor: AppColors.dartBreeze,
-            toolbarHeight: 0,
-            bottom: TabBar(
-              controller: _tabController,
-              indicatorColor: AppColors.smoothYellow,
-              unselectedLabelColor: AppColors.ligthWhite,
-              labelColor: AppColors.smoothYellow,
-              isScrollable: true,
-              tabs: _tabs,
-            ),
-          ),
-          body: MenuList(state.dishes),
-        ),
-      );
-    }
-    if (state is ErrorState) {
-      return Center(
-        child: Text(
-          state.errorMessage,
-          style: AppFonts.bold25.copyWith(
-            color: AppColors.red,
-          ),
-        ),
-      );
-    }
-    return Container(
-      color: AppColors.dartBreeze,
-      child: const Center(
-        child: CircularProgressIndicator(
-          color: AppColors.smoothYellow,
-        ),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -114,14 +69,33 @@ class DishesMenuScreenState extends State<DishesMenuScreen>
       ),
       child: BlocConsumer<MenuBloc, MenuState>(
         listener: (BuildContext context, MenuState state) =>
-            addEvents(context, state),
-        builder: (BuildContext context, MenuState state) => buildMenu(state),
-        listenWhen: (MenuState previous, MenuState current) =>
-            previous != current &&
-            (current is TabsListState || current is CurrentTabState),
-        buildWhen: (MenuState previous, MenuState current) =>
-            previous != current &&
-            (current is DishesListState || current is ErrorState),
+            initTabs(context, state),
+        builder: (BuildContext context, MenuState state) {
+          if (state is DishesListState) {
+            return GestureDetector(
+              onHorizontalDragEnd: handleSwipe,
+              child: Scaffold(
+                appBar: AppBar(
+                  backgroundColor: AppColors.dartBreeze,
+                  toolbarHeight: 0,
+                  bottom: TabBar(
+                    controller: _tabController,
+                    indicatorColor: AppColors.smoothYellow,
+                    unselectedLabelColor: AppColors.lightWhite,
+                    labelColor: AppColors.smoothYellow,
+                    isScrollable: true,
+                    tabs: _tabs,
+                  ),
+                ),
+                body: MenuList(state.dishes),
+              ),
+            );
+          }
+          if (state is ErrorState) {
+            return AppError(errorText: state.errorMessage);
+          }
+          return const AppLoadingCircle();
+        },
       ),
     );
   }

@@ -1,7 +1,6 @@
 import 'dart:io';
-
-import 'package:core_ui/src/theme/themes.dart';
 import 'package:flutter/material.dart';
+import '../../core_ui.dart';
 
 class AppImage extends StatelessWidget {
   final String _imageRef;
@@ -75,15 +74,7 @@ class AppImage extends StatelessWidget {
           return SizedBox(
             width: _width,
             height: _height,
-            child: Center(
-              child: Text(
-                textAlign: TextAlign.center,
-                AppConstants.undefinedImageType,
-                style: AppFonts.bold25.copyWith(
-                  color: AppColors.red,
-                ),
-              ),
-            ),
+            child: const AppError(errorText: AppConstants.undefinedImageType),
           );
         }
     }

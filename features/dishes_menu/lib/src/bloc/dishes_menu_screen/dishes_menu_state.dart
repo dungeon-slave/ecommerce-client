@@ -21,9 +21,3 @@ class TabsListState extends MenuState {
 
   TabsListState({required this.tabsNames});
 }
-
-class CurrentTabState extends MenuState {
-  final String currentTabName;
-
-  CurrentTabState({required this.currentTabName});
-}
