@@ -9,7 +9,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return AutoTabsScaffold(
       routes: const <PageRouteInfo>[
-        DishesMenuRoute(),
+        EmptyRoute(),
         OrderHistoryRoute(),
         ShoppingCartRoute(),
         AppSettingsRoute(),
@@ -18,7 +18,7 @@ class HomeScreen extends StatelessWidget {
       bottomNavigationBuilder: (BuildContext context, TabsRouter router) {
         return BottomNavigationBar(
           currentIndex: router.activeIndex,
-          onTap: (int index) => router.setActiveIndex(index),
+          onTap: router.setActiveIndex,
           type: BottomNavigationBarType.fixed,
           backgroundColor: AppColors.dartBreeze,
           selectedItemColor: AppColors.smoothYellow,

@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import '../../core_ui.dart';
 
@@ -35,28 +36,14 @@ class AppImage extends StatelessWidget {
     switch (getType()) {
       case 'network':
         {
-          return Image.network(
-            _imageRef,
+          return CachedNetworkImage(
+            imageUrl: _imageRef,
             width: _width,
             height: _height,
-            loadingBuilder: (BuildContext context, Widget child,
-                ImageChunkEvent? loadingProgress) {
-              if (loadingProgress == null) {
-                return child;
-              }
-              return Center(
-                child: Container(
-                  padding: const EdgeInsets.all(AppDimens.padding50),
-                  width: _width,
-                  height: _height,
-                  child: CircularProgressIndicator(
-                    strokeWidth: AppDimens.width25,
-                    value: loadingProgress.expectedTotalBytes != null
-                        ? loadingProgress.cumulativeBytesLoaded /
-                            loadingProgress.expectedTotalBytes!
-                        : null,
-                  ),
-                ),
+            progressIndicatorBuilder:
+                (BuildContext context, String url, DownloadProgress progress) {
+              return const Center(
+                child: AppLoadingCircle(),
               );
             },
           );

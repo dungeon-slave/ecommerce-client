@@ -21,8 +21,14 @@ dependencies:
     path: ../features/shopping_cart
   settings:
     path: ../features/settings
+  detailed_page:
+    path: ../features/detailed_page
+
   core:
     path: ../core
+  domain: 
+    path: ../domain
+
   build_runner: ^2.4.6
   auto_route: ^5.0.4
   

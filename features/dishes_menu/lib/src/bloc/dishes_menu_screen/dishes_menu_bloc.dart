@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:domain/domain.dart';
-import 'package:domain/models/dish_model.dart';
 import 'package:domain/models/dish_type_model.dart';
 
 part 'dishes_menu_event.dart';
@@ -8,9 +7,12 @@ part 'dishes_menu_state.dart';
 
 class MenuBloc extends Bloc<MenuEvent, MenuState> {
   final FetchDishesUsecase _fetchDishesUsecase;
-  late final List<DishTypeModel> types; //??
 
-  MenuBloc(this._fetchDishesUsecase) : super(LoadingState()) {
+  MenuBloc(this._fetchDishesUsecase)
+      : super(MenuState(
+          items: <DishTypeModel>[],
+          isLoading: true,
+        )) {
     on<InitEvent>(_init);
     on<ChangeTypeEvent>(_changeType);
 
@@ -18,13 +20,19 @@ class MenuBloc extends Bloc<MenuEvent, MenuState> {
   }
 
   void _init(InitEvent event, Emitter<MenuState> emit) async {
-    emit(LoadingState());
+    emit(state.copyWith(isLoading: true));
     try {
-      types = await _fetchDishesUsecase.execute();
-      emit(TabsListState(tabsNames: types.map((e) => e.typeName).toList()));
+      final List<DishTypeModel> types = await _fetchDishesUsecase.execute();
+      emit(
+        state.copyWith(
+          isLoading: false,
+          items: types,
+        ),
+      );
     } catch (e) {
       emit(
-        ErrorState(
+        state.copyWith(
+          isLoading: false,
           errorMessage: e.toString(),
         ),
       );
@@ -32,18 +40,6 @@ class MenuBloc extends Bloc<MenuEvent, MenuState> {
   }
 
   void _changeType(ChangeTypeEvent event, Emitter<MenuState> emit) {
-    try {
-      emit(
-        DishesListState(
-          dishes: types[event.typeIndex].dishesModels,
-        ),
-      );
-    } catch (e) {
-      emit(
-        ErrorState(
-          errorMessage: e.toString(),
-        ),
-      );
-    }
+    emit(state.copyWith(currentTab: event.typeIndex));
   }
 }
