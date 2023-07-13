@@ -1,7 +1,7 @@
-name: domain
+name: main_menu
 version: 0.0.1
 publish_to: none
-description: Package that represents domain layer.
+description: Main menu feature.
 
 environment:
   sdk: '>=3.0.3 <4.0.0'
@@ -10,6 +10,12 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  core:
+    path: ../../core
+  domain: 
+    path: ../../domain
+  core_ui:
+    path: ../../core_ui
 
 dev_dependencies:
   flutter_test:

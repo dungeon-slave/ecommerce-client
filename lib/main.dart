@@ -1,20 +1,14 @@
+import 'package:core/config/firebase_options.dart';
+import 'package:core/core.dart';
+import 'package:data/di/data_di.dart';
 import 'package:flutter/material.dart';
+import 'app/food_app.dart';
 
-void main() {
-  runApp(const MainApp());
-}
-
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
-      ),
-    );
-  }
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  await dataDI.initDependencies();
+  runApp(const FoodApp());
 }

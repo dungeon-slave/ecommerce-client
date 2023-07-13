@@ -1,7 +1,5 @@
 library core;
 
-/// A Calculator.
-class Calculator {
-  /// Returns [value] plus 1.
-  int addOne(int value) => value + 1;
-}
+export 'package:flutter_bloc/flutter_bloc.dart';
+export 'package:firebase_core/firebase_core.dart';
+export 'package:cloud_firestore/cloud_firestore.dart';
