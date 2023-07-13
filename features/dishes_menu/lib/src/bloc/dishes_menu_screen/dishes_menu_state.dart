@@ -1,4 +1,4 @@
-part of 'main_menu_bloc.dart';
+part of 'dishes_menu_bloc.dart';
 
 abstract class MenuState {}
 

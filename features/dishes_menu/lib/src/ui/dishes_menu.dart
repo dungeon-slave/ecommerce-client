@@ -4,21 +4,22 @@ import 'package:core_ui/core_ui.dart';
 import 'package:domain/usecase/fetch_dishes_usecase.dart';
 import 'package:flutter/material.dart';
 
-import '../bloc/main_menu_screen/main_menu_bloc.dart';
+import '../bloc/dishes_menu_screen/dishes_menu_bloc.dart';
 import 'menu_list.dart';
 
-class DishesMenu extends StatefulWidget {
-  const DishesMenu({super.key});
+class DishesMenuScreen extends StatefulWidget {
+  const DishesMenuScreen({super.key});
 
   @override
-  State<StatefulWidget> createState() => DishesMenuState();
+  State<StatefulWidget> createState() => DishesMenuScreenState();
 }
 
-class DishesMenuState extends State<DishesMenu> with TickerProviderStateMixin {
+class DishesMenuScreenState extends State<DishesMenuScreen>
+    with TickerProviderStateMixin {
   late final TabController _tabController;
   final List<Tab> _tabs = [];
 
-  void addEvents(MenuState state, BuildContext context) {
+  void addEvents(BuildContext context, MenuState state) {
     if (state is TabsListState) {
       _tabController = TabController(
           length: state.tabsNames.length,
@@ -50,32 +51,33 @@ class DishesMenuState extends State<DishesMenu> with TickerProviderStateMixin {
     }
   }
 
+  void handleSwipe(DragEndDetails details) {
+    // Swiping in right direction.
+    int sensitivy = 3;
+    if (details.primaryVelocity! > sensitivy && _tabController.index > 0) {
+      _tabController.index--;
+    }
+
+    // Swiping in left direction.
+    if (details.primaryVelocity! < -sensitivy &&
+        _tabController.index < _tabController.length - 1) {
+      _tabController.index++;
+    }
+  }
+
   Widget buildMenu(MenuState state) {
     if (state is DishesListState) {
       return GestureDetector(
-        onHorizontalDragEnd: (DragEndDetails details) {
-          // Swiping in right direction.
-          int sensitivy = 3;
-          if (details.primaryVelocity! > sensitivy &&
-              _tabController.index > 0) {
-            --_tabController.index;
-          }
-
-          // Swiping in left direction.
-          if (details.primaryVelocity! < -sensitivy &&
-              _tabController.index < _tabController.length - 1) {
-            ++_tabController.index;
-          }
-        },
+        onHorizontalDragEnd: handleSwipe,
         child: Scaffold(
           appBar: AppBar(
-            backgroundColor: AppColors.DART_BREEZE,
+            backgroundColor: AppColors.dartBreeze,
             toolbarHeight: 0,
             bottom: TabBar(
               controller: _tabController,
-              indicatorColor: AppColors.SMOOTH_YELLOW,
-              unselectedLabelColor: AppColors.LIGHT_WHITE,
-              labelColor: AppColors.SMOOTH_YELLOW,
+              indicatorColor: AppColors.smoothYellow,
+              unselectedLabelColor: AppColors.ligthWhite,
+              labelColor: AppColors.smoothYellow,
               isScrollable: true,
               tabs: _tabs,
             ),
@@ -89,27 +91,30 @@ class DishesMenuState extends State<DishesMenu> with TickerProviderStateMixin {
         child: Text(
           state.errorMessage,
           style: AppFonts.bold25.copyWith(
-            color: AppColors.RED,
+            color: AppColors.red,
           ),
         ),
       );
     }
-    return const Center(
+    return Container(
+      color: AppColors.dartBreeze,
+      child: const Center(
         child: CircularProgressIndicator(
-      backgroundColor: AppColors.DART_BREEZE,
-      color: AppColors.SMOOTH_YELLOW,
-    ));
+          color: AppColors.smoothYellow,
+        ),
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (BuildContext context) => MenuBloc(
-        appLocator.get<FetchDishesUsecase>(),
+        appLocator<FetchDishesUsecase>(),
       ),
       child: BlocConsumer<MenuBloc, MenuState>(
         listener: (BuildContext context, MenuState state) =>
-            addEvents(state, context),
+            addEvents(context, state),
         builder: (BuildContext context, MenuState state) => buildMenu(state),
         listenWhen: (MenuState previous, MenuState current) =>
             previous != current &&

@@ -2,8 +2,8 @@ import 'package:bloc/bloc.dart';
 import 'package:domain/domain.dart';
 import 'package:domain/models/dish_model.dart';
 
-part 'main_menu_event.dart';
-part 'main_menu_state.dart';
+part 'dishes_menu_event.dart';
+part 'dishes_menu_state.dart';
 
 class MenuBloc extends Bloc<MenuEvent, MenuState> {
   final FetchDishesUsecase _fetchDishesUsecase;

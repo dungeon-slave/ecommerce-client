@@ -1,13 +1,15 @@
+import 'package:core/di/app_di.dart';
 import 'package:flutter/material.dart';
-import 'package:main_menu/main_menu.dart';
+import 'package:navigation/navigation.dart';
 
 class FoodApp extends StatelessWidget {
   const FoodApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: DishesMenu(),
+    return MaterialApp.router(
+      routerDelegate: appLocator<AppRouter>().delegate(),
+      routeInformationParser: appLocator<AppRouter>().defaultRouteParser(),
     );
   }
 }

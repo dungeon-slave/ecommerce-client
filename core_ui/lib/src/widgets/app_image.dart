@@ -47,11 +47,11 @@ class AppImage extends StatelessWidget {
               }
               return Center(
                 child: Container(
-                  padding: const EdgeInsets.all(AppDimens.PADDING_50),
+                  padding: const EdgeInsets.all(AppDimens.padding50),
                   width: _width,
                   height: _height,
                   child: CircularProgressIndicator(
-                    strokeWidth: AppDimens.WIDTH_25,
+                    strokeWidth: AppDimens.width25,
                     value: loadingProgress.expectedTotalBytes != null
                         ? loadingProgress.cumulativeBytesLoaded /
                             loadingProgress.expectedTotalBytes!
@@ -78,9 +78,9 @@ class AppImage extends StatelessWidget {
             child: Center(
               child: Text(
                 textAlign: TextAlign.center,
-                AppConstants.UNDEFINED_IMAGE_TYPE,
+                AppConstants.undefinedImageType,
                 style: AppFonts.bold25.copyWith(
-                  color: AppColors.RED,
+                  color: AppColors.red,
                 ),
               ),
             ),
