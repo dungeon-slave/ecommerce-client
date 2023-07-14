@@ -6,7 +6,10 @@ import 'package:navigation/navigation.dart';
 class DishItem extends StatefulWidget {
   final DishModel _model;
 
-  const DishItem({required DishModel model, super.key}) : _model = model;
+  const DishItem({
+    required DishModel model,
+    super.key,
+  }) : _model = model;
 
   @override
   State<StatefulWidget> createState() => DishItemState();

@@ -36,16 +36,18 @@ class AppImage extends StatelessWidget {
     switch (getType()) {
       case 'network':
         {
-          return CachedNetworkImage(
-            imageUrl: _imageRef,
-            width: _width,
-            height: _height,
-            progressIndicatorBuilder:
-                (BuildContext context, String url, DownloadProgress progress) {
-              return const Center(
-                child: AppLoadingCircle(),
-              );
-            },
+          return Center(
+            child: CachedNetworkImage(
+              imageUrl: _imageRef,
+              width: _width,
+              height: _height,
+              progressIndicatorBuilder: (BuildContext context, String url,
+                  DownloadProgress progress) {
+                return const Center(
+                  child: AppLoadingCircle(),
+                );
+              },
+            ),
           );
         }
       case 'memory':

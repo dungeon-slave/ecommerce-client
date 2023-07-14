@@ -8,4 +8,7 @@ final class AppConstants {
   static const String navBarOrderHistory = 'Order history';
   static const String navBarShoppingCart = 'Shopping cart';
   static const String navBarSettings = 'Settings';
+
+  static const String detailedDescription = 'Description';
+  static const String detailedIngredients = 'Ingredients';
 }
