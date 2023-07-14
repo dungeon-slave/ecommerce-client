@@ -58,8 +58,7 @@ class DetailedPageScreen extends StatelessWidget {
                   padding: const EdgeInsets.only(bottom: AppDimens.padding25),
                   child: Text(
                     AppConstants.detailedDescription,
-                    style: AppFonts.normal25.copyWith(
-                      fontSize: AppDimens.size30,
+                    style: AppFonts.normal30.copyWith(
                       color: Theme.of(context).indicatorColor,
                     ),
                   ),
@@ -84,8 +83,7 @@ class DetailedPageScreen extends StatelessWidget {
                   ),
                   child: Text(
                     AppConstants.detailedIngredients,
-                    style: AppFonts.normal25.copyWith(
-                      fontSize: AppDimens.size30,
+                    style: AppFonts.normal30.copyWith(
                       color: Theme.of(context).indicatorColor,
                     ),
                   ),
@@ -124,7 +122,7 @@ class DetailedPageScreen extends StatelessWidget {
               bottom: AppDimens.padding10,
             ),
             decoration: BoxDecoration(
-              boxShadow: [
+              boxShadow: <BoxShadow>[
                 BoxShadow(
                   blurStyle: BlurStyle.inner,
                   color: Theme.of(context).scaffoldBackgroundColor,

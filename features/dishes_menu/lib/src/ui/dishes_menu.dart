@@ -52,11 +52,9 @@ class DishesMenuScreenState extends State<DishesMenuScreen>
             animationDuration: Duration.zero,
           );
           _tabController.addListener(
-            () {
-              BlocProvider.of<MenuBloc>(context).add(
-                ChangeTypeEvent(_tabController.index),
-              );
-            },
+            () => BlocProvider.of<MenuBloc>(context).add(
+              ChangeTypeEvent(_tabController.index),
+            ),
           );
         }
       }, builder: (BuildContext context, MenuState state) {
@@ -83,7 +81,7 @@ class DishesMenuScreenState extends State<DishesMenuScreen>
                 isScrollable: true,
                 tabs: List.generate(
                   state.items.length,
-                  (index) => Tab(
+                  (int index) => Tab(
                     child: Text(
                       state.items[index].typeName,
                       style: AppFonts.normal25,

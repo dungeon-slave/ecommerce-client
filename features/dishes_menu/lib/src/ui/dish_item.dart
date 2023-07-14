@@ -19,11 +19,9 @@ class DishItemState extends State<DishItem> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        context.navigateTo(
-          DetailedPageRoute(model: widget._model),
-        );
-      },
+      onTap: () => context.navigateTo(
+        DetailedPageRoute(model: widget._model),
+      ),
       child: Container(
         margin: const EdgeInsets.only(
           top: AppDimens.margin5,
@@ -35,13 +33,15 @@ class DishItemState extends State<DishItem> {
         ),
         decoration: BoxDecoration(
           color: Theme.of(context).cardColor,
-          borderRadius: const BorderRadius.all(Radius.circular(AppDimens.radius10)),
+          borderRadius:
+              const BorderRadius.all(Radius.circular(AppDimens.radius10)),
         ),
         child: Column(
           children: <Widget>[
             Text(
               widget._model.name,
-              style: AppFonts.normal25.copyWith(color: Theme.of(context).primaryColor),
+              style: AppFonts.normal25
+                  .copyWith(color: Theme.of(context).primaryColor),
             ),
             AppImage(
               imageRef: widget._model.imageRef,

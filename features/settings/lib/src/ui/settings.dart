@@ -16,8 +16,10 @@ class AppSettingsScreen extends StatelessWidget {
         centerTitle: true,
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         title: Text(
-          'Settings',
-          style: AppFonts.normal25.copyWith(color: Theme.of(context).primaryColor,),
+          AppConstants.navBarSettings,
+          style: AppFonts.normal25.copyWith(
+            color: Theme.of(context).primaryColor,
+          ),
         ),
       ),
       body: BlocBuilder<SettingsBloc, SettingsState>(
@@ -28,20 +30,21 @@ class AppSettingsScreen extends StatelessWidget {
               children: <Widget>[
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  mainAxisSize: MainAxisSize.max,
                   children: <Widget>[
                     Text(
-                      'Dark theme',
-                      style: AppFonts.normal22.copyWith(color: Theme.of(context).indicatorColor,),
+                      AppConstants.darkTheme,
+                      style: AppFonts.normal22.copyWith(
+                        color: Theme.of(context).primaryColor,
+                      ),
                     ),
                     Switch(
-                      onChanged: (bool value) { 
-                        BlocProvider.of<SettingsBloc>(context).add(
-                          SwitchThemeEvent(isDark: value),
-                        );
-                      }, 
+                      onChanged: (bool value) =>
+                          BlocProvider.of<SettingsBloc>(context).add(
+                        SwitchThemeEvent(isDark: value),
+                      ),
+                      activeColor: AppColors.yellow,
+                      inactiveThumbColor: AppColors.smoothYellow,
                       value: state.isDark,
-                      activeTrackColor: AppColors.smoothWhite,
                     ),
                   ],
                 )
