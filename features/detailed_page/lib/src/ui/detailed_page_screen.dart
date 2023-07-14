@@ -15,18 +15,19 @@ class DetailedPageScreen extends StatelessWidget {
     return Stack(
       children: <Widget>[
         Scaffold(
-          backgroundColor: AppColors.dartBreeze,
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           appBar: AppBar(
+            iconTheme: Theme.of(context).iconTheme,
             leading: IconButton(
               icon: AppIcons.closeDetailedPage,
               onPressed: () => Navigator.of(context).pop(),
             ),
             centerTitle: true,
-            backgroundColor: AppColors.dartBreeze,
+            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
             title: Text(
               _model.name,
               style: AppFonts.normal25.copyWith(
-                color: AppColors.lightWhite,
+                color: Theme.of(context).primaryColor,
                 fontSize: AppDimens.size30,
               ),
             ),
@@ -37,12 +38,12 @@ class DetailedPageScreen extends StatelessWidget {
               children: <Widget>[
                 Container(
                   margin: const EdgeInsets.all(AppDimens.padding50),
-                  decoration: const BoxDecoration(
+                  decoration: BoxDecoration(
                     borderRadius:
-                        BorderRadius.all(Radius.circular(AppDimens.padding10)),
+                        const BorderRadius.all(Radius.circular(AppDimens.padding10)),
                     boxShadow: <BoxShadow>[
                       BoxShadow(
-                        color: AppColors.smoothWhite,
+                        color: Theme.of(context).shadowColor,
                         blurRadius: AppDimens.padding100,
                       ),
                     ],
@@ -59,7 +60,7 @@ class DetailedPageScreen extends StatelessWidget {
                     AppConstants.detailedDescription,
                     style: AppFonts.normal25.copyWith(
                       fontSize: AppDimens.size30,
-                      color: AppColors.smoothYellow,
+                      color: Theme.of(context).indicatorColor,
                     ),
                   ),
                 ),
@@ -72,7 +73,7 @@ class DetailedPageScreen extends StatelessWidget {
                     textAlign: TextAlign.center,
                     _model.description,
                     style: AppFonts.normal22.copyWith(
-                      color: AppColors.lightWhite,
+                      color: Theme.of(context).primaryColor,
                     ),
                   ),
                 ),
@@ -85,7 +86,7 @@ class DetailedPageScreen extends StatelessWidget {
                     AppConstants.detailedIngredients,
                     style: AppFonts.normal25.copyWith(
                       fontSize: AppDimens.size30,
-                      color: AppColors.smoothYellow,
+                      color: Theme.of(context).indicatorColor,
                     ),
                   ),
                 ),
@@ -103,7 +104,7 @@ class DetailedPageScreen extends StatelessWidget {
                         child: Text(
                           '- ${_model.ingredients[index]}',
                           style: AppFonts.normal22.copyWith(
-                            color: AppColors.lightWhite,
+                            color: Theme.of(context).primaryColor,
                           ),
                         ),
                       );
@@ -122,20 +123,20 @@ class DetailedPageScreen extends StatelessWidget {
               top: AppDimens.padding10,
               bottom: AppDimens.padding10,
             ),
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
               boxShadow: [
                 BoxShadow(
                   blurStyle: BlurStyle.inner,
-                  color: AppColors.dartBreeze,
+                  color: Theme.of(context).scaffoldBackgroundColor,
                 ),
                 BoxShadow(
                   blurStyle: BlurStyle.outer,
                   blurRadius: AppDimens.padding10,
-                  color: AppColors.smoothYellow,
+                  color: Theme.of(context).indicatorColor,
                 ),
               ],
               borderRadius:
-                  BorderRadius.all(Radius.circular(AppDimens.padding10)),
+                  const BorderRadius.all(Radius.circular(AppDimens.padding10)),
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -143,7 +144,7 @@ class DetailedPageScreen extends StatelessWidget {
                 Text(
                   _model.price,
                   style: AppFonts.normal24.copyWith(
-                    color: AppColors.smoothYellow,
+                    color: Theme.of(context).indicatorColor,
                   ),
                 ),
                 ElevatedButton(
@@ -151,7 +152,7 @@ class DetailedPageScreen extends StatelessWidget {
                   child: Text(
                     AppConstants.addToCart,
                     style: AppFonts.normal22.copyWith(
-                      color: AppColors.lightWhite,
+                      color: Theme.of(context).primaryColor,
                     ),
                   ),
                 ),

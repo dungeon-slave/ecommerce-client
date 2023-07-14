@@ -1,4 +1,4 @@
-import 'package:core_ui/src/theme/themes.dart';
+import 'package:core_ui/src/theme/app_themes.dart';
 import 'package:flutter/widgets.dart';
 
 class AppError extends StatelessWidget {

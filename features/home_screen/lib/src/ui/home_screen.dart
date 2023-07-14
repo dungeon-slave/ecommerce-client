@@ -20,9 +20,9 @@ class HomeScreen extends StatelessWidget {
           currentIndex: router.activeIndex,
           onTap: router.setActiveIndex,
           type: BottomNavigationBarType.fixed,
-          backgroundColor: AppColors.dartBreeze,
-          selectedItemColor: AppColors.smoothYellow,
-          unselectedItemColor: AppColors.smoothYellow,
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+          selectedItemColor: Theme.of(context).indicatorColor,
+          unselectedItemColor: Theme.of(context).indicatorColor,
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
               activeIcon: AppIcons.selectedMenu,

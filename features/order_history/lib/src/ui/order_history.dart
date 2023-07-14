@@ -7,12 +7,12 @@ class OrderHistoryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: AppColors.dartBreeze,
+      color: Theme.of(context).scaffoldBackgroundColor,
       child: Center(
         child: Text(
           'Order history coming soon...',
           style: AppFonts.normal25.copyWith(
-            color: AppColors.smoothYellow,
+            color: Theme.of(context).indicatorColor,
           ),
         ),
       ),

@@ -33,15 +33,15 @@ class DishItemState extends State<DishItem> {
           top: AppDimens.padding10,
           bottom: AppDimens.padding10,
         ),
-        decoration: const BoxDecoration(
-          color: AppColors.smoothBrown,
-          borderRadius: BorderRadius.all(Radius.circular(AppDimens.radius10)),
+        decoration: BoxDecoration(
+          color: Theme.of(context).cardColor,
+          borderRadius: const BorderRadius.all(Radius.circular(AppDimens.radius10)),
         ),
         child: Column(
           children: <Widget>[
             Text(
               widget._model.name,
-              style: AppFonts.normal25.copyWith(color: AppColors.lightWhite),
+              style: AppFonts.normal25.copyWith(color: Theme.of(context).primaryColor),
             ),
             AppImage(
               imageRef: widget._model.imageRef,
@@ -54,7 +54,7 @@ class DishItemState extends State<DishItem> {
                 Text(
                   widget._model.price,
                   style: AppFonts.normal24.copyWith(
-                    color: AppColors.smoothYellow,
+                    color: Theme.of(context).indicatorColor,
                   ),
                 ),
                 ElevatedButton(
@@ -62,7 +62,7 @@ class DishItemState extends State<DishItem> {
                   child: Text(
                     AppConstants.addToCart,
                     style: AppFonts.normal22.copyWith(
-                      color: AppColors.lightWhite,
+                      color: Theme.of(context).primaryColor,
                     ),
                   ),
                 ),

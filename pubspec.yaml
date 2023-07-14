@@ -15,6 +15,11 @@ dependencies:
     path: ./data
   navigation:
     path: ./navigation
+  core_ui:
+    path: ./core_ui
+
+  settings:
+    path: ./features/settings
 
 dev_dependencies:
   flutter_test:

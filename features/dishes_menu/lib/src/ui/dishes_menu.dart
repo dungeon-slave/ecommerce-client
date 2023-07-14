@@ -65,7 +65,7 @@ class DishesMenuScreenState extends State<DishesMenuScreen>
         }
         if (state.isLoading) {
           return Container(
-            color: AppColors.dartBreeze,
+            color: Theme.of(context).scaffoldBackgroundColor,
             child: const AppLoadingCircle(),
           );
         }
@@ -73,13 +73,13 @@ class DishesMenuScreenState extends State<DishesMenuScreen>
           onHorizontalDragEnd: handleSwipe,
           child: Scaffold(
             appBar: AppBar(
-              backgroundColor: AppColors.dartBreeze,
+              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
               toolbarHeight: 0,
               bottom: TabBar(
                 controller: _tabController,
-                indicatorColor: AppColors.smoothYellow,
-                unselectedLabelColor: AppColors.lightWhite,
-                labelColor: AppColors.smoothYellow,
+                indicatorColor: Theme.of(context).indicatorColor,
+                unselectedLabelColor: Theme.of(context).primaryColor,
+                labelColor: Theme.of(context).indicatorColor,
                 isScrollable: true,
                 tabs: List.generate(
                   state.items.length,
@@ -93,7 +93,7 @@ class DishesMenuScreenState extends State<DishesMenuScreen>
               ),
             ),
             body: Container(
-              color: AppColors.dartBreeze,
+              color: Theme.of(context).scaffoldBackgroundColor,
               child: ListView.builder(
                 padding: const EdgeInsets.all(AppDimens.padding10),
                 itemCount: state.items[state.currentTab].dishesModels.length,
