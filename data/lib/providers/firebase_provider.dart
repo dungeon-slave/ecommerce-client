@@ -9,7 +9,7 @@ class FirebaseProvider {
     try {
       final List<QueryDocumentSnapshot<Map<String, dynamic>>> fbMenu =
           (await FirebaseFirestore.instance
-                  .collection(AppConstants.MENU_COLLECTION)
+                  .collection(AppConstants.menuCollection)
                   .get())
               .docs
               .toList();

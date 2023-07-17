@@ -1,0 +1,33 @@
+name: navigation
+version: 0.0.1
+publish_to: none
+description: Navigation package.
+
+environment:
+  sdk: '>=3.0.5 <4.0.0'
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  home_screen:
+    path: ../features/home_screen
+  dishes_menu:
+    path: ../features/dishes_menu
+  order_history:
+    path: ../features/order_history
+  shopping_cart:
+    path: ../features/shopping_cart
+  settings:
+    path: ../features/settings
+  core:
+    path: ../core
+  build_runner: ^2.4.6
+  auto_route: ^5.0.4
+  
+dev_dependencies:
+  auto_route_generator: 5.0.2
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0

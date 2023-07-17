@@ -24,27 +24,27 @@ class DishItemState extends State<DishItem> {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(
-        top: AppDimens.MARGIN_5,
-        bottom: AppDimens.MARGIN_5,
+        top: AppDimens.margin5,
+        bottom: AppDimens.margin5,
       ),
       padding: const EdgeInsets.only(
-        top: AppDimens.PADDING_10,
-        bottom: AppDimens.PADDING_10,
+        top: AppDimens.padding10,
+        bottom: AppDimens.padding10,
       ),
       decoration: const BoxDecoration(
-        color: AppColors.SMOOTH_BROWN,
-        borderRadius: BorderRadius.all(Radius.circular(AppDimens.RADIUS_10)),
+        color: AppColors.smoothBrown,
+        borderRadius: BorderRadius.all(Radius.circular(AppDimens.radius10)),
       ),
       child: Column(
         children: <Widget>[
           Text(
             widget._name,
-            style: AppFonts.normal25.copyWith(color: AppColors.LIGHT_WHITE),
+            style: AppFonts.normal25.copyWith(color: AppColors.ligthWhite),
           ),
           AppImage(
             imageRef: widget._imageRef,
-            width: AppDimens.SIZE_200,
-            height: AppDimens.SIZE_200,
+            width: AppDimens.size200,
+            height: AppDimens.size200,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -52,15 +52,15 @@ class DishItemState extends State<DishItem> {
               Text(
                 widget._price,
                 style: AppFonts.normal24.copyWith(
-                  color: AppColors.SMOOTH_YELLOW,
+                  color: AppColors.smoothYellow,
                 ),
               ),
               ElevatedButton(
                 onPressed: () => {},
                 child: Text(
-                  AppConstants.ADD_TO_CART,
+                  AppConstants.addToCart,
                   style: AppFonts.normal22.copyWith(
-                    color: AppColors.LIGHT_WHITE,
+                    color: AppColors.ligthWhite,
                   ),
                 ),
               ),

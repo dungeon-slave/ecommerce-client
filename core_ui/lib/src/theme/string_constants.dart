@@ -1,6 +1,10 @@
-class AppConstants {
-  static const String MENU_COLLECTION = 'menu';
-  static const String ADD_TO_CART = 'Add to cart';
-  static const String EMPTY_STATE = 'Nothing';
-  static const String UNDEFINED_IMAGE_TYPE = 'Undefined image type!';
+final class AppConstants {
+  static const String menuCollection = 'menu';
+  static const String addToCart = 'Add to cart';
+  static const String undefinedImageType = 'Undefined image type!';
+
+  static const String navBarMenu = 'Menu';
+  static const String navBarOrderHistory = 'Order history';
+  static const String navBarShoppingCart = 'Shopping cart';
+  static const String navBarSettings = 'Settings';
 }
