@@ -10,7 +10,7 @@ class OrderHistoryScreen extends StatelessWidget {
       color: Theme.of(context).scaffoldBackgroundColor,
       child: Center(
         child: Text(
-          'Order history coming soon...',
+          AppConstants.orderHistoryTitle,
           style: AppFonts.normal25.copyWith(
             color: Theme.of(context).indicatorColor,
           ),

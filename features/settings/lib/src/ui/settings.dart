@@ -16,7 +16,7 @@ class AppSettingsScreen extends StatelessWidget {
         centerTitle: true,
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         title: Text(
-          AppConstants.navBarSettings,
+          AppConstants.settingsTitle,
           style: AppFonts.normal25.copyWith(
             color: Theme.of(context).primaryColor,
           ),
@@ -40,7 +40,7 @@ class AppSettingsScreen extends StatelessWidget {
                     Switch(
                       onChanged: (bool value) =>
                           BlocProvider.of<SettingsBloc>(context).add(
-                        SwitchThemeEvent(isDark: value),
+                        SetThemeEvent(isDark: value),
                       ),
                       activeColor: AppColors.yellow,
                       inactiveThumbColor: AppColors.smoothYellow,

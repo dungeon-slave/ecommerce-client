@@ -5,13 +5,13 @@ class AppTheme {
   static ThemeData get light {
     return ThemeData(
       brightness: Brightness.light,
-      scaffoldBackgroundColor: AppColors.lightWhite,
-      primaryColor: AppColors.dartBreeze,
-      cardColor: AppColors.smoothGreen,
+      scaffoldBackgroundColor: AppColors.absWhite,
+      primaryColor: AppColors.absBlack,
+      cardColor: AppColors.absBlack,
       indicatorColor: AppColors.smoothYellow,
       shadowColor: AppColors.smoothBlue,
       iconTheme: const IconThemeData(
-        color: AppColors.dartBreeze,
+        color: AppColors.darkBreeze,
       ),
     );
   }
@@ -19,13 +19,13 @@ class AppTheme {
   static ThemeData get dark {
     return ThemeData(
       brightness: Brightness.dark,
-      scaffoldBackgroundColor: AppColors.dartBreeze,
-      primaryColor: AppColors.lightWhite,
-      cardColor: AppColors.smoothBrown,
+      scaffoldBackgroundColor: AppColors.darkBreeze,
+      primaryColor: AppColors.absWhite,
+      cardColor: AppColors.cream,
       indicatorColor: AppColors.yellow,
       shadowColor: AppColors.smoothWhite,
       iconTheme: const IconThemeData(
-        color: AppColors.lightWhite,
+        color: AppColors.absWhite,
       ),
     );
   }

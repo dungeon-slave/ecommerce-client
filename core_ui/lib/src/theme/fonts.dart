@@ -16,6 +16,11 @@ final class AppFonts {
     fontWeight: FontWeight.bold,
   );
 
+    static const bold24 = TextStyle(
+    fontSize: 24,
+    fontWeight: FontWeight.bold,
+  );
+
   static const normal24 = TextStyle(
     fontSize: 24,
     fontWeight: FontWeight.normal,

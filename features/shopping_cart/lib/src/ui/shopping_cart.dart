@@ -10,7 +10,7 @@ class ShoppingCartScreen extends StatelessWidget {
       color: Theme.of(context).scaffoldBackgroundColor,
       child: Center(
         child: Text(
-          'Shopping cart coming soon...',
+          AppConstants.shoppingCartTitle,
           style: AppFonts.normal25.copyWith(
             color: Theme.of(context).indicatorColor,
           ),

@@ -2,7 +2,7 @@ import 'package:core/core.dart';
 import 'package:core/di/app_di.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:dishes_menu/src/ui/dish_item.dart';
-import 'package:domain/usecase/fetch_dishes_usecase.dart';
+import 'package:domain/usecase/dishes/fetch_dishes_usecase.dart';
 import 'package:flutter/material.dart';
 
 import '../bloc/dishes_menu_screen/dishes_menu_bloc.dart';

@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:domain/domain.dart';
 import 'package:domain/models/dish_type_model.dart';
+import 'package:domain/usecase/usecase.dart';
 
 part 'dishes_menu_event.dart';
 part 'dishes_menu_state.dart';
@@ -22,7 +23,7 @@ class MenuBloc extends Bloc<MenuEvent, MenuState> {
   void _init(InitEvent event, Emitter<MenuState> emit) async {
     emit(state.copyWith(isLoading: true));
     try {
-      final List<DishTypeModel> types = await _fetchDishesUsecase.execute();
+      final List<DishTypeModel> types = await _fetchDishesUsecase.execute(const NoParams());
       emit(
         state.copyWith(
           isLoading: false,
