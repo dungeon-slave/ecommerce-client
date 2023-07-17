@@ -8,8 +8,4 @@ class SetThemeEvent extends ThemeEvent {
   SetThemeEvent({required this.isDark});
 }
 
-class GetThemeEvent extends ThemeEvent {
-  final String themeKey;
-
-  GetThemeEvent({required this.themeKey});
-}
+class GetThemeEvent extends ThemeEvent {}

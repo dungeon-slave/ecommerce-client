@@ -18,7 +18,7 @@ class SettingsBloc extends Bloc<ThemeEvent, SettingsState> {
         super(SettingsState(isDark: true)) {
     on<SetThemeEvent>(_setTheme);
     on<GetThemeEvent>(_getTheme);
-    add(GetThemeEvent(themeKey: 'Theme'));
+    add(GetThemeEvent());
   }
 
   void _setTheme(SetThemeEvent event, Emitter<SettingsState> emit) {
@@ -26,7 +26,11 @@ class SettingsBloc extends Bloc<ThemeEvent, SettingsState> {
     emit(SettingsState(isDark: event.isDark));
   }
 
-  void _getTheme(GetThemeEvent event, Emitter<SettingsState> emit) async   {
-    emit(SettingsState(isDark:  await _getThemeUseCase.execute(const NoParams())));
+  void _getTheme(GetThemeEvent event, Emitter<SettingsState> emit) async {
+    emit(
+      SettingsState(
+        isDark: await _getThemeUseCase.execute(const NoParams()),
+      ),
+    );
   }
 }

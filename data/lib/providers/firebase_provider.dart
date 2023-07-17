@@ -12,7 +12,7 @@ class FirebaseProvider {
           (await FirebaseFirestore.instance
                   .collection(AppConstants.menuCollection)
                   .get())
-              .docs[0];
+              .docs[AppConstants.menuDoc];
 
       Map<String, dynamic> fbDishesTypes = dishesTypesDoc.data();
 

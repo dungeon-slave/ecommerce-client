@@ -1,15 +1,16 @@
 import 'package:core/core.dart';
 
 class HiveProvider {
-  Future<void> saveTheme(bool isDark) async {
-    final Box<bool> box = await Hive.openBox(_HiveKeys.themeBox);
-    await box.put(_HiveKeys.themeKey, isDark);
+  late final Box<bool> _themeBox;
+
+  Future<void> openBoxes() async {
+    _themeBox = await Hive.openBox(_HiveKeys.themeBox);
   }
 
-  Future<bool> getTheme() async {
-    final Box<bool> box = await Hive.openBox(_HiveKeys.themeBox);
-    return box.get(_HiveKeys.themeKey) ?? true;
-  }
+  Future<void> saveTheme(bool isDark) async =>
+      await _themeBox.put(_HiveKeys.themeKey, isDark);
+
+  Future<bool> getTheme() async => _themeBox.get(_HiveKeys.themeKey) ?? true;
 }
 
 class _HiveKeys {

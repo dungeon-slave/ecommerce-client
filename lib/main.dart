@@ -1,6 +1,8 @@
 import 'package:core/config/firebase_options.dart';
 import 'package:core/core.dart';
+import 'package:core/di/app_di.dart';
 import 'package:data/di/data_di.dart';
+import 'package:data/providers/hive_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:navigation/navigation.dart';
 import 'app/food_app.dart';
@@ -12,6 +14,7 @@ Future<void> main() async {
   );
   await Hive.initFlutter();
   await dataDI.initDependencies();
+  await appLocator<HiveProvider>().openBoxes();
   setupNavigationDependencies();
   runApp(const FoodApp());
 }
