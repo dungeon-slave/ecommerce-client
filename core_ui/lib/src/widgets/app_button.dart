@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 class AppButton extends StatelessWidget {
   final String _text;
   final void Function() _handler;
+  
   const AppButton({
     super.key,
     required String text,

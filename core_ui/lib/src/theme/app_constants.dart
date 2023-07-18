@@ -1,6 +1,5 @@
 final class AppConstants {
   static const String menuCollection = 'dishes_menu';
-  static const int menuDoc = 0;
 
   static const String darkTheme = 'Dark theme';
   

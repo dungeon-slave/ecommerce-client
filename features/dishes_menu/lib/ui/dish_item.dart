@@ -12,10 +12,10 @@ class DishItem extends StatefulWidget {
   }) : _model = model;
 
   @override
-  State<StatefulWidget> createState() => DishItemState();
+  State<StatefulWidget> createState() => _DishItemState();
 }
 
-class DishItemState extends State<DishItem> {
+class _DishItemState extends State<DishItem> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -65,7 +65,7 @@ class DishItemState extends State<DishItem> {
                 ),
                 AppButton(
                   text: AppConstants.addToCart,
-                  handler: () => {},
+                  handler: () => {}, //TODO: implement
                 ),
               ],
             ),
