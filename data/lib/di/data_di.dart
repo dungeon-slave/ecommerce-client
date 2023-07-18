@@ -32,9 +32,7 @@ class DataDI {
   }
 
   void _initHive() {
-    appLocator.registerLazySingleton<HiveProvider>(
-      () => HiveProvider(),
-    );
+    appLocator.registerLazySingleton<HiveProvider>(() => HiveProvider());
   }
 
   void _initTheme() {

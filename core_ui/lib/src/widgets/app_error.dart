@@ -8,6 +8,7 @@ class AppError extends StatelessWidget {
     required String errorText,
     super.key,
   }) : _errorText = errorText;
+  
   @override
   Widget build(BuildContext context) {
     return Center(

@@ -30,87 +30,86 @@ class DetailedPageScreen extends StatelessWidget {
           ),
         ),
       ),
-      body: SingleChildScrollView(
+      body: ListView(
         padding: const EdgeInsets.only(bottom: AppDimens.padding100),
-        child: Column(
-          children: <Container>[
-            Container(
-              margin: const EdgeInsets.all(AppDimens.padding50),
-              decoration: BoxDecoration(
-                borderRadius: const BorderRadius.all(
-                    Radius.circular(AppDimens.padding10)),
-                boxShadow: <BoxShadow>[
-                  BoxShadow(
-                    color: Theme.of(context).shadowColor,
-                    blurRadius: AppDimens.padding100,
-                  ),
-                ],
+        children: <Container>[
+          Container(
+            margin: const EdgeInsets.all(AppDimens.padding50),
+            decoration: BoxDecoration(
+              borderRadius: const BorderRadius.all(
+                Radius.circular(AppDimens.padding10),
               ),
-              child: AppImage(
-                imageRef: _model.imageRef,
-                width: AppDimens.size250,
-                height: AppDimens.size250,
-              ),
-            ),
-            Container(
-              alignment: Alignment.centerLeft,
-              margin: const EdgeInsets.only(left: AppDimens.padding50),
-              padding: const EdgeInsets.only(bottom: AppDimens.padding25),
-              child: Text(
-                AppConstants.detailedDescription,
-                style: AppFonts.normal30.copyWith(
-                  color: Theme.of(context).indicatorColor,
+              boxShadow: <BoxShadow>[
+                BoxShadow(
+                  color: Theme.of(context).shadowColor,
+                  blurRadius: AppDimens.padding100,
                 ),
+              ],
+            ),
+            child: AppImage(
+              imageRef: _model.imageRef,
+              width: AppDimens.size250,
+              height: AppDimens.size250,
+            ),
+          ),
+          Container(
+            alignment: Alignment.centerLeft,
+            margin: const EdgeInsets.only(left: AppDimens.padding50),
+            padding: const EdgeInsets.only(bottom: AppDimens.padding25),
+            child: Text(
+              AppConstants.detailedDescription,
+              style: AppFonts.normal30.copyWith(
+                color: Theme.of(context).indicatorColor,
               ),
             ),
-            Container(
-              alignment: Alignment.centerLeft,
-              padding: const EdgeInsets.only(
-                left: AppDimens.padding50,
-                right: AppDimens.padding15,
+          ),
+          Container(
+            alignment: Alignment.centerLeft,
+            padding: const EdgeInsets.only(
+              left: AppDimens.padding50,
+              right: AppDimens.padding15,
+            ),
+            child: Text(
+              _model.description,
+              style: AppFonts.normal22.copyWith(
+                color: Theme.of(context).primaryColor,
               ),
-              child: Text(
-                _model.description,
-                style: AppFonts.normal22.copyWith(
-                  color: Theme.of(context).primaryColor,
+            ),
+          ),
+          Container(
+            alignment: Alignment.centerLeft,
+            margin: const EdgeInsets.only(left: AppDimens.padding50),
+            padding: const EdgeInsets.only(
+              bottom: AppDimens.padding25,
+              top: AppDimens.padding25,
+            ),
+            child: Text(
+              AppConstants.detailedIngredients,
+              style: AppFonts.normal30.copyWith(
+                color: Theme.of(context).indicatorColor,
+              ),
+            ),
+          ),
+          ...List.generate(
+            _model.ingredients.length,
+            (int index) {
+              return Container(
+                alignment: Alignment.centerLeft,
+                margin: const EdgeInsets.only(left: AppDimens.padding50),
+                padding: const EdgeInsets.only(
+                  right: AppDimens.padding20,
+                  bottom: AppDimens.padding20,
                 ),
-              ),
-            ),
-            Container(
-              alignment: Alignment.centerLeft,
-              margin: const EdgeInsets.only(left: AppDimens.padding50),
-              padding: const EdgeInsets.only(
-                bottom: AppDimens.padding25,
-                top: AppDimens.padding25,
-              ),
-              child: Text(
-                AppConstants.detailedIngredients,
-                style: AppFonts.normal30.copyWith(
-                  color: Theme.of(context).indicatorColor,
+                child: Text(
+                  '- ${_model.ingredients[index]}',
+                  style: AppFonts.normal22.copyWith(
+                    color: Theme.of(context).primaryColor,
+                  ),
                 ),
-              ),
-            ),
-            ...List.generate(
-              _model.ingredients.length,
-              (int index) {
-                return Container(
-                  alignment: Alignment.centerLeft,
-                  margin: const EdgeInsets.only(left: AppDimens.padding50),
-                  padding: const EdgeInsets.only(
-                    right: AppDimens.padding20,
-                    bottom: AppDimens.padding20,
-                  ),
-                  child: Text(
-                    '- ${_model.ingredients[index]}',
-                    style: AppFonts.normal22.copyWith(
-                      color: Theme.of(context).primaryColor,
-                    ),
-                  ),
-                );
-              },
-            ),
-          ],
-        ),
+              );
+            },
+          ),
+        ],
       ),
       bottomSheet: Container(
         padding: const EdgeInsets.only(
@@ -126,11 +125,6 @@ class DetailedPageScreen extends StatelessWidget {
               blurStyle: BlurStyle.normal,
               color: Theme.of(context).scaffoldBackgroundColor,
             ),
-            // BoxShadow(
-            //   blurStyle: BlurStyle.outer,
-            //   blurRadius: AppDimens.margin5,
-            //   color: Theme.of(context).indicatorColor,
-            // ),
           ],
         ),
         child: Row(
@@ -144,7 +138,7 @@ class DetailedPageScreen extends StatelessWidget {
             ),
             AppButton(
               text: AppConstants.addToCart,
-              handler: () => {},
+              handler: () => {}, //TODO: implement
             ),
           ],
         ),
