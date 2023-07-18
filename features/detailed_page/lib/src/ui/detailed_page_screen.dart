@@ -132,7 +132,7 @@ class DetailedPageScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             Text(
-              _model.price,
+              '${_model.price}\$',
               style: AppFonts.bold24.copyWith(
                 color: Theme.of(context).indicatorColor,
               ),

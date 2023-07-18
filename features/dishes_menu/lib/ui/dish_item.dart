@@ -58,7 +58,7 @@ class DishItemState extends State<DishItem> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 Text(
-                  widget._model.price,
+                  '${widget._model.price}\$',
                   style: AppFonts.bold24.copyWith(
                     color: Theme.of(context).indicatorColor,
                   ),
