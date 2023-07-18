@@ -36,8 +36,7 @@ class ShoppingCartScreen extends StatelessWidget {
           itemCount: 10,
           itemBuilder: (BuildContext context, int index) {
             return const CartItem(
-              itemName: 'Гамбургер',
-              itemPrice: '5.50\$',
+              
             );
           },
         ),

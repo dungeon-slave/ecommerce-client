@@ -1,7 +1,11 @@
-abstract class UseCase<Input, Output> {
+abstract class AsyncUseCase<Input, Output> {
   Future<Output> execute(Input input);
 }
 
-class NoParams{
+abstract class UseCase<Input, Output> {
+  Output execute(Input input);
+}
+
+class NoParams {
   const NoParams();
 }

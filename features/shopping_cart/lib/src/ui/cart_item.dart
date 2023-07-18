@@ -13,7 +13,6 @@ class CartItem extends StatelessWidget {
 
   double getAveragePrice() => _model.price * _amount;
   
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -57,7 +56,7 @@ class CartItem extends StatelessWidget {
             ],
           ),
           Text(
-            _model.price,
+            '${_model.price}\$',
             style: AppFonts.normal22,
           ),
         ],

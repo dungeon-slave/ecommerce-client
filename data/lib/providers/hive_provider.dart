@@ -10,7 +10,7 @@ class HiveProvider {
   Future<void> saveTheme(bool isDark) async =>
       await _themeBox.put(_HiveKeys.themeKey, isDark);
 
-  Future<bool> getTheme() async => _themeBox.get(_HiveKeys.themeKey) ?? true;
+  bool getTheme() => _themeBox.get(_HiveKeys.themeKey) ?? true;
 }
 
 class _HiveKeys {

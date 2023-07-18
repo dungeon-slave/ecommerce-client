@@ -8,7 +8,7 @@ class ThemeRepositoryImpl implements ThemeRepository {
       : _hiveProvider = hiveProvider;
 
   @override
-  Future<bool> getAppTheme() => _hiveProvider.getTheme();
+  bool getAppTheme() => _hiveProvider.getTheme();
 
   @override
   Future<void> saveAppTheme(bool isDark) => _hiveProvider.saveTheme(isDark);
