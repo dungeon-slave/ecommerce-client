@@ -6,7 +6,7 @@ abstract class DishMapper {
     return DishEntity(
       imageRef: model.imageRef,
       name: model.name,
-      price: double.parse(model.price.substring(0, model.price.length - 1)),
+      price: model.price,
       description: model.description,
       ingredients: model.ingredients,
     );
@@ -16,7 +16,7 @@ abstract class DishMapper {
     return DishModel(
       imageRef: entity.imageRef,
       name: entity.name,
-      price: '${entity.price}\$',
+      price: entity.price,
       description: entity.description,
       ingredients: entity.ingredients,
     );

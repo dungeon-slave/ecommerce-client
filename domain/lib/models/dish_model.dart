@@ -2,7 +2,7 @@ class DishModel {
   final String imageRef;
   final String name;
   final String description;
-  final String price;
+  final double price;
   final List<String> ingredients;
 
   DishModel(

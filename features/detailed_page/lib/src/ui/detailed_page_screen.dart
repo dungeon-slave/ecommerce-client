@@ -126,11 +126,6 @@ class DetailedPageScreen extends StatelessWidget {
               blurStyle: BlurStyle.normal,
               color: Theme.of(context).scaffoldBackgroundColor,
             ),
-            // BoxShadow(
-            //   blurStyle: BlurStyle.outer,
-            //   blurRadius: AppDimens.margin5,
-            //   color: Theme.of(context).indicatorColor,
-            // ),
           ],
         ),
         child: Row(
