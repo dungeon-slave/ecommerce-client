@@ -1,4 +1,4 @@
-import 'package:domain/models/dish_model.dart';
+import 'package:domain/models/dishes_items/dish_model.dart';
 import '../entities/dish_entity/dish_entity.dart';
 
 abstract class DishMapper {
@@ -9,6 +9,7 @@ abstract class DishMapper {
       price: model.price,
       description: model.description,
       ingredients: model.ingredients,
+      id: model.id,
     );
   }
 
@@ -19,6 +20,7 @@ abstract class DishMapper {
       price: entity.price,
       description: entity.description,
       ingredients: entity.ingredients,
+      id: entity.id,
     );
   }
 }

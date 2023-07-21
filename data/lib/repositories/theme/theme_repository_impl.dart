@@ -1,4 +1,4 @@
-import 'package:data/providers/hive_provider.dart';
+import 'package:data/providers/local/hive_provider.dart';
 import 'package:domain/repositories/theme_repository.dart';
 
 class ThemeRepositoryImpl implements ThemeRepository {

@@ -2,7 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:auto_route/empty_router_widgets.dart';
 import 'package:detailed_page/detailed_page.dart';
 import 'package:dishes_menu/dishes_menu.dart';
-import 'package:domain/models/dish_model.dart';
+import 'package:domain/models/dishes_items/dish_model.dart';
 import 'package:flutter/material.dart';
 
 import 'package:home_screen/home_screen.dart';
@@ -25,6 +25,7 @@ part 'app_router.gr.dart';
           page: EmptyRouterPage,
           children: [
             AutoRoute(
+              initial: true,
               name: 'DishesMenuRouter',
               path: '',
               page: DishesMenuScreen,
@@ -46,6 +47,7 @@ part 'app_router.gr.dart';
         AutoRoute(
           path: 'shopping_cart',
           page: ShoppingCartScreen,
+          maintainState: false,
         ),
         AutoRoute(
           path: 'settings',

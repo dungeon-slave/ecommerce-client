@@ -1,3 +1,4 @@
 library dishes_menu;
 
-export 'ui/dishes_menu.dart';
+export 'src/ui/dishes_menu.dart';
+export 'src/bloc/bloc.dart';

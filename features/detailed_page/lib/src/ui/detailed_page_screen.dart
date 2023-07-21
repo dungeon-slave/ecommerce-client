@@ -1,14 +1,17 @@
 import 'package:core_ui/core_ui.dart';
-import 'package:domain/models/dish_model.dart';
+import 'package:domain/models/dishes_items/dish_model.dart';
 import 'package:flutter/material.dart';
 
 class DetailedPageScreen extends StatelessWidget {
   final DishModel _model;
+  final void Function() _addToCartHandler;
 
   const DetailedPageScreen({
-    super.key,
     required DishModel model,
-  }) : _model = model;
+    required void Function() addToCartHandler,
+    super.key,
+  })  : _model = model,
+        _addToCartHandler = addToCartHandler;
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +21,7 @@ class DetailedPageScreen extends StatelessWidget {
         iconTheme: Theme.of(context).iconTheme,
         leading: IconButton(
           icon: AppIcons.closeDetailedPage,
-          onPressed: () => Navigator.of(context).pop(),
+          onPressed: () => Navigator.of(context).pop(), //TODO remove pop
         ),
         centerTitle: true,
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
@@ -31,7 +34,8 @@ class DetailedPageScreen extends StatelessWidget {
         ),
       ),
       body: ListView(
-        padding: const EdgeInsets.only(bottom: AppDimens.padding100),
+        padding: const EdgeInsets.only(
+            bottom: AppDimens.padding100), //TODO try replace with margin
         children: <Container>[
           Container(
             margin: const EdgeInsets.all(AppDimens.padding50),
@@ -138,7 +142,7 @@ class DetailedPageScreen extends StatelessWidget {
             ),
             AppButton(
               text: AppConstants.addToCart,
-              handler: () => {}, //TODO: implement
+              handler: _addToCartHandler,
             ),
           ],
         ),

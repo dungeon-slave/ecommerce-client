@@ -1,11 +1,12 @@
 import 'package:core/core.dart';
 import 'package:core/di/app_di.dart';
 import 'package:core_ui/core_ui.dart';
-import 'package:dishes_menu/ui/dish_item.dart';
+import 'package:dishes_menu/src/ui/dish_item.dart';
+import 'package:domain/domain.dart';
 import 'package:domain/usecase/dishes/fetch_dishes_usecase.dart';
 import 'package:flutter/material.dart';
 
-import '../src/bloc/dishes_menu_screen/dishes_menu_bloc.dart';
+import '../bloc/dishes_menu_screen/dishes_menu_bloc.dart';
 
 class DishesMenuScreen extends StatefulWidget {
   const DishesMenuScreen({super.key});
@@ -38,7 +39,8 @@ class DishesMenuScreenState extends State<DishesMenuScreen>
     return BlocProvider(
       create: (BuildContext context) {
         return MenuBloc(
-          appLocator<FetchDishesUsecase>(),
+           fetchDishesUsecase: appLocator<FetchDishesUsecase>(), 
+           saveItemsUseCase: appLocator<SaveItemUseCase>(),
         );
       },
       child: BlocConsumer<MenuBloc, MenuState>(

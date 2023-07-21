@@ -1,18 +1,17 @@
+import 'package:core/core.dart';
 import 'package:core_ui/core_ui.dart';
-import 'package:domain/models/dish_model.dart';
+import 'package:domain/models/cart_items/cart_item_model.dart';
 import 'package:flutter/material.dart';
+import 'package:shopping_cart/src/bloc/shopping_cart/shopping_cart_bloc.dart';
 
 class CartItem extends StatelessWidget {
-  final DishModel _model;
-  final int _amount;
+  final CartItemModel _model;
 
   const CartItem({
-    required DishModel model,
+    required CartItemModel model,
     super.key,
-  })  : _model = model;
+  }) : _model = model;
 
-  double getAveragePrice() => _model.price * _amount;
-  
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -24,30 +23,36 @@ class CartItem extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
-          const AppImage(
-            imageRef: "",
-            width: 100,
-            height: 100,
+          AppImage(
+            imageRef: _model.dishModel.imageRef,
+            width: AppDimens.padding100,
+            height: AppDimens.padding100,
           ),
           Column(
             children: <Widget>[
               Text(
-                _model.name,
+                _model.dishModel.name,
                 style: AppFonts.normal22,
               ),
               Row(
                 children: <Widget>[
                   IconButton(
-                    onPressed: () => {},
+                    onPressed: () =>
+                        BlocProvider.of<ShoppingCartBloc>(context).add(
+                      DecrementEvent(model: _model),
+                    ),
                     icon: const Icon(Icons.remove_circle),
                     color: Theme.of(context).indicatorColor,
                   ),
-                  const Text(
-                    '1',
+                  Text(
+                    _model.count.toString(),
                     style: AppFonts.normal22,
                   ),
                   IconButton(
-                    onPressed: () => {},
+                    onPressed: () =>
+                        BlocProvider.of<ShoppingCartBloc>(context).add(
+                      IncrementEvent(model: _model),
+                    ),
                     icon: const Icon(Icons.add_circle),
                     color: Theme.of(context).indicatorColor,
                   ),
@@ -56,7 +61,7 @@ class CartItem extends StatelessWidget {
             ],
           ),
           Text(
-            '${_model.price}\$',
+            '${_model.dishModel.price}\$',
             style: AppFonts.normal22,
           ),
         ],

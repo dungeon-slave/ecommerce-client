@@ -106,7 +106,7 @@ packages:
     source: hosted
     version: "1.17.1"
   core:
-    dependency: transitive
+    dependency: "direct main"
     description:
       path: "../../core"
       relative: true

@@ -226,7 +226,7 @@ packages:
     source: hosted
     version: "3.1.1"
   core:
-    dependency: transitive
+    dependency: "direct main"
     description:
       path: "../../core"
       relative: true
@@ -263,14 +263,14 @@ packages:
     source: path
     version: "0.0.1"
   dishes_menu:
-    dependency: transitive
+    dependency: "direct main"
     description:
       path: "../dishes_menu"
       relative: true
     source: path
     version: "0.0.1"
   domain:
-    dependency: transitive
+    dependency: "direct main"
     description:
       path: "../../domain"
       relative: true
@@ -705,7 +705,7 @@ packages:
     source: hosted
     version: "1.0.4"
   shopping_cart:
-    dependency: transitive
+    dependency: "direct main"
     description:
       path: "../shopping_cart"
       relative: true

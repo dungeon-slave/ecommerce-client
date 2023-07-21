@@ -1,4 +1,6 @@
-import 'package:domain/models/dish_model.dart';
+import 'package:core/core.dart';
+import 'package:dishes_menu/src/bloc/dishes_menu_screen/dishes_menu_bloc.dart';
+import 'package:domain/models/dishes_items/dish_model.dart';
 import 'package:flutter/material.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:navigation/navigation.dart';
@@ -6,13 +8,18 @@ import 'package:navigation/navigation.dart';
 class DishItem extends StatefulWidget {
   final DishModel _model;
 
+  void Function() _addToCartHandler(BuildContext context) {
+    return () =>
+        BlocProvider.of<MenuBloc>(context).add(AddDishEvent(model: _model));
+  }
+
   const DishItem({
     required DishModel model,
     super.key,
   }) : _model = model;
 
   @override
-  State<StatefulWidget> createState() => _DishItemState();
+  State<DishItem> createState() => _DishItemState();
 }
 
 class _DishItemState extends State<DishItem> {
@@ -20,7 +27,10 @@ class _DishItemState extends State<DishItem> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => context.navigateTo(
-        DetailedPageRoute(model: widget._model),
+        DetailedPageRoute(
+          model: widget._model,
+          addToCartHandler: widget._addToCartHandler(context),
+        ),
       ),
       child: Container(
         margin: const EdgeInsets.only(
@@ -65,7 +75,7 @@ class _DishItemState extends State<DishItem> {
                 ),
                 AppButton(
                   text: AppConstants.addToCart,
-                  handler: () => {}, //TODO: implement
+                  handler: widget._addToCartHandler(context),
                 ),
               ],
             ),

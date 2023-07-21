@@ -1,4 +1,4 @@
-import 'package:domain/models/dish_model.dart';
+import 'package:domain/models/dishes_items/dish_model.dart';
 
 class DishTypeModel {
   final String typeName;
