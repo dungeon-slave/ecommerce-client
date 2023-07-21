@@ -50,30 +50,26 @@ class ShoppingCartBloc extends Bloc<ShoppingCartEvent, ShoppingCartState> {
   }
 
   void _decrementItem(DecrementEvent event, Emitter<ShoppingCartState> emit) {
-    for (CartItemModel element in state.items) {
-      if (element.dishModel.id == event.model.dishModel.id) {
-        CartItemModel currElement = element.copyWith(count: element.count - 1);
-        _changeItemCountUseCase.execute(currElement);
-        state.items.remove(element);
-        if (currElement.count != 0) {
-          state.items.add(currElement);
-        }
-        break;
-      } 
+    int index = state.items.indexWhere((CartItemModel element) =>
+        element.dishModel.id == event.model.dishModel.id);
+    CartItemModel currElement =
+        state.items[index].copyWith(count: state.items[index].count - 1);
+    _changeItemCountUseCase.execute(currElement);
+    if (currElement.count != 0) {
+      state.items[index] = currElement;
+    } else {
+      state.items.removeAt(index);
     }
     emit(state.copyWith(items: state.items));
   }
 
   void _incrementItem(IncrementEvent event, Emitter<ShoppingCartState> emit) {
-    for (CartItemModel element in state.items) {
-      if (element.dishModel.id == event.model.dishModel.id) {
-        CartItemModel currElement = element.copyWith(count: element.count + 1);
-        _changeItemCountUseCase.execute(currElement);
-        state.items.remove(element);
-        state.items.add(currElement);
-        break;
-      }
-    }
+    int index = state.items.indexWhere((CartItemModel element) =>
+        element.dishModel.id == event.model.dishModel.id);
+    CartItemModel currElement =
+        state.items[index].copyWith(count: state.items[index].count + 1);
+    _changeItemCountUseCase.execute(currElement);
+    state.items[index] = currElement;
     emit(state.copyWith(items: state.items));
   }
 

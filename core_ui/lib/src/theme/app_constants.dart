@@ -1,6 +1,8 @@
 final class AppConstants {
   static const String menuCollection = 'dishes_menu';
 
+  static const int priceSize = 2;
+
   static const String darkTheme = 'Dark theme';
   
   static const String addToCart = 'Add to cart';

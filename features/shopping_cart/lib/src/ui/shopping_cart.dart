@@ -86,13 +86,13 @@ class ShoppingCartScreen extends StatelessWidget {
                         style: AppFonts.normal22,
                       ),
                       Text(
-                        '${state.totalPrice()}\$',
+                        '${state.totalPrice().toStringAsFixed(AppConstants.priceSize)}\$',
                         style: AppFonts.normal22,
                       ),
                     ],
                   ),
                   SizedBox(
-                    width: AppDimens.padding100 * 4,
+                    width: AppDimens.size400,
                     child: AppButton(
                       text: 'Checkout',
                       handler: () =>

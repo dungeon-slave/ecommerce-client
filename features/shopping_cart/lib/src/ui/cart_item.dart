@@ -61,7 +61,7 @@ class CartItem extends StatelessWidget {
             ],
           ),
           Text(
-            '${_model.dishModel.price}\$',
+            '${_model.averagePrice.toStringAsFixed(AppConstants.priceSize)}\$',
             style: AppFonts.normal22,
           ),
         ],

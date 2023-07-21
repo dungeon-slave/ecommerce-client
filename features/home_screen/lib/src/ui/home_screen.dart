@@ -53,12 +53,18 @@ class HomeScreen extends StatelessWidget {
                     ),
                     BottomNavigationBarItem(
                       activeIcon: Badge(
-                        offset: const Offset(5, -5),
+                        offset: const Offset(
+                          AppDimens.margin5,
+                          -AppDimens.margin5,
+                        ),
                         label: Text(state.count.toString()),
                         child: AppIcons.selectedShoppingCart,
                       ),
                       icon: Badge(
-                        offset: const Offset(5, -5),
+                        offset: const Offset(
+                          AppDimens.margin5,
+                          -AppDimens.margin5,
+                        ),
                         label: Text(state.count.toString()),
                         child: AppIcons.unselectedShoppingCart,
                       ),
