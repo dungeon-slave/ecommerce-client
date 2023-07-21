@@ -15,4 +15,7 @@ final class AppConstants {
 
   static const String detailedDescription = 'Description';
   static const String detailedIngredients = 'Ingredients';
+
+  static const String cartCheckout = 'Checkout';
+  static const String cartTotal = 'Total';
 }

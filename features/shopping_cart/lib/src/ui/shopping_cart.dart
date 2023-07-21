@@ -82,7 +82,7 @@ class ShoppingCartScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Text>[
                       const Text(
-                        'Total',
+                        AppConstants.cartTotal,
                         style: AppFonts.normal22,
                       ),
                       Text(
@@ -94,7 +94,7 @@ class ShoppingCartScreen extends StatelessWidget {
                   SizedBox(
                     width: AppDimens.size400,
                     child: AppButton(
-                      text: 'Checkout',
+                      text: AppConstants.cartCheckout,
                       handler: () =>
                           BlocProvider.of<ShoppingCartBloc>(context).add(
                         CheckoutEvent(),
