@@ -10,10 +10,10 @@ class SettingsBloc extends Bloc<ThemeEvent, SettingsState> {
   final SetThemeUseCase _setThemeUseCase;
   final GetThemeUseCase _getThemeUseCase;
 
-  SettingsBloc(
-      {required SetThemeUseCase setThemeUseCase,
-      required GetThemeUseCase getThemeUseCase})
-      : _setThemeUseCase = setThemeUseCase,
+  SettingsBloc({
+    required SetThemeUseCase setThemeUseCase,
+    required GetThemeUseCase getThemeUseCase,
+  })  : _setThemeUseCase = setThemeUseCase,
         _getThemeUseCase = getThemeUseCase,
         super(SettingsState(isDark: true)) {
     on<SetThemeEvent>(_setTheme);
