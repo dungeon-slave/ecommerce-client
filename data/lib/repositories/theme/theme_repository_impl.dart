@@ -4,7 +4,7 @@ import 'package:domain/repositories/theme_repository.dart';
 class ThemeRepositoryImpl implements ThemeRepository {
   final HiveProvider _hiveProvider;
 
-  ThemeRepositoryImpl({required HiveProvider hiveProvider})
+  const ThemeRepositoryImpl({required HiveProvider hiveProvider})
       : _hiveProvider = hiveProvider;
 
   @override

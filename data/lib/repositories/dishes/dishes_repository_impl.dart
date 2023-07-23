@@ -7,7 +7,7 @@ import 'package:domain/repositories/dishes_repository.dart';
 class DishesRepositoryImpl implements DishesRepository {
   final FirebaseProvider _firebaseProvider;
 
-  DishesRepositoryImpl(this._firebaseProvider);
+  const DishesRepositoryImpl(this._firebaseProvider);
 
   @override
   Future<List<DishTypeModel>> fetchDishes() async {

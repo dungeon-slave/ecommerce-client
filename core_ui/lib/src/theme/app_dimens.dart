@@ -15,5 +15,4 @@ final class AppDimens {
   static const double padding25 = 25;
   static const double padding50 = 50;
   static const double padding100 = 100;
-
 }

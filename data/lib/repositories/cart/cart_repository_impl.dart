@@ -7,7 +7,7 @@ import 'package:domain/repositories/cart_repository.dart';
 class CartRepositoryImpl implements CartRepository {
   final HiveProvider _hiveProvider;
 
-  CartRepositoryImpl({required HiveProvider hiveProvider})
+  const CartRepositoryImpl({required HiveProvider hiveProvider})
       : _hiveProvider = hiveProvider;
 
   @override

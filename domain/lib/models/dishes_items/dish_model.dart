@@ -6,7 +6,7 @@ class DishModel {
   final List<String> ingredients;
   final String id;
 
-  DishModel({
+  const DishModel({
     required this.imageRef,
     required this.name,
     required this.price,

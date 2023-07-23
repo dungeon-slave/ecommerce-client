@@ -5,7 +5,7 @@ import 'package:domain/usecase/usecase.dart';
 class ChangeItemCountUseCase implements AsyncUseCase<CartItemModel, void> {
   final CartRepository _cartRepository;
 
-  ChangeItemCountUseCase({required CartRepository cartRepository})
+  const ChangeItemCountUseCase({required CartRepository cartRepository})
       : _cartRepository = cartRepository;
 
   @override

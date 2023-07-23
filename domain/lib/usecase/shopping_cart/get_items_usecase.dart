@@ -5,7 +5,7 @@ import 'package:domain/usecase/usecase.dart';
 class GetItemsUseCase implements UseCase<NoParams, List<CartItemModel>> {
   final CartRepository _cartRepository;
 
-  GetItemsUseCase({required CartRepository cartRepository})
+  const GetItemsUseCase({required CartRepository cartRepository})
       : _cartRepository = cartRepository;
 
   @override
