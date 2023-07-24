@@ -1,64 +1,46 @@
 import 'package:bloc/bloc.dart';
 import 'package:domain/domain.dart';
-import 'package:domain/models/dish_model.dart';
+import 'package:domain/models/dish_type_model.dart';
+import 'package:domain/usecase/usecase.dart';
 
 part 'dishes_menu_event.dart';
 part 'dishes_menu_state.dart';
 
 class MenuBloc extends Bloc<MenuEvent, MenuState> {
   final FetchDishesUsecase _fetchDishesUsecase;
-  final Map<String, List<DishModel>> dishesByType = {};
 
-  MenuBloc(this._fetchDishesUsecase) : super(LoadingState()) {
+  MenuBloc(this._fetchDishesUsecase)
+      : super(MenuState(
+          items: <DishTypeModel>[],
+          isLoading: true,
+        )) {
     on<InitEvent>(_init);
     on<ChangeTypeEvent>(_changeType);
-    on<GetDishesTypesEvent>(_getDishesTypes);
-    on<GetDishesTypeEvent>(_getDishesType);
 
     add(InitEvent());
   }
 
   void _init(InitEvent event, Emitter<MenuState> emit) async {
+    emit(state.copyWith(isLoading: true));
     try {
-      List<DishModel> models = await _fetchDishesUsecase.execute();
-
-      for (DishModel model in models) {
-        if (dishesByType.containsKey(model.type)) {
-          dishesByType[model.type]!.add(model);
-        } else {
-          dishesByType.addAll({
-            model.type: [model]
-          });
-        }
-      }
-      add(GetDishesTypesEvent());
+      final List<DishTypeModel> types = await _fetchDishesUsecase.execute(const NoParams());
+      emit(
+        state.copyWith(
+          isLoading: false,
+          items: types,
+        ),
+      );
     } catch (e) {
-      emit(ErrorState(errorMessage: e.toString()));
+      emit(
+        state.copyWith(
+          isLoading: false,
+          errorMessage: e.toString(),
+        ),
+      );
     }
   }
 
   void _changeType(ChangeTypeEvent event, Emitter<MenuState> emit) {
-    try {
-      emit(DishesListState(dishes: dishesByType[event.type]!));
-    } catch (e) {
-      emit(ErrorState(errorMessage: e.toString()));
-    }
-  }
-
-  void _getDishesTypes(GetDishesTypesEvent event, Emitter<MenuState> emit) {
-    try {
-      emit(TabsListState(tabsNames: dishesByType.keys.toList()));
-    } catch (e) {
-      emit(ErrorState(errorMessage: e.toString()));
-    }
-  }
-
-  void _getDishesType(GetDishesTypeEvent event, Emitter<MenuState> emit) {
-    try {
-      emit(CurrentTabState(
-          currentTabName: dishesByType.keys.elementAt(event.selectedIndex)));
-    } catch (e) {
-      emit(ErrorState(errorMessage: e.toString()));
-    }
+    emit(state.copyWith(currentTab: event.typeIndex));
   }
 }

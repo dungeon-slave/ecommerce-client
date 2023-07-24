@@ -1,7 +1,7 @@
 import 'dart:io';
-
-import 'package:core_ui/src/theme/themes.dart';
+import 'package:core/core.dart';
 import 'package:flutter/material.dart';
+import '../../core_ui.dart';
 
 class AppImage extends StatelessWidget {
   final String _imageRef;
@@ -36,30 +36,18 @@ class AppImage extends StatelessWidget {
     switch (getType()) {
       case 'network':
         {
-          return Image.network(
-            _imageRef,
-            width: _width,
-            height: _height,
-            loadingBuilder: (BuildContext context, Widget child,
-                ImageChunkEvent? loadingProgress) {
-              if (loadingProgress == null) {
-                return child;
-              }
-              return Center(
-                child: Container(
-                  padding: const EdgeInsets.all(AppDimens.padding50),
-                  width: _width,
-                  height: _height,
-                  child: CircularProgressIndicator(
-                    strokeWidth: AppDimens.width25,
-                    value: loadingProgress.expectedTotalBytes != null
-                        ? loadingProgress.cumulativeBytesLoaded /
-                            loadingProgress.expectedTotalBytes!
-                        : null,
-                  ),
-                ),
-              );
-            },
+          return Center(
+            child: CachedNetworkImage(
+              imageUrl: _imageRef,
+              width: _width,
+              height: _height,
+              progressIndicatorBuilder: (BuildContext context, String url,
+                  DownloadProgress progress) {
+                return const Center(
+                  child: AppLoadingCircle(),
+                );
+              },
+            ),
           );
         }
       case 'memory':
@@ -75,15 +63,7 @@ class AppImage extends StatelessWidget {
           return SizedBox(
             width: _width,
             height: _height,
-            child: Center(
-              child: Text(
-                textAlign: TextAlign.center,
-                AppConstants.undefinedImageType,
-                style: AppFonts.bold25.copyWith(
-                  color: AppColors.red,
-                ),
-              ),
-            ),
+            child: const AppError(errorText: AppConstants.undefinedImageType),
           );
         }
     }

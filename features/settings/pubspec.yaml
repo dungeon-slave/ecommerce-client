@@ -12,6 +12,10 @@ dependencies:
     sdk: flutter
   core_ui:
     path: ../../core_ui
+  core:
+    path: ../../core
+  domain:
+    path: ../../domain
 
 dev_dependencies:
   flutter_test:

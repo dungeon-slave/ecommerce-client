@@ -1,72 +1,76 @@
+import 'package:domain/models/dish_model.dart';
 import 'package:flutter/material.dart';
 import 'package:core_ui/core_ui.dart';
+import 'package:navigation/navigation.dart';
 
 class DishItem extends StatefulWidget {
-  final String _name;
-  final String _imageRef;
-  final String _price;
+  final DishModel _model;
 
-  const DishItem(
-      {required String name,
-      required String imageRef,
-      required String price,
-      super.key})
-      : _name = name,
-        _imageRef = imageRef,
-        _price = price;
+  const DishItem({
+    required DishModel model,
+    super.key,
+  }) : _model = model;
 
   @override
-  State<StatefulWidget> createState() => DishItemState();
+  State<StatefulWidget> createState() => _DishItemState();
 }
 
-class DishItemState extends State<DishItem> {
+class _DishItemState extends State<DishItem> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(
-        top: AppDimens.margin5,
-        bottom: AppDimens.margin5,
+    return GestureDetector(
+      onTap: () => context.navigateTo(
+        DetailedPageRoute(model: widget._model),
       ),
-      padding: const EdgeInsets.only(
-        top: AppDimens.padding10,
-        bottom: AppDimens.padding10,
-      ),
-      decoration: const BoxDecoration(
-        color: AppColors.smoothBrown,
-        borderRadius: BorderRadius.all(Radius.circular(AppDimens.radius10)),
-      ),
-      child: Column(
-        children: <Widget>[
-          Text(
-            widget._name,
-            style: AppFonts.normal25.copyWith(color: AppColors.ligthWhite),
-          ),
-          AppImage(
-            imageRef: widget._imageRef,
-            width: AppDimens.size200,
-            height: AppDimens.size200,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              Text(
-                widget._price,
-                style: AppFonts.normal24.copyWith(
-                  color: AppColors.smoothYellow,
-                ),
-              ),
-              ElevatedButton(
-                onPressed: () => {},
-                child: Text(
-                  AppConstants.addToCart,
-                  style: AppFonts.normal22.copyWith(
-                    color: AppColors.ligthWhite,
+      child: Container(
+        margin: const EdgeInsets.only(
+          top: AppDimens.margin5,
+          bottom: AppDimens.margin5,
+        ),
+        padding: const EdgeInsets.only(
+          top: AppDimens.padding10,
+          bottom: AppDimens.padding10,
+        ),
+        decoration: BoxDecoration(
+          boxShadow: <BoxShadow>[
+            BoxShadow(
+              blurStyle: BlurStyle.outer,
+              blurRadius: AppDimens.padding10,
+              color: Theme.of(context).cardColor,
+            ),
+          ],
+          borderRadius:
+              const BorderRadius.all(Radius.circular(AppDimens.radius10)),
+        ),
+        child: Column(
+          children: <Widget>[
+            Text(
+              widget._model.name,
+              style: AppFonts.normal25
+                  .copyWith(color: Theme.of(context).primaryColor),
+            ),
+            AppImage(
+              imageRef: widget._model.imageRef,
+              width: AppDimens.size200,
+              height: AppDimens.size200,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                Text(
+                  widget._model.price,
+                  style: AppFonts.bold24.copyWith(
+                    color: Theme.of(context).indicatorColor,
                   ),
                 ),
-              ),
-            ],
-          ),
-        ],
+                AppButton(
+                  text: AppConstants.addToCart,
+                  handler: () => {}, //TODO: implement
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

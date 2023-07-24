@@ -1,11 +1,11 @@
 import 'package:core/core.dart';
 import 'package:core/di/app_di.dart';
 import 'package:core_ui/core_ui.dart';
-import 'package:domain/usecase/fetch_dishes_usecase.dart';
+import 'package:dishes_menu/src/ui/dish_item.dart';
+import 'package:domain/usecase/dishes/fetch_dishes_usecase.dart';
 import 'package:flutter/material.dart';
 
 import '../bloc/dishes_menu_screen/dishes_menu_bloc.dart';
-import 'menu_list.dart';
 
 class DishesMenuScreen extends StatefulWidget {
   const DishesMenuScreen({super.key});
@@ -17,39 +17,7 @@ class DishesMenuScreen extends StatefulWidget {
 class DishesMenuScreenState extends State<DishesMenuScreen>
     with TickerProviderStateMixin {
   late final TabController _tabController;
-  final List<Tab> _tabs = [];
-
-  void addEvents(BuildContext context, MenuState state) {
-    if (state is TabsListState) {
-      _tabController = TabController(
-          length: state.tabsNames.length,
-          vsync: this,
-          animationDuration: Duration.zero);
-      _tabController.addListener(() {
-        BlocProvider.of<MenuBloc>(context).add(
-          GetDishesTypeEvent(_tabController.index),
-        );
-      });
-      for (String tabName in state.tabsNames) {
-        _tabs.add(
-          Tab(
-            child: Text(
-              tabName,
-              style: AppFonts.normal25,
-            ),
-          ),
-        );
-      }
-      BlocProvider.of<MenuBloc>(context).add(
-        GetDishesTypeEvent(0),
-      );
-    }
-    if (state is CurrentTabState) {
-      BlocProvider.of<MenuBloc>(context).add(
-        ChangeTypeEvent(state.currentTabName),
-      );
-    }
-  }
+  bool isTabControllerInited = false;
 
   void handleSwipe(DragEndDetails details) {
     // Swiping in right direction.
@@ -65,64 +33,78 @@ class DishesMenuScreenState extends State<DishesMenuScreen>
     }
   }
 
-  Widget buildMenu(MenuState state) {
-    if (state is DishesListState) {
-      return GestureDetector(
-        onHorizontalDragEnd: handleSwipe,
-        child: Scaffold(
-          appBar: AppBar(
-            backgroundColor: AppColors.dartBreeze,
-            toolbarHeight: 0,
-            bottom: TabBar(
-              controller: _tabController,
-              indicatorColor: AppColors.smoothYellow,
-              unselectedLabelColor: AppColors.ligthWhite,
-              labelColor: AppColors.smoothYellow,
-              isScrollable: true,
-              tabs: _tabs,
-            ),
-          ),
-          body: MenuList(state.dishes),
-        ),
-      );
-    }
-    if (state is ErrorState) {
-      return Center(
-        child: Text(
-          state.errorMessage,
-          style: AppFonts.bold25.copyWith(
-            color: AppColors.red,
-          ),
-        ),
-      );
-    }
-    return Container(
-      color: AppColors.dartBreeze,
-      child: const Center(
-        child: CircularProgressIndicator(
-          color: AppColors.smoothYellow,
-        ),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (BuildContext context) => MenuBloc(
-        appLocator<FetchDishesUsecase>(),
-      ),
+      create: (BuildContext context) {
+        return MenuBloc(
+          appLocator<FetchDishesUsecase>(),
+        );
+      },
       child: BlocConsumer<MenuBloc, MenuState>(
-        listener: (BuildContext context, MenuState state) =>
-            addEvents(context, state),
-        builder: (BuildContext context, MenuState state) => buildMenu(state),
-        listenWhen: (MenuState previous, MenuState current) =>
-            previous != current &&
-            (current is TabsListState || current is CurrentTabState),
-        buildWhen: (MenuState previous, MenuState current) =>
-            previous != current &&
-            (current is DishesListState || current is ErrorState),
-      ),
+          listener: (BuildContext context, MenuState state) {
+        if (!isTabControllerInited && state.items.isNotEmpty) {
+          isTabControllerInited = true;
+          _tabController = TabController(
+            initialIndex: 0,
+            length: state.items.length,
+            vsync: this,
+            animationDuration: Duration.zero,
+          );
+          _tabController.addListener(
+            () => BlocProvider.of<MenuBloc>(context).add(
+              ChangeTypeEvent(_tabController.index),
+            ),
+          );
+        }
+      }, builder: (BuildContext context, MenuState state) {
+        if (state.errorMessage.isNotEmpty) {
+          return AppError(errorText: state.errorMessage);
+        }
+        if (state.isLoading) {
+          return Container(
+            color: Theme.of(context).scaffoldBackgroundColor,
+            child: const AppLoadingCircle(),
+          );
+        }
+        return GestureDetector(
+          onHorizontalDragEnd: handleSwipe,
+          child: Scaffold(
+            appBar: AppBar(
+              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+              toolbarHeight: 0,
+              bottom: TabBar(
+                controller: _tabController,
+                indicatorColor: Theme.of(context).indicatorColor,
+                unselectedLabelColor: Theme.of(context).primaryColor,
+                labelColor: Theme.of(context).indicatorColor,
+                isScrollable: true,
+                tabs: List.generate(
+                  state.items.length,
+                  (int index) => Tab(
+                    child: Text(
+                      state.items[index].typeName,
+                      style: AppFonts.normal25,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            body: Container(
+              color: Theme.of(context).scaffoldBackgroundColor,
+              child: ListView.builder(
+                padding: const EdgeInsets.all(AppDimens.padding10),
+                itemCount: state.items[state.currentTab].dishesModels.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return DishItem(
+                    model: state.items[state.currentTab].dishesModels[index],
+                  );
+                },
+              ),
+            ),
+          ),
+        );
+      }),
     );
   }
 }

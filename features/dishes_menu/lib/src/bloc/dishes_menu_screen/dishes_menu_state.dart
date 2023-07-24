@@ -1,29 +1,29 @@
 part of 'dishes_menu_bloc.dart';
 
-abstract class MenuState {}
-
-class LoadingState extends MenuState {}
-
-class ErrorState extends MenuState {
+class MenuState {
+  final List<DishTypeModel> items;
+  final bool isLoading;
   final String errorMessage;
+  final int currentTab;
 
-  ErrorState({required this.errorMessage});
-}
+  MenuState({
+    required this.items,
+    this.isLoading = false,
+    this.errorMessage = '',
+    this.currentTab = 0,
+  });
 
-class DishesListState extends MenuState {
-  final List<DishModel> dishes;
-
-  DishesListState({required this.dishes});
-}
-
-class TabsListState extends MenuState {
-  final Iterable<String> tabsNames;
-
-  TabsListState({required this.tabsNames});
-}
-
-class CurrentTabState extends MenuState {
-  final String currentTabName;
-
-  CurrentTabState({required this.currentTabName});
+  MenuState copyWith({
+    List<DishTypeModel>? items,
+    bool? isLoading,
+    String? errorMessage,
+    int? currentTab,
+  }) {
+    return MenuState(
+      items: items ?? this.items,
+      errorMessage: errorMessage ?? this.errorMessage,
+      isLoading: isLoading ?? this.isLoading,
+      currentTab: currentTab ?? this.currentTab,
+    );
+  }
 }

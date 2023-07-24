@@ -1,6 +1,12 @@
+import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
 
 final class AppIcons {
+  //??
+  static const Icon closeDetailedPage = Icon(
+    Icons.clear,
+    size: AppDimens.size40,
+  );
   static const Icon unselectedMenu = Icon(
     Icons.storefront,
   );
