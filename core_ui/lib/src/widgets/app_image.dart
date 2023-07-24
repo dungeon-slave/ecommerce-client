@@ -22,7 +22,6 @@ class AppImage extends StatelessWidget {
       return 'network';
     }
     if (_imageRef.endsWith('.png') ||
-        _imageRef.endsWith('.svg') ||
         _imageRef.endsWith('.jpg') ||
         _imageRef.endsWith('.jpeg')) {
       return 'memory';

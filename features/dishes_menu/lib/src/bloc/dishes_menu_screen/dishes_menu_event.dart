@@ -9,3 +9,9 @@ class ChangeTypeEvent extends MenuEvent {
 
   ChangeTypeEvent(this.typeIndex);
 }
+
+class AddDishEvent extends MenuEvent {
+  final DishModel model;
+
+  AddDishEvent({required this.model});
+}

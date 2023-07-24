@@ -1,8 +1,8 @@
 import 'package:domain/domain.dart';
-import 'package:domain/models/dish_type_model.dart';
+import 'package:domain/models/dishes_items/dish_type_model.dart';
 import 'package:domain/usecase/usecase.dart';
 
-class FetchDishesUsecase implements UseCase<NoParams, List<DishTypeModel>> {
+class FetchDishesUsecase implements AsyncUseCase<NoParams, List<DishTypeModel>> {
   final DishesRepository _dishesRepository;
 
   const FetchDishesUsecase(this._dishesRepository);

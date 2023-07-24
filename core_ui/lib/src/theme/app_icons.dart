@@ -2,7 +2,7 @@ import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
 
 final class AppIcons {
-  //??
+  //TODO make app icon
   static const Icon closeDetailedPage = Icon(
     Icons.clear,
     size: AppDimens.size40,

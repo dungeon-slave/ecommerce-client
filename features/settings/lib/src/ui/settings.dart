@@ -11,17 +11,7 @@ class AppSettingsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      appBar: AppBar(
-        iconTheme: Theme.of(context).iconTheme,
-        centerTitle: true,
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        title: Text(
-          AppConstants.settingsTitle,
-          style: AppFonts.normal25.copyWith(
-            color: Theme.of(context).primaryColor,
-          ),
-        ),
-      ),
+      appBar: const CustomAppBar(text: AppConstants.settingsTitle),
       body: BlocBuilder<SettingsBloc, SettingsState>(
         builder: (context, state) {
           return Container(

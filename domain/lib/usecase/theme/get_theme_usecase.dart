@@ -8,5 +8,5 @@ class GetThemeUseCase implements UseCase<NoParams, bool> {
       : _themeRepository = themeRepository;
 
   @override
-  Future<bool> execute(NoParams input) => _themeRepository.getAppTheme();
+  bool execute(NoParams input) => _themeRepository.getAppTheme();
 }
