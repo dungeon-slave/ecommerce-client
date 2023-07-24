@@ -2,6 +2,7 @@ import 'package:core/core.dart';
 import 'package:core/di/app_di.dart';
 import 'package:data/entities/cart_item_entity/cart_item_entity.dart';
 import 'package:data/entities/dish_entity/dish_entity.dart';
+import 'package:data/entities/dish_type_enity/dish_type_entity.dart';
 import 'package:data/providers/remote/firebase_provider.dart';
 import 'package:data/providers/local/hive_provider.dart';
 import 'package:data/repositories/cart/cart_repository_impl.dart';
@@ -29,37 +30,64 @@ class DataDI {
 
   void _initDishes() {
     appLocator.registerLazySingleton<DishesRepository>(
-      () => DishesRepositoryImpl(appLocator.get<FirebaseProvider>()),
+      () => DishesRepositoryImpl(
+        firebaseProvider: appLocator<FirebaseProvider>(),
+        hiveProvider: appLocator<HiveProvider>(),
+      ),
     );
 
     appLocator.registerLazySingleton<FetchDishesUsecase>(
-      () => FetchDishesUsecase(appLocator.get<DishesRepository>()),
+      () => FetchDishesUsecase(
+        dishesRepository: appLocator<DishesRepository>(),
+      ),
+    );
+    appLocator.registerLazySingleton<SaveDishesUseCase>(
+      () => SaveDishesUseCase(
+        dishesRepository: appLocator<DishesRepository>(),
+      ),
     );
   }
 
   void _initHive() {
-    appLocator.registerLazySingleton<HiveProvider>(() => HiveProvider());
-    Hive.registerAdapter<CartItemEntity>(CartItemEntityAdapter());
-    Hive.registerAdapter<DishEntity>(DishEntityAdapter());
+    appLocator.registerLazySingleton<HiveProvider>(
+      () => HiveProvider(),
+    );
+    Hive.registerAdapter<CartItemEntity>(
+      CartItemEntityAdapter(),
+    );
+    Hive.registerAdapter<DishEntity>(
+      DishEntityAdapter(),
+    );
+    Hive.registerAdapter<DishTypeEntity>(
+      DishTypeEntityAdapter(),
+    );
   }
 
   void _initTheme() {
     appLocator.registerLazySingleton<ThemeRepository>(
-      () => ThemeRepositoryImpl(hiveProvider: appLocator<HiveProvider>()),
+      () => ThemeRepositoryImpl(
+        hiveProvider: appLocator<HiveProvider>(),
+      ),
     );
 
     appLocator.registerLazySingleton<SetThemeUseCase>(
-      () => SetThemeUseCase(themeRepository: appLocator<ThemeRepository>()),
+      () => SetThemeUseCase(
+        themeRepository: appLocator<ThemeRepository>(),
+      ),
     );
 
     appLocator.registerLazySingleton<GetThemeUseCase>(
-      () => GetThemeUseCase(themeRepository: appLocator<ThemeRepository>()),
+      () => GetThemeUseCase(
+        themeRepository: appLocator<ThemeRepository>(),
+      ),
     );
   }
 
   void _initCart() {
     appLocator.registerLazySingleton<CartRepository>(
-      () => CartRepositoryImpl(hiveProvider: appLocator<HiveProvider>()),
+      () => CartRepositoryImpl(
+        hiveProvider: appLocator<HiveProvider>(),
+      ),
     );
 
     appLocator.registerLazySingleton<SaveItemUseCase>(
@@ -68,19 +96,27 @@ class DataDI {
       ),
     );
     appLocator.registerLazySingleton<GetItemsUseCase>(
-      () => GetItemsUseCase(cartRepository: appLocator<CartRepository>()),
+      () => GetItemsUseCase(
+        cartRepository: appLocator<CartRepository>(),
+      ),
     );
     appLocator.registerLazySingleton<ClearCartUseCase>(
-      () => ClearCartUseCase(cartRepository: appLocator<CartRepository>()),
+      () => ClearCartUseCase(
+        cartRepository: appLocator<CartRepository>(),
+      ),
     );
     appLocator.registerLazySingleton<ChangeItemCountUseCase>(
-      () => ChangeItemCountUseCase(cartRepository: appLocator<CartRepository>()),
+      () => ChangeItemCountUseCase(
+        cartRepository: appLocator<CartRepository>(),
+      ),
     );
   }
 
   void _initHomeScreen() {
     appLocator.registerLazySingleton<GetCartCountUseCase>(
-      () => GetCartCountUseCase(cartRepository: appLocator<CartRepository>()),
+      () => GetCartCountUseCase(
+        cartRepository: appLocator<CartRepository>(),
+      ),
     );
   }
 }
