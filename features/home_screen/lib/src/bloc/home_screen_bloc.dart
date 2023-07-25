@@ -11,12 +11,16 @@ class HomeScreenBloc extends Bloc<HomeScreenEvent, HomeScreenState> {
 
   HomeScreenBloc(GetCartCountUseCase getCartCountUseCase)
       : _getCartCountUseCase = getCartCountUseCase,
-        super(HomeScreenState(
-          count: 0,
-          isConnected: true,
-        )) {
+        super(
+          const HomeScreenState(
+            count: 0,
+            isConnected: false,
+            isVisibleMessage: false,
+          ),
+        ) {
     on<ChangeCartCountEvent>(_changeCartCount);
     on<ChangeConnectionEvent>(_changeConnectionStatus);
+    on<ShowMessageEvent>(_changeMessageVisibility);
     InternetConnectionChecker().onStatusChange.listen(
       (InternetConnectionStatus event) {
         add(
@@ -31,17 +35,29 @@ class HomeScreenBloc extends Bloc<HomeScreenEvent, HomeScreenState> {
   void _changeCartCount(
       ChangeCartCountEvent event, Emitter<HomeScreenState> emit) {
     emit(
-      HomeScreenState(
-          count: _getCartCountUseCase.execute(const NoParams()),
-          isConnected: state.isConnected),
+      state.copyWith(
+        count: _getCartCountUseCase.execute(const NoParams()),
+      ),
+    );
+  }
+
+  void _changeMessageVisibility(
+      ShowMessageEvent event, Emitter<HomeScreenState> emit) {
+    emit(
+      state.copyWith(
+        isVisibleMessage: false,
+      ),
     );
   }
 
   void _changeConnectionStatus(
       ChangeConnectionEvent event, Emitter<HomeScreenState> emit) {
-    emit(HomeScreenState(
-      count: state.count,
+    emit(state.copyWith(
       isConnected: event.isConnected,
+      isVisibleMessage: true,
     ));
+    Future.delayed(const Duration(seconds: 3), () {
+      add(ShowMessageEvent(isVisible: false));
+    });
   }
 }

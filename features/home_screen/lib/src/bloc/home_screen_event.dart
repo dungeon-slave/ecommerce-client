@@ -9,3 +9,9 @@ class ChangeConnectionEvent extends HomeScreenEvent {
 
   ChangeConnectionEvent({required this.isConnected});
 }
+
+class ShowMessageEvent extends HomeScreenEvent {
+  final bool isVisible;
+
+  ShowMessageEvent({required this.isVisible});
+}

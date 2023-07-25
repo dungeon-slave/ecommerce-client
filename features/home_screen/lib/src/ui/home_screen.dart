@@ -13,151 +13,127 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => HomeScreenBloc(
+      create: (BuildContext context) => HomeScreenBloc(
         appLocator<GetCartCountUseCase>(),
       ),
-      child: BlocBuilder<HomeScreenBloc, HomeScreenState>(
-        builder: (context, state) {
-          Bloc.observer = CartObserver(context: context);
-          if (state.isConnected) {
-            return AutoTabsScaffold(
-              routes: const <PageRouteInfo>[
-                EmptyRoute(),
-                OrderHistoryRoute(),
-                ShoppingCartRoute(),
-                AppSettingsRoute(),
-              ],
-              animationDuration: Duration.zero,
-              bottomNavigationBuilder:
-                  (BuildContext context, TabsRouter router) {
-                return Container(
-                  decoration: BoxDecoration(
-                    border: Border(
-                      top: BorderSide(color: Theme.of(context).indicatorColor),
+      child: Stack(
+        children: <Widget>[
+          AutoTabsScaffold(
+            routes: const <PageRouteInfo>[
+              EmptyRoute(),
+              OrderHistoryRoute(),
+              ShoppingCartRoute(),
+              AppSettingsRoute(),
+            ],
+            animationDuration: Duration.zero,
+            bottomNavigationBuilder: (BuildContext context, TabsRouter router) {
+              return Container(
+                decoration: BoxDecoration(
+                  border: Border(
+                    top: BorderSide(color: Theme.of(context).indicatorColor),
+                  ),
+                ),
+                child: BottomNavigationBar(
+                  currentIndex: router.activeIndex,
+                  onTap: router.setActiveIndex,
+                  type: BottomNavigationBarType.fixed,
+                  backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                  selectedItemColor: Theme.of(context).indicatorColor,
+                  unselectedItemColor: Theme.of(context).indicatorColor,
+                  items: <BottomNavigationBarItem>[
+                    const BottomNavigationBarItem(
+                      activeIcon: AppIcons.selectedMenu,
+                      icon: AppIcons.unselectedMenu,
+                      label: AppConstants.menuTitle,
+                    ),
+                    const BottomNavigationBarItem(
+                      activeIcon: AppIcons.selectedOrderHistory,
+                      icon: AppIcons.unselectedOrderHistory,
+                      label: AppConstants.orderHistoryTitle,
+                    ),
+                    BottomNavigationBarItem(
+                      activeIcon: Badge(
+                        offset: const Offset(
+                          AppDimens.margin5,
+                          -AppDimens.margin5,
+                        ),
+                        label: BlocBuilder<HomeScreenBloc, HomeScreenState>(
+                          builder: (context, state) {
+                            return Text(state.count.toString());
+                          },
+                        ),
+                        child: AppIcons.selectedShoppingCart,
+                      ),
+                      icon: Badge(
+                        offset: const Offset(
+                          AppDimens.margin5,
+                          -AppDimens.margin5,
+                        ),
+                        label: BlocBuilder<HomeScreenBloc, HomeScreenState>(
+                          builder: (context, state) {
+                            return Text(state.count.toString());
+                          },
+                        ),
+                        child: AppIcons.unselectedShoppingCart,
+                      ),
+                      label: AppConstants.shoppingCartTitle,
+                    ),
+                    const BottomNavigationBarItem(
+                      activeIcon: AppIcons.selectedSettings,
+                      icon: AppIcons.unselectedSettings,
+                      label: AppConstants.settingsTitle,
+                    ),
+                  ],
+                ),
+              );
+            },
+          ),
+          BlocBuilder<HomeScreenBloc, HomeScreenState>(
+            builder: (BuildContext context, HomeScreenState state) {
+              if (Bloc.observer is! CartObserver) {
+                Bloc.observer = CartObserver(context: context);
+              }
+              if (state.isVisibleMessage) {
+                return Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Container(
+                    width: MediaQuery.sizeOf(context).width,
+                    margin: const EdgeInsets.only(
+                      bottom: AppDimens.padding65,
+                      left: AppDimens.margin5,
+                      right: AppDimens.margin5,
+                    ),
+                    decoration: BoxDecoration(
+                      color: state.isConnected
+                          ? AppColors.green
+                          : AppColors.red,
+                      borderRadius: const BorderRadius.all(
+                        Radius.circular(AppDimens.radius10),
+                      ),
+                    ),
+                    padding: const EdgeInsets.only(
+                      top: AppDimens.margin5,
+                      bottom: AppDimens.margin5,
+                      left: AppDimens.padding25,
+                      right: AppDimens.padding25,
+                    ),
+                    child: Text(
+                      textAlign: TextAlign.center,
+                      state.isConnected
+                          ? AppConstants.connectionRestored
+                          : AppConstants.connectionLoss,
+                      style: AppFonts.normal22.copyWith(
+                        color: AppColors.absWhite,
+                        decoration: TextDecoration.none,
+                      ),
                     ),
                   ),
-                  child: BottomNavigationBar(
-                    currentIndex: router.activeIndex,
-                    onTap: router.setActiveIndex,
-                    type: BottomNavigationBarType.fixed,
-                    backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-                    selectedItemColor: Theme.of(context).indicatorColor,
-                    unselectedItemColor: Theme.of(context).indicatorColor,
-                    items: <BottomNavigationBarItem>[
-                      const BottomNavigationBarItem(
-                        activeIcon: AppIcons.selectedMenu,
-                        icon: AppIcons.unselectedMenu,
-                        label: AppConstants.menuTitle,
-                      ),
-                      const BottomNavigationBarItem(
-                        activeIcon: AppIcons.selectedOrderHistory,
-                        icon: AppIcons.unselectedOrderHistory,
-                        label: AppConstants.orderHistoryTitle,
-                      ),
-                      BottomNavigationBarItem(
-                        activeIcon: Badge(
-                          offset: const Offset(
-                            AppDimens.margin5,
-                            -AppDimens.margin5,
-                          ),
-                          label: Text(state.count.toString()),
-                          child: AppIcons.selectedShoppingCart,
-                        ),
-                        icon: Badge(
-                          offset: const Offset(
-                            AppDimens.margin5,
-                            -AppDimens.margin5,
-                          ),
-                          label: Text(state.count.toString()),
-                          child: AppIcons.unselectedShoppingCart,
-                        ),
-                        label: AppConstants.shoppingCartTitle,
-                      ),
-                      const BottomNavigationBarItem(
-                        activeIcon: AppIcons.selectedSettings,
-                        icon: AppIcons.unselectedSettings,
-                        label: AppConstants.settingsTitle,
-                      ),
-                    ],
-                  ),
                 );
-              },
-            );
-          } else {
-            return Stack(
-              children: [
-                AutoTabsScaffold(
-                  routes: const <PageRouteInfo>[
-                    EmptyRoute(),
-                    OrderHistoryRoute(),
-                    ShoppingCartRoute(),
-                    AppSettingsRoute(),
-                  ],
-                  animationDuration: Duration.zero,
-                  bottomNavigationBuilder:
-                      (BuildContext context, TabsRouter router) {
-                    return Container(
-                      decoration: BoxDecoration(
-                        border: Border(
-                          top: BorderSide(
-                              color: Theme.of(context).indicatorColor),
-                        ),
-                      ),
-                      child: BottomNavigationBar(
-                        currentIndex: router.activeIndex,
-                        onTap: router.setActiveIndex,
-                        type: BottomNavigationBarType.fixed,
-                        backgroundColor:
-                            Theme.of(context).scaffoldBackgroundColor,
-                        selectedItemColor: Theme.of(context).indicatorColor,
-                        unselectedItemColor: Theme.of(context).indicatorColor,
-                        items: <BottomNavigationBarItem>[
-                          const BottomNavigationBarItem(
-                            activeIcon: AppIcons.selectedMenu,
-                            icon: AppIcons.unselectedMenu,
-                            label: AppConstants.menuTitle,
-                          ),
-                          const BottomNavigationBarItem(
-                            activeIcon: AppIcons.selectedOrderHistory,
-                            icon: AppIcons.unselectedOrderHistory,
-                            label: AppConstants.orderHistoryTitle,
-                          ),
-                          BottomNavigationBarItem(
-                            activeIcon: Badge(
-                              offset: const Offset(
-                                AppDimens.margin5,
-                                -AppDimens.margin5,
-                              ),
-                              label: Text(state.count.toString()),
-                              child: AppIcons.selectedShoppingCart,
-                            ),
-                            icon: Badge(
-                              offset: const Offset(
-                                AppDimens.margin5,
-                                -AppDimens.margin5,
-                              ),
-                              label: Text(state.count.toString()),
-                              child: AppIcons.unselectedShoppingCart,
-                            ),
-                            label: AppConstants.shoppingCartTitle,
-                          ),
-                          const BottomNavigationBarItem(
-                            activeIcon: AppIcons.selectedSettings,
-                            icon: AppIcons.unselectedSettings,
-                            label: AppConstants.settingsTitle,
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                ),
-                const SnackBar(
-                  content: Text('Disconnected'),
-                ),
-              ],
-            );
-          }
-        },
+              }
+              return const SizedBox.shrink();
+            },
+          ),
+        ],
       ),
     );
   }

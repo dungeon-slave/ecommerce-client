@@ -18,4 +18,7 @@ final class AppConstants {
 
   static const String cartCheckout = 'Checkout';
   static const String cartTotal = 'Total';
+
+  static const String connectionLoss = 'Disconnected!';
+  static const String connectionRestored = 'Connected!';
 }

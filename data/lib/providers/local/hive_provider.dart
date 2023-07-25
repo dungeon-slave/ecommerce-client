@@ -5,7 +5,7 @@ import 'package:data/entities/dish_type_enity/dish_type_entity.dart';
 class HiveProvider {
   late final Box<bool> _themeBox;
   late final Box<CartItemEntity> _cartBox;
-  late final Box<List<DishTypeEntity>> _menuBox;
+  late final Box<DishTypeEntity> _menuBox;
 
   Future<void> openBoxes() async {
     _themeBox = await Hive.openBox<bool>(_HiveKeys.themeBox);
@@ -13,8 +13,12 @@ class HiveProvider {
     _menuBox = await Hive.openBox(_HiveKeys.menuBox);
   }
 
-  Future<void> saveMenu(List<DishTypeEntity> dishesTypes) async =>
-      await _menuBox.put(_HiveKeys.menuKey, dishesTypes);
+  Future<void> saveMenu(List<DishTypeEntity> dishesTypes) async {
+    await _menuBox.clear();
+    for (int i = 0; i < dishesTypes.length; i++) {
+      await _menuBox.put(i, dishesTypes[i]);
+    }
+  }
 
   Future<void> saveTheme(bool isDark) async =>
       await _themeBox.put(_HiveKeys.themeKey, isDark);
@@ -46,7 +50,7 @@ class HiveProvider {
     return count;
   }
 
-  List<DishTypeEntity> getMenu() => _menuBox.get(_HiveKeys.menuKey) ?? <DishTypeEntity>[];
+  List<DishTypeEntity> getMenu() => _menuBox.values.toList();
 
   List<CartItemEntity> getCartItems() => _cartBox.values.toList();
 
@@ -78,5 +82,4 @@ class _HiveKeys {
   static const String menuBox = 'appMenu';
 
   static const String themeKey = 'theme';
-  static const String menuKey = 'menu';
 }
