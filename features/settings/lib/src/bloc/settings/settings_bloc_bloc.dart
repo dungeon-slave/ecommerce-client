@@ -25,7 +25,7 @@ class SettingsBloc extends Bloc<ThemeEvent, SettingsState> {
         _getTextScaleUseCase = getTextScaleUseCase,
         super(SettingsState(
           isDark: true,
-          textScale: AppConstants.textScales[0],
+          textScale: AppConstants.textScales[1],
         )) {
     on<SetThemeEvent>(_setTheme);
     on<GetThemeEvent>(_getTheme);
@@ -37,34 +37,36 @@ class SettingsBloc extends Bloc<ThemeEvent, SettingsState> {
 
   void _setTheme(SetThemeEvent event, Emitter<SettingsState> emit) {
     _setThemeUseCase.execute(event.isDark);
-    emit(SettingsState(
-      isDark: event.isDark,
-      textScale: state.textScale,
-    ));
+    emit(
+      state.copyWith(
+        isDark: event.isDark,
+      ),
+    );
   }
 
   void _setTextScale(SetTextScaleEvent event, Emitter<SettingsState> emit) {
     _setTextScaleUseCase.execute(event.textScale);
-    emit(SettingsState(
-      isDark: state.isDark,
-      textScale: event.textScale,
-    ));
+    emit(
+      state.copyWith(
+        textScale: event.textScale,
+      ),
+    );
   }
 
   void _getTheme(GetThemeEvent event, Emitter<SettingsState> emit) {
     emit(
-      SettingsState(
+      state.copyWith(
         isDark: _getThemeUseCase.execute(const NoParams()),
-        textScale: state.textScale,
       ),
     );
   }
 
   void _getTextScale(GetTextScaleEvent event, Emitter<SettingsState> emit) {
     emit(
-      SettingsState(
-        isDark: state.isDark,
-        textScale: _getTextScaleUseCase.execute(const NoParams()),
+      state.copyWith(
+        textScale: _getTextScaleUseCase.execute(
+          const NoParams(),
+        ),
       ),
     );
   }

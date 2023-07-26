@@ -32,7 +32,6 @@ class MenuBloc extends Bloc<MenuEvent, MenuState> {
   }
 
   void _init(InitEvent event, Emitter<MenuState> emit) async {
-    //emit(state.copyWith(isLoading: true));
     try {
       final List<DishTypeModel> types =
           await _fetchDishesUsecase.execute(const NoParams());
