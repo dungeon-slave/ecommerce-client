@@ -97,32 +97,27 @@ class HomeScreen extends StatelessWidget {
                 return Align(
                   alignment: Alignment.bottomCenter,
                   child: Container(
-                    width: MediaQuery.sizeOf(context).width,
+                    width: AppDimens.size380,
                     margin: const EdgeInsets.only(
                       bottom: AppDimens.padding65,
-                      left: AppDimens.margin5,
-                      right: AppDimens.margin5,
                     ),
                     decoration: BoxDecoration(
-                      color: state.isConnected
-                          ? AppColors.green
-                          : AppColors.red,
+                      color:
+                          state.isConnected ? AppColors.green : AppColors.red,
                       borderRadius: const BorderRadius.all(
                         Radius.circular(AppDimens.radius10),
                       ),
                     ),
                     padding: const EdgeInsets.only(
-                      top: AppDimens.margin5,
-                      bottom: AppDimens.margin5,
-                      left: AppDimens.padding25,
-                      right: AppDimens.padding25,
+                      top: AppDimens.padding10,
+                      bottom: AppDimens.padding10,
                     ),
                     child: Text(
                       textAlign: TextAlign.center,
                       state.isConnected
                           ? AppConstants.connectionRestored
                           : AppConstants.connectionLoss,
-                      style: AppFonts.normal22.copyWith(
+                      style: AppFonts.normal24.copyWith(
                         color: AppColors.absWhite,
                         decoration: TextDecoration.none,
                       ),

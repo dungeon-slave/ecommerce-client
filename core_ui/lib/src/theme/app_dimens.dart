@@ -7,6 +7,7 @@ final class AppDimens {
   static const double size40 = 40;
   static const double size200 = 200;
   static const double size250 = 250;
+  static const double size380 = 380;
   static const double size400 = 400;
 
   static const double padding10 = 10;
