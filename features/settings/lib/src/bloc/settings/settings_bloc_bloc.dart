@@ -42,7 +42,7 @@ class SettingsBloc extends Bloc<ThemeEvent, SettingsState> {
   }
 
   void _openLink(OpenLinkEvent event, Emitter<SettingsState> emit) async {
-    _urlService.openInBrowser(event.link);
+    _urlService.openDefault(event.link);
   }
 
   void _setTheme(SetThemeEvent event, Emitter<SettingsState> emit) async {

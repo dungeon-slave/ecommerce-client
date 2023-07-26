@@ -3,9 +3,10 @@ import 'package:domain/usecase/usecase.dart';
 
 class GetThemeUseCase implements UseCase<NoParams, bool> {
   final ThemeRepository _themeRepository;
-  
-  const GetThemeUseCase({required ThemeRepository themeRepository})
-      : _themeRepository = themeRepository;
+
+  const GetThemeUseCase({
+    required ThemeRepository themeRepository,
+  }) : _themeRepository = themeRepository;
 
   @override
   bool execute(NoParams input) => _themeRepository.getAppTheme();

@@ -4,8 +4,9 @@ import 'package:domain/usecase/usecase.dart';
 class ClearCartUseCase implements AsyncUseCase<NoParams, void> {
   final CartRepository _cartRepository;
 
-  const ClearCartUseCase({required CartRepository cartRepository})
-      : _cartRepository = cartRepository;
+  const ClearCartUseCase({
+    required CartRepository cartRepository,
+  }) : _cartRepository = cartRepository;
 
   @override
   Future<void> execute(NoParams input) => _cartRepository.clearCart();

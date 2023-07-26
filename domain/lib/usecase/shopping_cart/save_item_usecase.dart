@@ -5,8 +5,9 @@ import 'package:domain/usecase/usecase.dart';
 class SaveItemUseCase implements AsyncUseCase<CartItemModel, void> {
   final CartRepository _cartRepository;
 
-  const SaveItemUseCase({required CartRepository cartRepository})
-      : _cartRepository = cartRepository;
+  const SaveItemUseCase({
+    required CartRepository cartRepository,
+  }) : _cartRepository = cartRepository;
 
   @override
   Future<void> execute(CartItemModel input) {

@@ -6,8 +6,9 @@ class FetchDishesUsecase
     implements AsyncUseCase<NoParams, List<DishTypeModel>> {
   final DishesRepository _dishesRepository;
 
-  const FetchDishesUsecase({required DishesRepository dishesRepository})
-      : _dishesRepository = dishesRepository;
+  const FetchDishesUsecase({
+    required DishesRepository dishesRepository,
+  }) : _dishesRepository = dishesRepository;
 
   @override
   Future<List<DishTypeModel>> execute(NoParams empty) async {
