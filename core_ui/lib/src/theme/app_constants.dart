@@ -4,6 +4,7 @@ final class AppConstants {
   static const int priceSize = 2;
 
   static const String darkTheme = 'Dark theme';
+  static const String textScale = 'Text scale';
   
   static const String addToCart = 'Add to cart';
   static const String undefinedImageType = 'Undefined image type!';
@@ -21,4 +22,6 @@ final class AppConstants {
 
   static const String connectionLoss = 'Disconnected!';
   static const String connectionRestored = 'Connected!';
+
+  static const List<double> textScales = [0.8, 1.0, 1.2];
 }

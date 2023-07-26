@@ -15,9 +15,11 @@ class AppSettingsScreen extends StatelessWidget {
       body: BlocBuilder<SettingsBloc, SettingsState>(
         builder: (context, state) {
           return Container(
-            padding: const EdgeInsets.all(AppDimens.padding20),
+            padding: const EdgeInsets.all(
+              AppDimens.padding20,
+            ),
             child: Column(
-              children: <Widget>[
+              children: <Row>[
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
@@ -37,7 +39,45 @@ class AppSettingsScreen extends StatelessWidget {
                       value: state.isDark,
                     ),
                   ],
-                )
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      AppConstants.textScale,
+                      style: AppFonts.normal22.copyWith(
+                        color: Theme.of(context).primaryColor,
+                      ),
+                    ),
+                    ToggleButtons(
+                      onPressed: (int index) =>
+                          BlocProvider.of<SettingsBloc>(context).add(
+                        SetTextScaleEvent(
+                          textScale: AppConstants.textScales[index],
+                        ),
+                      ),
+                      textStyle: AppFonts.normal22,
+                      borderColor: Theme.of(context).cardColor,
+                      borderWidth: 3,
+                      borderRadius: BorderRadius.circular(AppDimens.padding20),
+                      selectedColor: Theme.of(context).indicatorColor,
+                      disabledColor: Theme.of(context).primaryColor,
+                      selectedBorderColor: Theme.of(context).indicatorColor,
+                      splashColor: Theme.of(context).shadowColor,
+                      isSelected: List.generate(
+                        AppConstants.textScales.length,
+                        (int index) =>
+                            AppConstants.textScales[index] == state.textScale,
+                      ),
+                      children: List.generate(
+                        AppConstants.textScales.length,
+                        (int index) => Text(
+                          AppConstants.textScales[index].toString(),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ],
             ),
           );

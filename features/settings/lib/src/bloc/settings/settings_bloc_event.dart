@@ -9,3 +9,11 @@ class SetThemeEvent extends ThemeEvent {
 }
 
 class GetThemeEvent extends ThemeEvent {}
+
+class SetTextScaleEvent extends ThemeEvent {
+  final double textScale;
+
+  SetTextScaleEvent({required this.textScale});
+}
+
+class GetTextScaleEvent extends ThemeEvent {}

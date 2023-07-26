@@ -1,4 +1,5 @@
 import 'package:core/core.dart';
+import 'package:core_ui/core_ui.dart';
 import 'package:data/entities/cart_item_entity/cart_item_entity.dart';
 import 'package:data/entities/dish_type_enity/dish_type_entity.dart';
 
@@ -6,11 +7,13 @@ class HiveProvider {
   late final Box<bool> _themeBox;
   late final Box<CartItemEntity> _cartBox;
   late final Box<DishTypeEntity> _menuBox;
+  late final Box<double> _textScaleBox;
 
   Future<void> openBoxes() async {
     _themeBox = await Hive.openBox<bool>(_HiveKeys.themeBox);
     _cartBox = await Hive.openBox<CartItemEntity>(_HiveKeys.cartBox);
     _menuBox = await Hive.openBox(_HiveKeys.menuBox);
+    _textScaleBox = await Hive.openBox(_HiveKeys.textScaleBox);
   }
 
   Future<void> saveMenu(List<DishTypeEntity> dishesTypes) async {
@@ -39,7 +42,11 @@ class HiveProvider {
     await _cartBox.put(item.dishEntity.id, item);
   }
 
+  Future<void> saveTextScale(double textScale) async => await _textScaleBox.put(_HiveKeys.textScaleKey, textScale);
+
   bool getTheme() => _themeBox.get(_HiveKeys.themeKey) ?? true;
+
+  double getTextScale() => _textScaleBox.get(_HiveKeys.textScaleKey) ?? AppConstants.textScales[1];
 
   int getCartItemsCount() {
     int count = 0;
@@ -80,6 +87,8 @@ class _HiveKeys {
   static const String themeBox = 'appTheme';
   static const String cartBox = 'appCart';
   static const String menuBox = 'appMenu';
+  static const String textScaleBox = 'appTextScale';
 
   static const String themeKey = 'theme';
+  static const String textScaleKey = 'textScale';
 }

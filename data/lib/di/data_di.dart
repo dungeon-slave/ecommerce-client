@@ -7,6 +7,7 @@ import 'package:data/providers/remote/firebase_provider.dart';
 import 'package:data/providers/local/hive_provider.dart';
 import 'package:data/repositories/cart/cart_repository_impl.dart';
 import 'package:data/repositories/dishes/dishes_repository_impl.dart';
+import 'package:data/repositories/textScale/text_scale_repository.dart';
 import 'package:data/repositories/theme/theme_repository_impl.dart';
 import 'package:domain/domain.dart';
 
@@ -18,6 +19,7 @@ class DataDI {
     _initDishes();
     _initHive();
     _initTheme();
+    _initTextScale();
     _initCart();
     _initHomeScreen();
   }
@@ -79,6 +81,26 @@ class DataDI {
     appLocator.registerLazySingleton<GetThemeUseCase>(
       () => GetThemeUseCase(
         themeRepository: appLocator<ThemeRepository>(),
+      ),
+    );
+  }
+
+  void _initTextScale() {
+    appLocator.registerLazySingleton<TextScaleRepository>(
+      () => TextScaleRepositoryImpl(
+        hiveProvider: appLocator<HiveProvider>(),
+      ),
+    );
+
+    appLocator.registerLazySingleton<SetTextScaleUseCase>(
+      () => SetTextScaleUseCase(
+        textScaleRepository: appLocator<TextScaleRepository>(),
+      ),
+    );
+
+    appLocator.registerLazySingleton<GetTextScaleUseCase>(
+      () => GetTextScaleUseCase(
+        textScaleRepository: appLocator<TextScaleRepository>(),
       ),
     );
   }
