@@ -16,7 +16,7 @@ class HomeScreen extends StatelessWidget {
       create: (BuildContext context) => HomeScreenBloc(
         appLocator<GetCartCountUseCase>(),
       ),
-      child: Stack(
+      child: Stack( //TODO try overlay entry
         children: <Widget>[
           AutoTabsScaffold(
             routes: const <PageRouteInfo>[

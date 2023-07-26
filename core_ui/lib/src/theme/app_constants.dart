@@ -1,11 +1,19 @@
 final class AppConstants {
   static const String menuCollection = 'dishes_menu';
 
+  static const String contactUs = 'Contact us';
+
+  static const String telegramContactTitle = 'Telegram';
+  static const String instagramContactTitle = 'Instagram';
+
+  static const String telegramLink = 'https://pub.dev/packages/url_launcher/example';
+  static const String instagramLink = 'https://api.flutter.dev/flutter/material/Icons-class.html';
+
   static const int priceSize = 2;
 
   static const String darkTheme = 'Dark theme';
   static const String textScale = 'Text scale';
-  
+
   static const String addToCart = 'Add to cart';
   static const String undefinedImageType = 'Undefined image type!';
 

@@ -17,3 +17,9 @@ class SetTextScaleEvent extends ThemeEvent {
 }
 
 class GetTextScaleEvent extends ThemeEvent {}
+
+class OpenLinkEvent extends ThemeEvent {
+  final Uri link;
+
+  OpenLinkEvent({required this.link});
+}

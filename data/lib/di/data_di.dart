@@ -15,6 +15,7 @@ final DataDI dataDI = DataDI();
 
 class DataDI {
   Future<void> initDependencies() async {
+    _initServices();
     _initFirebase();
     _initDishes();
     _initHive();
@@ -22,6 +23,12 @@ class DataDI {
     _initTextScale();
     _initCart();
     _initHomeScreen();
+  }
+
+  void _initServices() {
+    appLocator.registerLazySingleton<UrlService>(
+      () => UrlService(),
+    );
   }
 
   void _initFirebase() {
