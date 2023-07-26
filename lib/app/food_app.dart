@@ -19,6 +19,7 @@ class FoodApp extends StatelessWidget {
         getThemeUseCase: appLocator<GetThemeUseCase>(),
         setTextScaleUseCase: appLocator<SetTextScaleUseCase>(),
         getTextScaleUseCase: appLocator<GetTextScaleUseCase>(),
+        urlService: appLocator<UrlService>(),
       ),
       child: BlocBuilder<SettingsBloc, SettingsState>(
         builder: (BuildContext context, SettingsState state) {
