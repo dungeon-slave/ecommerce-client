@@ -22,6 +22,7 @@ dependencies:
   equatable: ^2.0.5
   internet_connection_checker: ^1.0.0+1
   url_launcher: ^6.1.12
+  firebase_auth: ^4.7.2
 
 dev_dependencies:
   flutter_test:
