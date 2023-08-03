@@ -8,12 +8,14 @@ class HiveProvider {
   late final Box<CartItemEntity> _cartBox;
   late final Box<DishTypeEntity> _menuBox;
   late final Box<double> _textScaleBox;
+  late final Box<String> _userIdBox;
 
   Future<void> openBoxes() async {
     _themeBox = await Hive.openBox<bool>(_HiveKeys.themeBox);
     _cartBox = await Hive.openBox<CartItemEntity>(_HiveKeys.cartBox);
     _menuBox = await Hive.openBox(_HiveKeys.menuBox);
     _textScaleBox = await Hive.openBox(_HiveKeys.textScaleBox);
+    _userIdBox = await Hive.openBox(_HiveKeys.userId);
   }
 
   Future<void> saveMenu(List<DishTypeEntity> dishesTypes) async {
@@ -46,7 +48,7 @@ class HiveProvider {
 
   bool getTheme() => _themeBox.get(_HiveKeys.themeKey) ?? true;
 
-  double getTextScale() => _textScaleBox.get(_HiveKeys.textScaleKey) ?? AppConstants.textScales[1];
+  double getTextScale() => _textScaleBox.get(_HiveKeys.textScaleKey) ?? AppConstants.textScales.first;
 
   int getCartItemsCount() {
     int count = 0;
@@ -81,6 +83,12 @@ class HiveProvider {
   }
 
   Future<void> clearCart() async => await _cartBox.clear();
+
+  Future<void> saveUserId(String userId) async => await _userIdBox.put(_HiveKeys.userIdKey, userId);
+
+  String? getUserId() => _userIdBox.get(_HiveKeys.userIdKey);
+
+  Future<void> removeUser() async => await _userIdBox.clear();
 }
 
 class _HiveKeys {
@@ -88,7 +96,9 @@ class _HiveKeys {
   static const String cartBox = 'appCart';
   static const String menuBox = 'appMenu';
   static const String textScaleBox = 'appTextScale';
+  static const String userId = 'appUserId';
 
   static const String themeKey = 'theme';
   static const String textScaleKey = 'textScale';
+  static const String userIdKey = 'userId';
 }

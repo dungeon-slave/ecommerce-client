@@ -31,7 +31,7 @@ class MenuBloc extends Bloc<MenuEvent, MenuState> {
     add(InitEvent());
   }
 
-  void _init(InitEvent event, Emitter<MenuState> emit) async {
+  Future<void> _init(InitEvent event, Emitter<MenuState> emit) async {
     try {
       final List<DishTypeModel> types =
           await _fetchDishesUsecase.execute(const NoParams());
@@ -56,8 +56,8 @@ class MenuBloc extends Bloc<MenuEvent, MenuState> {
     emit(state.copyWith(currentTab: event.typeIndex));
   }
 
-  void _addDish(AddDishEvent event, Emitter<MenuState> emit) {
-    _saveItemUseCase.execute(
+  Future<void> _addDish(AddDishEvent event, Emitter<MenuState> emit) async {
+    await _saveItemUseCase.execute(
       CartItemModel(
         dishModel: event.model,
         count: 1,

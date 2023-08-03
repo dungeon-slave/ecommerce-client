@@ -138,7 +138,15 @@ class AppSettingsScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                )
+                ),
+                Container(
+                  child: AppButton(
+                    text: AppConstants.signOutTitle,
+                    handler: () => BlocProvider.of<SettingsBloc>(context).add(
+                      SignOutEvent(),
+                    ),
+                  ),
+                ),
               ],
             ),
           );

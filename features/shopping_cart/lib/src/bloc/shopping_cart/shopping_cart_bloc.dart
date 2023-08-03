@@ -7,7 +7,7 @@ part 'shopping_cart_event.dart';
 part 'shopping_cart_state.dart';
 
 class ShoppingCartBloc extends Bloc<ShoppingCartEvent, ShoppingCartState> {
-  final ChangeItemCountUseCase _changeItemCountUseCase; //TODO implement
+  final ChangeItemCountUseCase _changeItemCountUseCase;
   final GetItemsUseCase _getItemsUseCase;
   final ClearCartUseCase _clearCartUseCase;
 
@@ -49,12 +49,12 @@ class ShoppingCartBloc extends Bloc<ShoppingCartEvent, ShoppingCartState> {
     }
   }
 
-  void _decrementItem(DecrementEvent event, Emitter<ShoppingCartState> emit) {
+  Future<void> _decrementItem(DecrementEvent event, Emitter<ShoppingCartState> emit) async {
     int index = state.items.indexWhere((CartItemModel element) =>
         element.dishModel.id == event.model.dishModel.id);
     CartItemModel currElement =
         state.items[index].copyWith(count: state.items[index].count - 1);
-    _changeItemCountUseCase.execute(currElement);
+    await _changeItemCountUseCase.execute(currElement);
     if (currElement.count != 0) {
       state.items[index] = currElement;
     } else {
@@ -63,19 +63,19 @@ class ShoppingCartBloc extends Bloc<ShoppingCartEvent, ShoppingCartState> {
     emit(state.copyWith(items: state.items));
   }
 
-  void _incrementItem(IncrementEvent event, Emitter<ShoppingCartState> emit) {
+  Future<void> _incrementItem(IncrementEvent event, Emitter<ShoppingCartState> emit) async {
     int index = state.items.indexWhere((CartItemModel element) =>
         element.dishModel.id == event.model.dishModel.id);
     CartItemModel currElement =
         state.items[index].copyWith(count: state.items[index].count + 1);
-    _changeItemCountUseCase.execute(currElement);
+    await _changeItemCountUseCase.execute(currElement);
     state.items[index] = currElement;
     emit(state.copyWith(items: state.items));
   }
 
-  void _clearCart(ClearCartEvent event, Emitter<ShoppingCartState> emit) async {
+  Future<void> _clearCart(ClearCartEvent event, Emitter<ShoppingCartState> emit) async {
     await _clearCartUseCase.execute(const NoParams());
-    add(InitEvent());
+    add(InitEvent()); //TODO remove
   }
 
   void _checkout(CheckoutEvent event, Emitter<ShoppingCartState> emit) {

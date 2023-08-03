@@ -3,7 +3,6 @@ import 'package:core/di/app_di.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:dishes_menu/src/ui/dish_item.dart';
 import 'package:domain/domain.dart';
-import 'package:domain/usecase/dishes/fetch_dishes_usecase.dart';
 import 'package:flutter/material.dart';
 
 import '../bloc/dishes_menu_screen/dishes_menu_bloc.dart';
@@ -22,12 +21,11 @@ class DishesMenuScreenState extends State<DishesMenuScreen>
 
   void handleSwipe(DragEndDetails details) {
     // Swiping in right direction.
-    int sensitivy = 3;
-    if (details.primaryVelocity! > sensitivy && _tabController.index > 0) {
+    if (details.primaryVelocity! > AppConstants.swipesSensivity && _tabController.index > 0) {
       _tabController.index--;
     }
     // Swiping in left direction.
-    if (details.primaryVelocity! < -sensitivy &&
+    if (details.primaryVelocity! < -AppConstants.swipesSensivity &&
         _tabController.index < _tabController.length - 1) {
       _tabController.index++;
     }

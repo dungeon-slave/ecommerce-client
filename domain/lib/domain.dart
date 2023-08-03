@@ -16,3 +16,12 @@ export 'package:domain/usecase/home_screen/get_cart_count_usecase.dart';
 export 'package:domain/usecase/shopping_cart/change_item_count_usecase.dart';
 export 'package:domain/usecase/text_scale/get_text_scale_usecase.dart';
 export 'package:domain/usecase/text_scale/set_text_scale_usecase.dart';
+export 'package:domain/usecase/authentication/email_sign_in_usecase.dart';
+export 'package:domain/usecase/authentication/email_sign_up_usecase.dart';
+export 'package:domain/usecase/authentication/google_sign_in_usecase.dart';
+export 'package:domain/usecase/authentication/sign_out_usecase.dart';
+export 'package:domain/usecase/authentication/save_user_usecase.dart';
+export 'package:domain/usecase/authentication/check_user_usecase.dart';
+
+export 'package:domain/models/authentication/email_sign_in_model.dart';
+export 'package:domain/models/authentication/email_sign_up_model.dart';

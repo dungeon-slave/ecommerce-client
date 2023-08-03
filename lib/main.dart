@@ -13,7 +13,7 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   await Hive.initFlutter();
-  await dataDI.initDependencies();
+  dataDI.initDependencies();
   await appLocator<HiveProvider>().openBoxes();
   setupNavigationDependencies();
   runApp(const FoodApp());

@@ -21,7 +21,7 @@ class DetailedPageScreen extends StatelessWidget {
         iconTheme: Theme.of(context).iconTheme,
         leading: IconButton(
           icon: AppIcons.closeDetailedPage,
-          onPressed: () => Navigator.of(context).pop(), //TODO remove pop
+          onPressed: () => Navigator.of(context).pop(),
         ),
         centerTitle: true,
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,

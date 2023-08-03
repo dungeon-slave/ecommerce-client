@@ -42,10 +42,8 @@ android {
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
-//C:\Program Files\Java\jdk-19\bin/keytool -list -v \
--alias androiddebugkey -keystore %USERPROFILE%\.android\debug.keystore
     defaultConfig {
-        applicationId "com.example.food_app"
+        applicationId "com.example.market_client"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
         minSdkVersion 21
@@ -63,7 +61,6 @@ android {
     }
 }
 
-
 flutter {
     source '../..'
 }
@@ -73,7 +70,4 @@ dependencies {
 	implementation platform('com.google.firebase:firebase-bom:32.2.0')
 }
 
-plugins {
-	id 'com.android.application'
-	id 'com.google.gms.google-services'
-}
+apply plugin: 'com.google.gms.google-services'
