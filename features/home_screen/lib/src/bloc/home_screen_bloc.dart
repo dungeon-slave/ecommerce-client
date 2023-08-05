@@ -1,5 +1,5 @@
-import 'package:bloc/bloc.dart';
 import 'package:core/core.dart';
+import 'package:core/services/network_service.dart';
 import 'package:domain/usecase/home_screen/get_cart_count_usecase.dart';
 import 'package:domain/usecase/usecase.dart';
 
@@ -8,9 +8,13 @@ part 'home_screen_state.dart';
 
 class HomeScreenBloc extends Bloc<HomeScreenEvent, HomeScreenState> {
   final GetCartCountUseCase _getCartCountUseCase;
+  final NetworkService _networkService;
 
-  HomeScreenBloc(GetCartCountUseCase getCartCountUseCase)
-      : _getCartCountUseCase = getCartCountUseCase,
+  HomeScreenBloc({
+    required GetCartCountUseCase getCartCountUseCase,
+    required NetworkService networkService,
+  })  : _getCartCountUseCase = getCartCountUseCase,
+        _networkService = networkService,
         super(
           const HomeScreenState(
             count: 0,
@@ -21,14 +25,13 @@ class HomeScreenBloc extends Bloc<HomeScreenEvent, HomeScreenState> {
     on<ChangeCartCountEvent>(_changeCartCount);
     on<ChangeConnectionEvent>(_changeConnectionStatus);
     on<ShowMessageEvent>(_changeMessageVisibility);
-    InternetConnectionChecker().onStatusChange.listen(
-      (InternetConnectionStatus event) {
-        add(
-          ChangeConnectionEvent(
-            isConnected: event == InternetConnectionStatus.connected,
-          ),
-        );
-      },
+
+    _networkService.addListener(
+      () async => add(
+        ChangeConnectionEvent(
+          isConnected: await _networkService.checkConnection(),
+        ),
+      ),
     );
   }
 
@@ -56,8 +59,9 @@ class HomeScreenBloc extends Bloc<HomeScreenEvent, HomeScreenState> {
       isConnected: event.isConnected,
       isVisibleMessage: true,
     ));
-    Future.delayed(const Duration(seconds: 3), () {
-      add(ShowMessageEvent(isVisible: false));
-    });
+    Future.delayed(
+      const Duration(seconds: 3),
+      () => add(ShowMessageEvent(isVisible: false)),
+    );
   }
 }

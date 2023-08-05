@@ -1,11 +1,11 @@
-import 'package:core/core.dart';
+import 'package:core/core.dart' show BlocBuilder, BlocProvider;
 import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
+import 'package:settings/src/bloc/settings/settings_bloc_bloc.dart';
 
-import '../../settings.dart';
-
-class AppSettingsScreen extends StatelessWidget {
-  const AppSettingsScreen({super.key});
+//FIXME rework layout
+class SettingsScreen extends StatelessWidget {
+  const SettingsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,7 @@ class AppSettingsScreen extends StatelessWidget {
               AppDimens.padding20,
             ),
             child: Column(
-              children: <Container>[
+              children: <Widget>[
                 Container(
                   margin: const EdgeInsets.only(
                     top: AppDimens.padding10,
@@ -53,7 +53,7 @@ class AppSettingsScreen extends StatelessWidget {
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
+                    children: <Widget>[
                       Text(
                         AppConstants.textScale,
                         style: AppFonts.normal22.copyWith(
@@ -139,12 +139,10 @@ class AppSettingsScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                Container(
-                  child: AppButton(
-                    text: AppConstants.signOutTitle,
-                    handler: () => BlocProvider.of<SettingsBloc>(context).add(
-                      SignOutEvent(),
-                    ),
+                AppButton(
+                  text: AppConstants.signOutTitle,
+                  handler: () => BlocProvider.of<SettingsBloc>(context).add(
+                    SignOutEvent(),
                   ),
                 ),
               ],

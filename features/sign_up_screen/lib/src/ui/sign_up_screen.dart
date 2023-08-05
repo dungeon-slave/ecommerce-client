@@ -1,10 +1,13 @@
-import 'package:core/core.dart';
+import 'package:core/core.dart' show BlocProvider, BlocBuilder;
 import 'package:core/di/app_di.dart';
+import 'package:core/services/auth_service.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
+import 'package:navigation/navigation.dart';
 import 'package:sign_up_screen/src/bloc/sign_up_bloc.dart';
 
+//FIXME make adaptive layout
 class SignUpScreen extends StatelessWidget {
   final _nameController = TextEditingController();
   final _emailController = TextEditingController();
@@ -20,6 +23,9 @@ class SignUpScreen extends StatelessWidget {
       create: (context) => SignUpBloc(
         emailSignUpUseCase: appLocator<EmailSignUpUseCase>(),
         saveUserUseCase: appLocator<SaveUserUseCase>(),
+        checkUserUseCase: appLocator<CheckUserUseCase>(),
+        appRouter: appLocator<AppRouter>(),
+        authService: appLocator<AuthService>(),
       ),
       child: Scaffold(
         body: Column(

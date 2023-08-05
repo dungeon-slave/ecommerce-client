@@ -1,11 +1,10 @@
 import 'package:core/core.dart';
 import 'package:core/di/app_di.dart';
 import 'package:core_ui/core_ui.dart';
+import 'package:dishes_menu/src/bloc/dishes_menu_screen/dishes_menu_bloc.dart';
 import 'package:dishes_menu/src/ui/dish_item.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
-
-import '../bloc/dishes_menu_screen/dishes_menu_bloc.dart';
 
 class DishesMenuScreen extends StatefulWidget {
   const DishesMenuScreen({super.key});
@@ -19,7 +18,7 @@ class DishesMenuScreenState extends State<DishesMenuScreen>
   late final TabController _tabController;
   bool isTabControllerInited = false;
 
-  void handleSwipe(DragEndDetails details) {
+  void _handleSwipe(DragEndDetails details) {
     // Swiping in right direction.
     if (details.primaryVelocity! > AppConstants.swipesSensivity && _tabController.index > 0) {
       _tabController.index--;
@@ -68,11 +67,11 @@ class DishesMenuScreenState extends State<DishesMenuScreen>
           );
         }
         return GestureDetector(
-          onHorizontalDragEnd: handleSwipe,
+          onHorizontalDragEnd: _handleSwipe,
           child: Scaffold(
             appBar: AppBar(
               backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-              toolbarHeight: 0,
+              toolbarHeight: 0, //FIXME wrong value
               bottom: TabBar(
                 controller: _tabController,
                 indicatorColor: Theme.of(context).indicatorColor,

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' show Color;
 
 final class AppColors {
   static const Color darkBreeze = Color.fromARGB(255, 0, 31, 36);

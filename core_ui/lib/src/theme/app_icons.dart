@@ -1,5 +1,5 @@
-import 'package:core_ui/core_ui.dart';
-import 'package:flutter/material.dart';
+import 'package:core_ui/core_ui.dart' show AppDimens;
+import 'package:flutter/material.dart' show Icon, Icons;
 
 final class AppIcons {
   //TODO make app icon
@@ -30,5 +30,8 @@ final class AppIcons {
   );
   static const Icon unselectedSettings = Icon(
     Icons.settings_outlined,
+  );
+  static const Icon clearCart = Icon(
+    Icons.delete,
   );
 }

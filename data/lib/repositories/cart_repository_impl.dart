@@ -14,7 +14,11 @@ class CartRepositoryImpl implements CartRepository {
   List<CartItemModel> getItems() {
     final List<CartItemEntity> result = _hiveProvider.getCartItems();
 
-    return result.map((CartItemEntity e) => CartItemMapper.toModel(e)).toList();
+    return result
+        .map(
+          (CartItemEntity e) => CartItemMapper.toModel(e),
+        )
+        .toList();
   }
 
   @override

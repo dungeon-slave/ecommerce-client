@@ -1,5 +1,5 @@
-import 'package:core_ui/core_ui.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:core/core.dart' show FirebaseFirestore, QueryDocumentSnapshot;
+import 'package:core_ui/core_ui.dart' show AppConstants;
 import 'package:data/entities/dish_entity/dish_entity.dart';
 import 'package:data/entities/dish_type_enity/dish_type_entity.dart';
 

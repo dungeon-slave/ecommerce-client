@@ -1,4 +1,4 @@
-import 'package:core/core.dart';
+import 'package:core/core.dart' show Equatable;
 import 'package:domain/models/dishes_items/dish_model.dart';
 
 class CartItemModel extends Equatable {

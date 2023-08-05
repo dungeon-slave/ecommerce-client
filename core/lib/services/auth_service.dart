@@ -1,4 +1,4 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/widgets.dart' show ChangeNotifier;
 
 class AuthService extends ChangeNotifier {
   bool _authenticated = false;

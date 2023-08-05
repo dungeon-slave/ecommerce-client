@@ -1,8 +1,8 @@
+import 'package:data/entities/dish_entity/dish_entity.dart';
 import 'package:data/entities/dish_type_enity/dish_type_entity.dart';
 import 'package:data/mappers/dish_mapper.dart';
 import 'package:domain/models/dishes_items/dish_model.dart';
 import 'package:domain/models/dishes_items/dish_type_model.dart';
-import '../entities/dish_entity/dish_entity.dart';
 
 abstract class DishTypeMapper {
   static DishTypeEntity toEntity(DishTypeModel model) {

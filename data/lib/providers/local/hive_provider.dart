@@ -1,5 +1,5 @@
-import 'package:core/core.dart';
-import 'package:core_ui/core_ui.dart';
+import 'package:core/core.dart' show Hive, Box;
+import 'package:core_ui/core_ui.dart' show AppConstants;
 import 'package:data/entities/cart_item_entity/cart_item_entity.dart';
 import 'package:data/entities/dish_type_enity/dish_type_entity.dart';
 
@@ -15,7 +15,7 @@ class HiveProvider {
     _cartBox = await Hive.openBox<CartItemEntity>(_HiveKeys.cartBox);
     _menuBox = await Hive.openBox(_HiveKeys.menuBox);
     _textScaleBox = await Hive.openBox(_HiveKeys.textScaleBox);
-    _userIdBox = await Hive.openBox(_HiveKeys.userId);
+    _userIdBox = await Hive.openBox(_HiveKeys.userIdBox);
   }
 
   Future<void> saveMenu(List<DishTypeEntity> dishesTypes) async {
@@ -25,43 +25,19 @@ class HiveProvider {
     }
   }
 
+  List<DishTypeEntity> getMenu() => _menuBox.values.toList();
+
   Future<void> saveTheme(bool isDark) async =>
       await _themeBox.put(_HiveKeys.themeKey, isDark);
 
-  Future<void> saveCartItem(CartItemEntity item) async {
-    for (CartItemEntity element in _cartBox.values) {
-      if (element.dishEntity.id == item.dishEntity.id) {
-        await _cartBox.put(
-          element.dishEntity.id,
-          CartItemEntity(
-            dishEntity: element.dishEntity,
-            count: element.count + 1,
-          ),
-        );
-        return;
-      }
-    }
-    await _cartBox.put(item.dishEntity.id, item);
-  }
-
-  Future<void> saveTextScale(double textScale) async => await _textScaleBox.put(_HiveKeys.textScaleKey, textScale);
-
   bool getTheme() => _themeBox.get(_HiveKeys.themeKey) ?? true;
 
-  double getTextScale() => _textScaleBox.get(_HiveKeys.textScaleKey) ?? AppConstants.textScales.first;
+  Future<void> saveTextScale(double textScale) async =>
+      await _textScaleBox.put(_HiveKeys.textScaleKey, textScale);
 
-  int getCartItemsCount() {
-    int count = 0;
-    for (CartItemEntity element in _cartBox.values) {
-      count += element.count;
-    }
-
-    return count;
-  }
-
-  List<DishTypeEntity> getMenu() => _menuBox.values.toList();
-
-  List<CartItemEntity> getCartItems() => _cartBox.values.toList();
+  double getTextScale() =>
+      _textScaleBox.get(_HiveKeys.textScaleKey) ??
+      AppConstants.textScales.first;
 
   Future<void> changeItemCount(CartItemEntity item) async {
     for (CartItemEntity element in _cartBox.values) {
@@ -82,9 +58,37 @@ class HiveProvider {
     }
   }
 
+  List<CartItemEntity> getCartItems() => _cartBox.values.toList();
+
+  int getCartItemsCount() {
+    int count = 0;
+    for (CartItemEntity element in _cartBox.values) {
+      count += element.count;
+    }
+
+    return count;
+  }
+
+  Future<void> saveCartItem(CartItemEntity item) async {
+    for (CartItemEntity element in _cartBox.values) {
+      if (element.dishEntity.id == item.dishEntity.id) {
+        await _cartBox.put(
+          element.dishEntity.id,
+          CartItemEntity(
+            dishEntity: element.dishEntity,
+            count: element.count + 1,
+          ),
+        );
+        return;
+      }
+    }
+    await _cartBox.put(item.dishEntity.id, item);
+  }
+
   Future<void> clearCart() async => await _cartBox.clear();
 
-  Future<void> saveUserId(String userId) async => await _userIdBox.put(_HiveKeys.userIdKey, userId);
+  Future<void> saveUserId(String userId) async =>
+      await _userIdBox.put(_HiveKeys.userIdKey, userId);
 
   String? getUserId() => _userIdBox.get(_HiveKeys.userIdKey);
 
@@ -96,7 +100,7 @@ class _HiveKeys {
   static const String cartBox = 'appCart';
   static const String menuBox = 'appMenu';
   static const String textScaleBox = 'appTextScale';
-  static const String userId = 'appUserId';
+  static const String userIdBox = 'appUserId';
 
   static const String themeKey = 'theme';
   static const String textScaleKey = 'textScale';

@@ -1,5 +1,6 @@
 import 'package:core/core.dart';
 import 'package:core/di/app_di.dart';
+import 'package:core/services/network_service.dart';
 import 'package:data/entities/cart_item_entity/cart_item_entity.dart';
 import 'package:data/entities/dish_entity/dish_entity.dart';
 import 'package:data/entities/dish_type_enity/dish_type_entity.dart';
@@ -31,6 +32,12 @@ class DataDI {
     );
     appLocator.registerLazySingleton<AuthService>(
       () => AuthService(),
+    );
+    appLocator.registerLazySingleton<NetworkService>(
+      () => NetworkService(
+        connectivity: Connectivity(),
+        internetConnectionChecker: InternetConnectionChecker(),
+      ),
     );
   }
 
@@ -68,6 +75,7 @@ class DataDI {
       () => DishesRepositoryImpl(
         firebaseProvider: appLocator<FirebaseProvider>(),
         hiveProvider: appLocator<HiveProvider>(),
+        networkService: appLocator<NetworkService>(),
       ),
     );
 

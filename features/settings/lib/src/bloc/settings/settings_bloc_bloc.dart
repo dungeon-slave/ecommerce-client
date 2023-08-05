@@ -1,4 +1,4 @@
-import 'package:bloc/bloc.dart';
+import 'package:core/core.dart' show Bloc, Emitter;
 import 'package:core/services/auth_service.dart';
 import 'package:core/services/url_service.dart';
 import 'package:core_ui/core_ui.dart';
@@ -37,7 +37,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
         _authService = authService,
         super(SettingsState(
           isDark: true,
-          textScale: AppConstants.textScales[1],
+          textScale: AppConstants.textScales.first,
         )) {
     on<SetThemeEvent>(_setTheme);
     on<GetThemeEvent>(_getTheme);
@@ -46,21 +46,23 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     on<OpenLinkEvent>(_openLink);
     on<SignOutEvent>(_signOut);
 
+    //FIXME unite this in SettingsModel
     add(GetThemeEvent());
     add(GetTextScaleEvent());
   }
 
   Future<void> _signOut(SignOutEvent event, Emitter<SettingsState> emit) async {
     await _signOutUseCase.execute(const NoParams());
-    _authService.authenticated =
-        _checkUserUseCase.execute(const NoParams());
+    _authService.authenticated = _checkUserUseCase.execute(const NoParams());
   }
 
-  Future<void> _openLink(OpenLinkEvent event, Emitter<SettingsState> emit) async {
+  Future<void> _openLink(
+      OpenLinkEvent event, Emitter<SettingsState> emit) async {
     _urlService.openDefault(event.link);
   }
 
-  Future<void> _setTheme(SetThemeEvent event, Emitter<SettingsState> emit) async {
+  Future<void> _setTheme(
+      SetThemeEvent event, Emitter<SettingsState> emit) async {
     await _setThemeUseCase.execute(event.isDark);
     emit(
       state.copyWith(

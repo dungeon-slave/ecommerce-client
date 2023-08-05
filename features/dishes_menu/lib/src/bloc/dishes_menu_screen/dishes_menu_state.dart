@@ -7,7 +7,7 @@ class MenuState {
   final int currentTab;
   final bool showSnackBar;
 
-  MenuState({
+  const MenuState({
     required this.items,
     this.isLoading = false,
     this.errorMessage = '',

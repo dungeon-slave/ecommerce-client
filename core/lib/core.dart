@@ -7,6 +7,7 @@ export 'package:cached_network_image/cached_network_image.dart';
 export 'package:hive_flutter/hive_flutter.dart';
 export 'package:equatable/equatable.dart';
 export 'package:internet_connection_checker/internet_connection_checker.dart';
+export 'package:connectivity_plus/connectivity_plus.dart';
 export 'package:firebase_auth/firebase_auth.dart';
 export 'package:google_sign_in/google_sign_in.dart';
 

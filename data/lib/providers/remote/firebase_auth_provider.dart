@@ -1,5 +1,5 @@
 import 'package:core/core.dart';
-import 'package:domain/domain.dart';
+import 'package:domain/domain.dart' show EmailSignInModel, EmailSignUpModel;
 
 class FirebaseAuthProvider {
   final FirebaseAuth _firebaseAuth;
@@ -31,12 +31,6 @@ class FirebaseAuthProvider {
     ))
         .user;
     return user != null ? user.uid : '';
-    // return (await _firebaseAuth.signInWithEmailAndPassword(
-    //   email: data.email,
-    //   password: data.password,
-    // ))
-    //     .user!
-    //     .uid; //TODO remove ! operator
   }
 
   Future<String> googleSignIn() async {

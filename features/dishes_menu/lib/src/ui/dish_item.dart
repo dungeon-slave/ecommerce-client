@@ -1,4 +1,4 @@
-import 'package:core/core.dart';
+import 'package:core/core.dart' show BlocProvider;
 import 'package:dishes_menu/src/bloc/dishes_menu_screen/dishes_menu_bloc.dart';
 import 'package:domain/models/dishes_items/dish_model.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +26,7 @@ class _DishItemState extends State<DishItem> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => context.navigateTo(
+      onTap: () => context.navigateTo( //FIXME maybe remove in bloc
         DetailedPageRoute(
           model: widget._model,
           addToCartHandler: widget._addToCartHandler(context),

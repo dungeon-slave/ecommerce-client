@@ -1,4 +1,4 @@
-import 'package:core_ui/src/theme/app_themes.dart';
+import 'package:core_ui/src/theme/app_themes.dart' show AppFonts, AppColors;
 import 'package:flutter/widgets.dart';
 
 class AppError extends StatelessWidget {
@@ -8,7 +8,7 @@ class AppError extends StatelessWidget {
     required String errorText,
     super.key,
   }) : _errorText = errorText;
-  
+
   @override
   Widget build(BuildContext context) {
     return Center(

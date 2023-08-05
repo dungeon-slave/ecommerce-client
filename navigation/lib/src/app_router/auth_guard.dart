@@ -20,7 +20,7 @@ class AuthGuard extends AutoRedirectGuard {
       resolver.next();
     }
     else {
-      router.replace(const SignRouter());
+      router.replace(const SignRoute());
     }
   }
 

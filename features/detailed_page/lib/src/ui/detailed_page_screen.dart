@@ -35,7 +35,8 @@ class DetailedPageScreen extends StatelessWidget {
       ),
       body: ListView(
         padding: const EdgeInsets.only(
-            bottom: AppDimens.padding100), //TODO try replace with margin
+          bottom: AppDimens.padding100,
+        ),
         children: <Container>[
           Container(
             margin: const EdgeInsets.all(AppDimens.padding50),

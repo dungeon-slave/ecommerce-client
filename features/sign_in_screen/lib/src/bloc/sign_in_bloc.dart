@@ -1,7 +1,6 @@
-import 'package:bloc/bloc.dart';
+import 'package:core/core.dart' show Bloc, Emitter;
 import 'package:core/services/auth_service.dart';
 import 'package:domain/models/authentication/email_sign_in_model.dart';
-import 'package:domain/models/authentication/email_sign_up_model.dart';
 import 'package:domain/usecase/authentication/check_user_usecase.dart';
 import 'package:domain/usecase/authentication/email_sign_in_usecase.dart';
 import 'package:domain/usecase/authentication/google_sign_in_usecase.dart';
@@ -9,10 +8,10 @@ import 'package:domain/usecase/authentication/save_user_usecase.dart';
 import 'package:domain/usecase/usecase.dart';
 import 'package:navigation/navigation.dart';
 
-part 'login_screen_event.dart';
-part 'login_screen_state.dart';
+part 'sign_in_event.dart';
+part 'sign_in_state.dart';
 
-class LoginScreenBloc extends Bloc<LoginScreenEvent, LoginScreenState> {
+class SignInBloc extends Bloc<LoginScreenEvent, LoginScreenState> {
   final GoogleSignInUseCase _googleSignInUseCase;
   final EmailSignInUseCase _emailSignInUseCase;
   final SaveUserUseCase _saveUserUseCase;
@@ -20,7 +19,7 @@ class LoginScreenBloc extends Bloc<LoginScreenEvent, LoginScreenState> {
   final AuthService _authService;
   final AppRouter _appRouter;
 
-  LoginScreenBloc({
+  SignInBloc({
     required GoogleSignInUseCase googleSignInUseCase,
     required EmailSignInUseCase emailSignInUseCase,
     required SaveUserUseCase saveUserUseCase,
@@ -33,7 +32,7 @@ class LoginScreenBloc extends Bloc<LoginScreenEvent, LoginScreenState> {
         _checkUserUseCase = checkUserUseCase,
         _authService = authService,
         _appRouter = appRouter,
-        super(LoginScreenInitial()) {
+        super(const LoginScreenState()) {
     on<EmailSignInEvent>(_emailSignIn);
     on<GoogleSignInEvent>(_googleSignIn);
   }
@@ -44,7 +43,7 @@ class LoginScreenBloc extends Bloc<LoginScreenEvent, LoginScreenState> {
     await _saveUserUseCase.execute(userId);
     _authService.authenticated =
         _checkUserUseCase.execute(const NoParams());
-    _appRouter.replace(const HomeRouter());
+    _appRouter.replace(const HomeRoute());
     //TODO implement state change
   }
 
@@ -54,7 +53,7 @@ class LoginScreenBloc extends Bloc<LoginScreenEvent, LoginScreenState> {
     await _saveUserUseCase.execute(userId);
     _authService.authenticated =
         _checkUserUseCase.execute(const NoParams());
-    _appRouter.replace(const HomeRouter());
+    _appRouter.replace(const HomeRoute());
     //TODO implement state change
   }
 }

@@ -26,6 +26,6 @@ class MainPageBloc extends Bloc<MainPageEvent, MainPageState> {
 
   void _getUser(InitEvent event, Emitter<MainPageState> emit) {
     _authService.authenticated = _checkUserUseCase.execute(const NoParams());
-    _appRouter.replace(const HomeRouter());
+    _appRouter.replace(const HomeRoute());
   }
 }

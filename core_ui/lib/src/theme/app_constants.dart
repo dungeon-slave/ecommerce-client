@@ -11,6 +11,7 @@ final class AppConstants {
 
   static const int priceSize = 2;
   static const int swipesSensivity = 3;
+  static const double deleteIconSize = 30;
 
   static const String darkTheme = 'Dark theme';
   static const String textScale = 'Text scale';
@@ -40,7 +41,6 @@ final class AppConstants {
   static const String passwordTitle = 'Password';
   static const String emailTitle = 'Email';
   static const String nameTitle = 'Name';
-
 
   static const List<double> textScales = [0.8, 1.0, 1.2];
 }

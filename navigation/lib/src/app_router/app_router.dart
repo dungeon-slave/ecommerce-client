@@ -22,12 +22,12 @@ part 'app_router.gr.dart';
     AutoRoute(
       path: '/',
       page: MainPageScreen,
-      name: 'MainPageRouter',
+      name: 'MainPageRoute',
       initial: true,
       children: <AutoRoute>[
         AutoRoute(
           path: 'sign',
-          name: 'SignRouter',
+          name: 'SignRoute',
           page: EmptyRouterPage,
           children: [
             AutoRoute(
@@ -47,18 +47,17 @@ part 'app_router.gr.dart';
         ),
         AutoRoute(
           path: 'home',
-          name: 'HomeRouter',
+          name: 'HomeRoute',
           page: HomeScreen,
           guards: [AuthGuard],
           children: <AutoRoute>[
             AutoRoute(
-              name: 'EmptyRoute',
+              name: 'MenuRoute',
               path: 'dishes_menu',
               page: EmptyRouterPage,
               children: [
                 AutoRoute(
                   initial: true,
-                  name: 'DishesMenuRouter',
                   path: '',
                   page: DishesMenuScreen,
                 ),
@@ -83,7 +82,7 @@ part 'app_router.gr.dart';
             ),
             AutoRoute(
               path: 'settings',
-              page: AppSettingsScreen,
+              page: SettingsScreen,
             ),
           ],
         ),

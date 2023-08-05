@@ -1,4 +1,4 @@
-import 'package:core/core.dart';
+import 'package:core/core.dart' show BlocProvider, AuthService, BlocBuilder;
 import 'package:core/di/app_di.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:domain/domain.dart';
@@ -15,7 +15,7 @@ class SignInScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => LoginScreenBloc(
+      create: (context) => SignInBloc(
         emailSignInUseCase: appLocator<EmailSignInUseCase>(),
         googleSignInUseCase: appLocator<GoogleSignInUseCase>(),
         saveUserUseCase: appLocator<SaveUserUseCase>(),
@@ -58,11 +58,11 @@ class SignInScreen extends StatelessWidget {
                 controller: _passwordController,
               ),
             ),
-            BlocBuilder<LoginScreenBloc, LoginScreenState>(
+            BlocBuilder<SignInBloc, LoginScreenState>(
               builder: (context, state) {
                 return AppButton(
                   text: AppConstants.signInTitle,
-                  handler: () => BlocProvider.of<LoginScreenBloc>(context).add(
+                  handler: () => BlocProvider.of<SignInBloc>(context).add(
                     EmailSignInEvent(
                       model: EmailSignInModel(
                         email: _emailController.text,
@@ -73,11 +73,11 @@ class SignInScreen extends StatelessWidget {
                 );
               },
             ),
-            BlocBuilder<LoginScreenBloc, LoginScreenState>(
+            BlocBuilder<SignInBloc, LoginScreenState>(
               builder: (context, state) {
                 return AppButton(
                   text: AppConstants.googleSignInTitle,
-                  handler: () => BlocProvider.of<LoginScreenBloc>(context).add(
+                  handler: () => BlocProvider.of<SignInBloc>(context).add(
                     GoogleSignInEvent(),
                   ),
                 );
@@ -85,7 +85,7 @@ class SignInScreen extends StatelessWidget {
             ),
             AppButton(
               text: AppConstants.signUpTitle,
-              handler: () => context.navigateTo(
+              handler: () => context.router.push(
                 SignUpRoute(),
               ),
             ),
