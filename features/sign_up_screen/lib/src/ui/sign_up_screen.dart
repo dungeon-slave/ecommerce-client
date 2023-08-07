@@ -1,4 +1,4 @@
-import 'package:core/core.dart' show BlocProvider, BlocBuilder;
+import 'package:core/core.dart' show BlocBuilder, BlocProvider, RoutePage;
 import 'package:core/di/app_di.dart';
 import 'package:core/services/auth_service.dart';
 import 'package:core_ui/core_ui.dart';
@@ -8,8 +8,8 @@ import 'package:navigation/navigation.dart';
 import 'package:sign_up_screen/src/bloc/sign_up_bloc.dart';
 
 //FIXME make adaptive layout
+@RoutePage()
 class SignUpScreen extends StatelessWidget {
-  final _nameController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
@@ -44,18 +44,6 @@ class SignUpScreen extends StatelessWidget {
               ),
               child: TextField(
                 decoration: const InputDecoration(
-                  labelText: AppConstants.nameTitle,
-                ),
-                controller: _nameController,
-              ),
-            ),
-            Container(
-              margin: const EdgeInsets.only(
-                left: AppDimens.padding25,
-                right: AppDimens.padding25,
-              ),
-              child: TextField(
-                decoration: const InputDecoration(
                   labelText: AppConstants.emailTitle,
                 ),
                 controller: _emailController,
@@ -80,7 +68,7 @@ class SignUpScreen extends StatelessWidget {
                   handler: () => BlocProvider.of<SignUpBloc>(context).add(
                     SignUpEvent(
                       data: EmailSignUpModel(
-                        name: _nameController.text,
+                        name: '',
                         email: _emailController.text,
                         password: _passwordController.text,
                       ),

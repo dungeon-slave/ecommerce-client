@@ -1,9 +1,10 @@
-import 'package:core/core.dart' show BlocBuilder, BlocProvider;
+import 'package:core/core.dart' show BlocBuilder, BlocProvider, RoutePage;
 import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:settings/src/bloc/settings/settings_bloc_bloc.dart';
 
 //FIXME rework layout
+@RoutePage()
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
 
@@ -40,7 +41,7 @@ class SettingsScreen extends StatelessWidget {
                           SetThemeEvent(isDark: value),
                         ),
                         activeColor: AppColors.yellow,
-                        inactiveThumbColor: AppColors.smoothYellow,
+                        inactiveThumbColor: AppColors.absBlack,
                         value: state.isDark,
                       ),
                     ],

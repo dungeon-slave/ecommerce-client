@@ -45,6 +45,7 @@ app.*.map.json
 
 /.vscode
 *.g.dart
+*.gm.dart
 *.freezed.dart
 *.gr.dart
 pubspec.lock

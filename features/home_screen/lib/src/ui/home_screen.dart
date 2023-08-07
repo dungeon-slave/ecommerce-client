@@ -1,15 +1,27 @@
-import 'package:core/core.dart' show BlocProvider, BlocBuilder, Bloc;
+import 'package:core/core.dart'
+    show
+        AutoTabsScaffold,
+        Bloc,
+        BlocBuilder,
+        BlocProvider,
+        PageRouteInfo,
+        RoutePage,
+        TabsRouter;
 import 'package:core/di/app_di.dart';
 import 'package:core/services/network_service.dart';
 import 'package:core_ui/core_ui.dart' show AppIcons, AppConstants;
+import 'package:dishes_menu/dishes_menu.dart';
 import 'package:domain/usecase/home_screen/get_cart_count_usecase.dart';
 import 'package:flutter/material.dart';
 import 'package:home_screen/src/bloc/cart_observer.dart';
 import 'package:home_screen/src/bloc/home_screen_bloc.dart';
 import 'package:home_screen/src/ui/components/cart_count_badge.dart';
 import 'package:home_screen/src/ui/components/network_popup.dart';
-import 'package:navigation/navigation.dart';
+import 'package:order_history/order_history.dart';
+import 'package:settings/settings.dart';
+import 'package:shopping_cart/shopping_cart.dart';
 
+@RoutePage()
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
@@ -24,7 +36,7 @@ class HomeScreen extends StatelessWidget {
         children: <Widget>[
           AutoTabsScaffold(
             routes: const <PageRouteInfo>[
-              MenuRoute(),
+              EmptyDishesMenu(),
               OrderHistoryRoute(),
               ShoppingCartRoute(),
               SettingsRoute(),

@@ -1,4 +1,5 @@
-import 'package:core/core.dart' show BlocProvider, AuthService, BlocBuilder;
+import 'package:core/core.dart'
+    show AuthService, AutoRouterX, BlocBuilder, BlocProvider, RoutePage;
 import 'package:core/di/app_di.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:domain/domain.dart';
@@ -6,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:navigation/navigation.dart';
 import 'package:sign_in_screen/sign_in_screen.dart';
 
+@RoutePage()
 class SignInScreen extends StatelessWidget {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -85,9 +87,9 @@ class SignInScreen extends StatelessWidget {
             ),
             AppButton(
               text: AppConstants.signUpTitle,
-              handler: () => context.router.push(
-                SignUpRoute(),
-              ),
+              handler: () => context.router.pushNamed('sign/up'
+                  //SignUpRoute('sign/up'),
+                  ),
             ),
           ],
         ),

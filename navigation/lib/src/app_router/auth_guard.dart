@@ -1,31 +1,21 @@
-import 'package:core/services/auth_service.dart';
-import 'package:navigation/navigation.dart';
+import 'package:core/core.dart';
+import 'package:flutter/material.dart';
+import 'package:sign_in_screen/sign_in_screen.dart';
 
-class AuthGuard extends AutoRedirectGuard {
+class AuthGuard extends AutoRouteGuard {
   final AuthService _authService;
 
   AuthGuard({
     required AuthService authService,
-  }) : _authService = authService {
-    _authService.addListener(() {
-      if (!_authService.authenticated) {
-        reevaluate();
-      }
-    });
-  }
+  }) : _authService = authService;
 
   @override
   void onNavigation(NavigationResolver resolver, StackRouter router) {
     if (_authService.authenticated) {
       resolver.next();
+    } else {
+      router.pushAndPopUntil(SignInRoute(),
+          predicate: (Route<dynamic> predicate) => false);
     }
-    else {
-      router.replace(const SignRoute());
-    }
-  }
-
-  @override
-  Future<bool> canNavigate(RouteMatch route) {
-    return Future(() => false);
   }
 }

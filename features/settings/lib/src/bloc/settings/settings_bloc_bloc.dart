@@ -4,6 +4,8 @@ import 'package:core/services/url_service.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:domain/domain.dart';
 import 'package:domain/usecase/usecase.dart';
+import 'package:home_screen/home_screen.gm.dart';
+import 'package:navigation/navigation.dart' show AppRouter;
 
 part 'settings_bloc_event.dart';
 part 'settings_bloc_state.dart';
@@ -17,6 +19,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
   final GetTextScaleUseCase _getTextScaleUseCase;
   final AuthService _authService;
   final UrlService _urlService;
+  final AppRouter _appRouter;
 
   SettingsBloc({
     required SetThemeUseCase setThemeUseCase,
@@ -27,6 +30,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     required CheckUserUseCase checkUserUseCase,
     required UrlService urlService,
     required AuthService authService,
+    required AppRouter appRouter,
   })  : _getThemeUseCase = getThemeUseCase,
         _setTextScaleUseCase = setTextScaleUseCase,
         _getTextScaleUseCase = getTextScaleUseCase,
@@ -35,6 +39,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
         _checkUserUseCase = checkUserUseCase,
         _setThemeUseCase = setThemeUseCase,
         _authService = authService,
+        _appRouter = appRouter,
         super(SettingsState(
           isDark: true,
           textScale: AppConstants.textScales.first,
@@ -54,6 +59,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
   Future<void> _signOut(SignOutEvent event, Emitter<SettingsState> emit) async {
     await _signOutUseCase.execute(const NoParams());
     _authService.authenticated = _checkUserUseCase.execute(const NoParams());
+    _appRouter.replace(const HomeRoute());
   }
 
   Future<void> _openLink(

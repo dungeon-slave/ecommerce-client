@@ -1,9 +1,9 @@
-import 'package:core/core.dart' show BlocProvider;
+import 'package:core/core.dart' show AutoRouterX, BlocProvider;
+import 'package:detailed_page/detailed_page.dart';
 import 'package:dishes_menu/src/bloc/dishes_menu_screen/dishes_menu_bloc.dart';
 import 'package:domain/models/dishes_items/dish_model.dart';
 import 'package:flutter/material.dart';
 import 'package:core_ui/core_ui.dart';
-import 'package:navigation/navigation.dart';
 
 class DishItem extends StatefulWidget {
   final DishModel _model;
@@ -31,7 +31,7 @@ class _DishItemState extends State<DishItem> {
           model: widget._model,
           addToCartHandler: widget._addToCartHandler(context),
         ),
-      ),
+      ), 
       child: Container(
         margin: const EdgeInsets.only(
           top: AppDimens.margin5,

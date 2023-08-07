@@ -1,7 +1,9 @@
 import 'package:core_ui/core_ui.dart';
 import 'package:domain/models/dishes_items/dish_model.dart';
 import 'package:flutter/material.dart';
+import 'package:core/core.dart';
 
+@RoutePage()
 class DetailedPageScreen extends StatelessWidget {
   final DishModel _model;
   final void Function() _addToCartHandler;

@@ -1,7 +1,8 @@
 import 'package:core/core.dart';
 import 'package:domain/usecase/authentication/check_user_usecase.dart';
 import 'package:domain/usecase/usecase.dart';
-import 'package:navigation/navigation.dart';
+import 'package:home_screen/home_screen.gm.dart';
+import 'package:navigation/navigation.dart' show AppRouter;
 
 part 'main_page_event.dart';
 part 'main_page_state.dart';
@@ -18,7 +19,7 @@ class MainPageBloc extends Bloc<MainPageEvent, MainPageState> {
   })  : _checkUserUseCase = checkUserUseCase,
         _authService = authService,
         _appRouter = appRouter,
-        super(const MainPageState()) {
+        super(const MainPageState(isChecked: false)) {
     on<InitEvent>(_getUser);
 
     add(InitEvent());
@@ -26,6 +27,7 @@ class MainPageBloc extends Bloc<MainPageEvent, MainPageState> {
 
   void _getUser(InitEvent event, Emitter<MainPageState> emit) {
     _authService.authenticated = _checkUserUseCase.execute(const NoParams());
-    _appRouter.replace(const HomeRoute());
+    _appRouter.push(const HomeRoute());
+    emit(state.copyWith(isChecked: true));
   }
 }

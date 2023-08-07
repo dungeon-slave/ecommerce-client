@@ -16,6 +16,8 @@ dependencies:
     path: ../../domain
   core:
     path: ../../core
+  auto_route_generator: ^7.3.0
+  build_runner: ^2.4.6
 
 dev_dependencies:
   flutter_test:

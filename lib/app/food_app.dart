@@ -21,18 +21,19 @@ class FoodApp extends StatelessWidget {
         signOutUseCase: appLocator<SignOutUseCase>(),
         urlService: appLocator<UrlService>(),
         authService: appLocator<AuthService>(),
+        appRouter: appLocator<AppRouter>(),
       ),
       child: BlocBuilder<SettingsBloc, SettingsState>(
         builder: (BuildContext context, SettingsState state) {
           return MaterialApp.router(
+            routerConfig: appLocator<AppRouter>().config(
+              reevaluateListenable: appLocator<AuthService>(),
+            ),
             builder: (context, child) => MediaQuery(
               data: const MediaQueryData()
                   .copyWith(textScaleFactor: state.textScale),
               child: child ?? const SizedBox.shrink(),
             ),
-            routerDelegate: appLocator<AppRouter>().delegate(),
-            routeInformationParser:
-                appLocator<AppRouter>().defaultRouteParser(),
             theme: state.isDark ? AppTheme.dark : AppTheme.light,
           );
         },

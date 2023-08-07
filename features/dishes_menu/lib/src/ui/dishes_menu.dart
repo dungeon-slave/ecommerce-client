@@ -6,6 +6,7 @@ import 'package:dishes_menu/src/ui/dish_item.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 
+@RoutePage()
 class DishesMenuScreen extends StatefulWidget {
   const DishesMenuScreen({super.key});
 
