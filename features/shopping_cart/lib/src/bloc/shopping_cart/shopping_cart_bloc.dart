@@ -83,7 +83,7 @@ class ShoppingCartBloc extends Bloc<ShoppingCartEvent, ShoppingCartState> {
       ClearCartEvent event, Emitter<ShoppingCartState> emit) async {
     await _clearCartUseCase.execute(const NoParams());
     final List<CartItemModel> items =
-        _getItemsUseCase.execute(const NoParams());
+        _fetchItemsUseCase.execute(const NoParams());
     emit(
       state.copyWith(
         isLoading: false,

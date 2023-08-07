@@ -20,7 +20,7 @@ class MainPageBloc extends Bloc<MainPageEvent, MainPageState> {
         _authService = authService,
         _appRouter = appRouter,
         super(const MainPageState(isChecked: false)) {
-    on<InitEvent>(_getUser);
+    on<InitEvent>(_checkUser);
 
     add(InitEvent());
   }

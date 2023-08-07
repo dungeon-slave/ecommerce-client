@@ -30,6 +30,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     required CheckUserUseCase checkUserUseCase,
     required UrlService urlService,
     required AuthService authService,
+    required AppRouter appRouter,
   })  : _fetchThemeUseCase = fetchThemeUseCase,
         _setTextScaleUseCase = setTextScaleUseCase,
         _fetchTextScaleUseCase = fetchTextScaleUseCase,
