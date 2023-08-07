@@ -14,9 +14,9 @@ class FoodApp extends StatelessWidget {
     return BlocProvider(
       create: (BuildContext context) => SettingsBloc(
         setThemeUseCase: appLocator<SetThemeUseCase>(),
-        getThemeUseCase: appLocator<GetThemeUseCase>(),
+        fetchThemeUseCase: appLocator<FetchThemeUseCase>(),
         setTextScaleUseCase: appLocator<SetTextScaleUseCase>(),
-        getTextScaleUseCase: appLocator<GetTextScaleUseCase>(),
+        fetchTextScaleUseCase: appLocator<FetchTextScaleUseCase>(),
         checkUserUseCase: appLocator<CheckUserUseCase>(),
         signOutUseCase: appLocator<SignOutUseCase>(),
         urlService: appLocator<UrlService>(),

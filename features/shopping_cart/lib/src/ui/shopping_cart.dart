@@ -14,7 +14,7 @@ class ShoppingCartScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (BuildContext context) => ShoppingCartBloc(
-        getItemsUseCase: appLocator<GetItemsUseCase>(),
+        fetchItemsUseCase: appLocator<FetchItemsUseCase>(),
         changeItemCountUseCase: appLocator<ChangeItemCountUseCase>(),
         clearCartUseCase: appLocator<ClearCartUseCase>(),
       ),

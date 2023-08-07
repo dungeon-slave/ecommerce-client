@@ -36,5 +36,5 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
       await _hiveProvider.saveUserId(userId);
 
   @override
-  bool checkUser() => _hiveProvider.getUserId() != null ? true : false;
+  bool checkUser() => _hiveProvider.fetchUserId() != null ? true : false;
 }

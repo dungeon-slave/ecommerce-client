@@ -11,8 +11,8 @@ class CartRepositoryImpl implements CartRepository {
       : _hiveProvider = hiveProvider;
 
   @override
-  List<CartItemModel> getItems() {
-    final List<CartItemEntity> result = _hiveProvider.getCartItems();
+  List<CartItemModel> fetchItems() {
+    final List<CartItemEntity> result = _hiveProvider.fetchCartItems();
 
     return result
         .map(
@@ -30,7 +30,7 @@ class CartRepositoryImpl implements CartRepository {
   Future<void> clearCart() => _hiveProvider.clearCart();
 
   @override
-  int getItemsCount() => _hiveProvider.getCartItemsCount();
+  int fetchItemsCount() => _hiveProvider.fetchCartItemsCount();
 
   @override
   Future<void> changeItemCount(CartItemModel item) =>

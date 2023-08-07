@@ -1,4 +1,4 @@
 abstract class TextScaleRepository {
   Future<void> saveTextScale(double textScale);
-  double getTextScale();
+  double fetchTextScale();
 } 

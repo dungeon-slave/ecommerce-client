@@ -10,26 +10,26 @@ part 'settings_bloc_state.dart';
 
 class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
   final SetThemeUseCase _setThemeUseCase;
-  final GetThemeUseCase _getThemeUseCase;
+  final FetchThemeUseCase _fetchThemeUseCase;
   final SignOutUseCase _signOutUseCase;
   final CheckUserUseCase _checkUserUseCase;
   final SetTextScaleUseCase _setTextScaleUseCase;
-  final GetTextScaleUseCase _getTextScaleUseCase;
+  final FetchTextScaleUseCase _fetchTextScaleUseCase;
   final AuthService _authService;
   final UrlService _urlService;
 
   SettingsBloc({
     required SetThemeUseCase setThemeUseCase,
-    required GetThemeUseCase getThemeUseCase,
+    required FetchThemeUseCase fetchThemeUseCase,
     required SetTextScaleUseCase setTextScaleUseCase,
-    required GetTextScaleUseCase getTextScaleUseCase,
+    required FetchTextScaleUseCase fetchTextScaleUseCase,
     required SignOutUseCase signOutUseCase,
     required CheckUserUseCase checkUserUseCase,
     required UrlService urlService,
     required AuthService authService,
-  })  : _getThemeUseCase = getThemeUseCase,
+  })  : _fetchThemeUseCase = fetchThemeUseCase,
         _setTextScaleUseCase = setTextScaleUseCase,
-        _getTextScaleUseCase = getTextScaleUseCase,
+        _fetchTextScaleUseCase = fetchTextScaleUseCase,
         _urlService = urlService,
         _signOutUseCase = signOutUseCase,
         _checkUserUseCase = checkUserUseCase,
@@ -40,15 +40,15 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
           textScale: AppConstants.textScales.first,
         )) {
     on<SetThemeEvent>(_setTheme);
-    on<GetThemeEvent>(_getTheme);
+    on<FetchThemeEvent>(_fetchTheme);
     on<SetTextScaleEvent>(_setTextScale);
-    on<GetTextScaleEvent>(_getTextScale);
+    on<FetchTextScaleEvent>(_fetchTextScale);
     on<OpenLinkEvent>(_openLink);
     on<SignOutEvent>(_signOut);
 
     //FIXME unite this in SettingsModel
-    add(GetThemeEvent());
-    add(GetTextScaleEvent());
+    add(FetchThemeEvent());
+    add(FetchTextScaleEvent());
   }
 
   Future<void> _signOut(SignOutEvent event, Emitter<SettingsState> emit) async {
@@ -81,18 +81,18 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     );
   }
 
-  void _getTheme(GetThemeEvent event, Emitter<SettingsState> emit) {
+  void _fetchTheme(FetchThemeEvent event, Emitter<SettingsState> emit) {
     emit(
       state.copyWith(
-        isDark: _getThemeUseCase.execute(const NoParams()),
+        isDark: _fetchThemeUseCase.execute(const NoParams()),
       ),
     );
   }
 
-  void _getTextScale(GetTextScaleEvent event, Emitter<SettingsState> emit) {
+  void _fetchTextScale(FetchTextScaleEvent event, Emitter<SettingsState> emit) {
     emit(
       state.copyWith(
-        textScale: _getTextScaleUseCase.execute(
+        textScale: _fetchTextScaleUseCase.execute(
           const NoParams(),
         ),
       ),

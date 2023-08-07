@@ -1,4 +1,4 @@
 abstract class ThemeRepository {
   Future<void> saveAppTheme(bool isDark);
-  bool getAppTheme();
+  bool fetchAppTheme();
 }

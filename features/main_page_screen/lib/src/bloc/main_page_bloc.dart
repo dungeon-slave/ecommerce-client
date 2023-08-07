@@ -19,12 +19,12 @@ class MainPageBloc extends Bloc<MainPageEvent, MainPageState> {
         _authService = authService,
         _appRouter = appRouter,
         super(const MainPageState()) {
-    on<InitEvent>(_getUser);
+    on<InitEvent>(_checkUser);
 
     add(InitEvent());
   }
 
-  void _getUser(InitEvent event, Emitter<MainPageState> emit) {
+  void _checkUser(InitEvent event, Emitter<MainPageState> emit) {
     _authService.authenticated = _checkUserUseCase.execute(const NoParams());
     _appRouter.replace(const HomeRoute());
   }

@@ -17,7 +17,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (BuildContext context) => HomeScreenBloc(
-        getCartCountUseCase: appLocator<GetCartCountUseCase>(),
+        fetchCartCountUseCase: appLocator<FetchCartCountUseCase>(),
         networkService: appLocator<NetworkService>(),
       ),
       child: Stack(
