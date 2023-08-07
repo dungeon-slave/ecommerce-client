@@ -8,11 +8,11 @@ class AppTheme {
       brightness: Brightness.light,
       scaffoldBackgroundColor: AppColors.absWhite,
       primaryColor: AppColors.absBlack,
-      cardColor: AppColors.absBlack,
-      indicatorColor: AppColors.smoothYellow,
-      shadowColor: AppColors.smoothBlue,
+      cardColor: AppColors.smoothWhite,
+      indicatorColor: AppColors.absBlack,
+      shadowColor: AppColors.smoothWhite,
       iconTheme: const IconThemeData(
-        color: AppColors.darkBreeze,
+        color: AppColors.absBlack,
       ),
     );
   }
@@ -22,9 +22,9 @@ class AppTheme {
       brightness: Brightness.dark,
       scaffoldBackgroundColor: AppColors.darkBreeze,
       primaryColor: AppColors.absWhite,
-      cardColor: AppColors.cream,
+      cardColor: AppColors.smoothDarkBreeze,
       indicatorColor: AppColors.yellow,
-      shadowColor: AppColors.smoothWhite,
+      shadowColor: AppColors.smoothDarkBreeze,
       iconTheme: const IconThemeData(
         color: AppColors.absWhite,
       ),

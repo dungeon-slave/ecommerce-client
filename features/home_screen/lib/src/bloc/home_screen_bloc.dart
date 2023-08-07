@@ -55,10 +55,12 @@ class HomeScreenBloc extends Bloc<HomeScreenEvent, HomeScreenState> {
 
   void _changeConnectionStatus(
       ChangeConnectionEvent event, Emitter<HomeScreenState> emit) {
-    emit(state.copyWith(
-      isConnected: event.isConnected,
-      isVisibleMessage: true,
-    ));
+    emit(
+      state.copyWith(
+        isConnected: event.isConnected,
+        isVisibleMessage: true,
+      ),
+    );
     Future.delayed(
       const Duration(seconds: 3),
       () => add(ShowMessageEvent(isVisible: false)),
