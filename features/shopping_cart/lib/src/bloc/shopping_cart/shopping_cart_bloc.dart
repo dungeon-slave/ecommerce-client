@@ -8,15 +8,15 @@ part 'shopping_cart_state.dart';
 
 class ShoppingCartBloc extends Bloc<ShoppingCartEvent, ShoppingCartState> {
   final ChangeItemCountUseCase _changeItemCountUseCase;
-  final GetItemsUseCase _getItemsUseCase;
+  final FetchItemsUseCase _fetchItemsUseCase;
   final ClearCartUseCase _clearCartUseCase;
 
   ShoppingCartBloc({
     required ChangeItemCountUseCase changeItemCountUseCase,
-    required GetItemsUseCase getItemsUseCase,
+    required FetchItemsUseCase fetchItemsUseCase,
     required ClearCartUseCase clearCartUseCase,
   })  : _changeItemCountUseCase = changeItemCountUseCase,
-        _getItemsUseCase = getItemsUseCase,
+        _fetchItemsUseCase = fetchItemsUseCase,
         _clearCartUseCase = clearCartUseCase,
         super(
           const ShoppingCartState(
@@ -36,7 +36,7 @@ class ShoppingCartBloc extends Bloc<ShoppingCartEvent, ShoppingCartState> {
   void _init(InitEvent event, Emitter<ShoppingCartState> emit) {
     try {
       final List<CartItemModel> items =
-          _getItemsUseCase.execute(const NoParams());
+          _fetchItemsUseCase.execute(const NoParams());
       emit(
         state.copyWith(
           isLoading: false,

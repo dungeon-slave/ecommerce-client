@@ -25,17 +25,17 @@ class HiveProvider {
     }
   }
 
-  List<DishTypeEntity> getMenu() => _menuBox.values.toList();
+  List<DishTypeEntity> fetchMenu() => _menuBox.values.toList();
 
   Future<void> saveTheme(bool isDark) async =>
       await _themeBox.put(_HiveKeys.themeKey, isDark);
 
-  bool getTheme() => _themeBox.get(_HiveKeys.themeKey) ?? true;
+  bool fetchTheme() => _themeBox.get(_HiveKeys.themeKey) ?? true;
 
   Future<void> saveTextScale(double textScale) async =>
       await _textScaleBox.put(_HiveKeys.textScaleKey, textScale);
 
-  double getTextScale() =>
+  double fetchTextScale() =>
       _textScaleBox.get(_HiveKeys.textScaleKey) ??
       AppConstants.textScales.first;
 
@@ -58,9 +58,9 @@ class HiveProvider {
     }
   }
 
-  List<CartItemEntity> getCartItems() => _cartBox.values.toList();
+  List<CartItemEntity> fetchCartItems() => _cartBox.values.toList();
 
-  int getCartItemsCount() {
+  int fetchCartItemsCount() {
     int count = 0;
     for (CartItemEntity element in _cartBox.values) {
       count += element.count;
@@ -90,7 +90,7 @@ class HiveProvider {
   Future<void> saveUserId(String userId) async =>
       await _userIdBox.put(_HiveKeys.userIdKey, userId);
 
-  String? getUserId() => _userIdBox.get(_HiveKeys.userIdKey);
+  String? fetchUserId() => _userIdBox.get(_HiveKeys.userIdKey);
 
   Future<void> removeUser() async => await _userIdBox.clear();
 }

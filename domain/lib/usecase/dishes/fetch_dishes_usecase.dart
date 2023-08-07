@@ -12,6 +12,6 @@ class FetchDishesUsecase
 
   @override
   Future<List<DishTypeModel>> execute(NoParams empty) async {
-    return _dishesRepository.getMenu();
+    return _dishesRepository.fetchMenu();
   }
 }

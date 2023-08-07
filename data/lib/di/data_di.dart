@@ -123,8 +123,8 @@ class DataDI {
       ),
     );
 
-    appLocator.registerLazySingleton<GetThemeUseCase>(
-      () => GetThemeUseCase(
+    appLocator.registerLazySingleton<FetchThemeUseCase>(
+      () => FetchThemeUseCase(
         themeRepository: appLocator<ThemeRepository>(),
       ),
     );
@@ -135,8 +135,8 @@ class DataDI {
       ),
     );
 
-    appLocator.registerLazySingleton<GetTextScaleUseCase>(
-      () => GetTextScaleUseCase(
+    appLocator.registerLazySingleton<FetchTextScaleUseCase>(
+      () => FetchTextScaleUseCase(
         textScaleRepository: appLocator<TextScaleRepository>(),
       ),
     );
@@ -146,8 +146,8 @@ class DataDI {
         cartRepository: appLocator<CartRepository>(),
       ),
     );
-    appLocator.registerLazySingleton<GetItemsUseCase>(
-      () => GetItemsUseCase(
+    appLocator.registerLazySingleton<FetchItemsUseCase>(
+      () => FetchItemsUseCase(
         cartRepository: appLocator<CartRepository>(),
       ),
     );
@@ -191,8 +191,8 @@ class DataDI {
       ),
     );
 
-    appLocator.registerLazySingleton<GetCartCountUseCase>(
-      () => GetCartCountUseCase(
+    appLocator.registerLazySingleton<FetchCartCountUseCase>(
+      () => FetchCartCountUseCase(
         cartRepository: appLocator<CartRepository>(),
       ),
     );

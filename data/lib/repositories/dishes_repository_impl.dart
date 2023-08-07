@@ -20,12 +20,12 @@ class DishesRepositoryImpl implements DishesRepository {
         _networkService = networkService;
 
   @override
-  Future<List<DishTypeModel>> getMenu() async {
+  Future<List<DishTypeModel>> fetchMenu() async {
     final bool connectivityResult = 
         await _networkService.checkConnection();
     final List<DishTypeEntity> result = connectivityResult
-        ? await _firebaseProvider.getMenu()
-        : _hiveProvider.getMenu();
+        ? await _firebaseProvider.fetchMenu()
+        : _hiveProvider.fetchMenu();
 
     return result
         .map(

@@ -8,7 +8,7 @@ class SetThemeEvent extends SettingsEvent {
   SetThemeEvent({required this.isDark});
 }
 
-class GetThemeEvent extends SettingsEvent {}
+class FetchThemeEvent extends SettingsEvent {}
 
 class SetTextScaleEvent extends SettingsEvent {
   final double textScale;
@@ -16,7 +16,7 @@ class SetTextScaleEvent extends SettingsEvent {
   SetTextScaleEvent({required this.textScale});
 }
 
-class GetTextScaleEvent extends SettingsEvent {}
+class FetchTextScaleEvent extends SettingsEvent {}
 
 class OpenLinkEvent extends SettingsEvent {
   final Uri link;

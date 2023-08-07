@@ -7,13 +7,13 @@ part 'home_screen_event.dart';
 part 'home_screen_state.dart';
 
 class HomeScreenBloc extends Bloc<HomeScreenEvent, HomeScreenState> {
-  final GetCartCountUseCase _getCartCountUseCase;
+  final FetchCartCountUseCase _fetchCartCountUseCase;
   final NetworkService _networkService;
 
   HomeScreenBloc({
-    required GetCartCountUseCase getCartCountUseCase,
+    required FetchCartCountUseCase fetchCartCountUseCase,
     required NetworkService networkService,
-  })  : _getCartCountUseCase = getCartCountUseCase,
+  })  : _fetchCartCountUseCase = fetchCartCountUseCase,
         _networkService = networkService,
         super(
           const HomeScreenState(
@@ -39,7 +39,7 @@ class HomeScreenBloc extends Bloc<HomeScreenEvent, HomeScreenState> {
       ChangeCartCountEvent event, Emitter<HomeScreenState> emit) {
     emit(
       state.copyWith(
-        count: _getCartCountUseCase.execute(const NoParams()),
+        count: _fetchCartCountUseCase.execute(const NoParams()),
       ),
     );
   }

@@ -9,7 +9,7 @@ class TextScaleRepositoryImpl implements TextScaleRepository {
   }) : _hiveProvider = hiveProvider;
 
   @override
-  double getTextScale() => _hiveProvider.getTextScale();
+  double fetchTextScale() => _hiveProvider.fetchTextScale();
 
   @override
   Future<void> saveTextScale(double textScale) async =>

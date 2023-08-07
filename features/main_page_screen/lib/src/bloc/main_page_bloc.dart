@@ -25,7 +25,7 @@ class MainPageBloc extends Bloc<MainPageEvent, MainPageState> {
     add(InitEvent());
   }
 
-  void _getUser(InitEvent event, Emitter<MainPageState> emit) {
+  void _checkUser(InitEvent event, Emitter<MainPageState> emit) {
     _authService.authenticated = _checkUserUseCase.execute(const NoParams());
     _appRouter.push(const HomeRoute());
     emit(state.copyWith(isChecked: true));

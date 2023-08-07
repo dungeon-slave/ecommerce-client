@@ -4,7 +4,7 @@ import 'package:data/entities/dish_entity/dish_entity.dart';
 import 'package:data/entities/dish_type_enity/dish_type_entity.dart';
 
 class FirebaseProvider {
-  Future<List<DishTypeEntity>> getMenu() async {
+  Future<List<DishTypeEntity>> fetchMenu() async {
     List<DishTypeEntity> dishesTypes = <DishTypeEntity>[];
 
     final QueryDocumentSnapshot<Map<String, dynamic>> dishesTypesDoc =
