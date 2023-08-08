@@ -16,8 +16,6 @@ dependencies:
     path: ../../core_ui
   domain: 
     path: ../../domain
-  home_screen:
-    path: ../home_screen
   navigation:
     path: ../../navigation
   build_runner: ^2.4.6
