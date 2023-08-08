@@ -1,6 +1,6 @@
 import 'package:core/core.dart';
 import 'package:core/services/network_service.dart';
-import 'package:domain/usecase/home_screen/get_cart_count_usecase.dart';
+import 'package:domain/usecase/home_screen/fetch_cart_count_usecase.dart';
 import 'package:domain/usecase/usecase.dart';
 
 part 'home_screen_event.dart';

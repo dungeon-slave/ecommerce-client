@@ -2,7 +2,7 @@ import 'package:core/core.dart' show BlocProvider, BlocBuilder, Bloc;
 import 'package:core/di/app_di.dart';
 import 'package:core/services/network_service.dart';
 import 'package:core_ui/core_ui.dart' show AppIcons, AppConstants;
-import 'package:domain/usecase/home_screen/get_cart_count_usecase.dart';
+import 'package:domain/usecase/home_screen/fetch_cart_count_usecase.dart';
 import 'package:flutter/material.dart';
 import 'package:home_screen/src/bloc/cart_observer.dart';
 import 'package:home_screen/src/bloc/home_screen_bloc.dart';
