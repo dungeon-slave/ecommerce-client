@@ -11,7 +11,7 @@ import 'package:core/di/app_di.dart';
 import 'package:core/services/network_service.dart';
 import 'package:core_ui/core_ui.dart' show AppIcons, AppConstants;
 import 'package:dishes_menu/dishes_menu.dart';
-import 'package:domain/usecase/home_screen/fetch_cart_count_usecase.dart';
+import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:home_screen/src/bloc/cart_observer.dart';
 import 'package:home_screen/src/bloc/home_screen_bloc.dart';
@@ -31,6 +31,8 @@ class HomeScreen extends StatelessWidget {
       create: (BuildContext context) => HomeScreenBloc(
         fetchCartCountUseCase: appLocator<FetchCartCountUseCase>(),
         networkService: appLocator<NetworkService>(),
+        fetchTextScaleUseCase: appLocator<FetchTextScaleUseCase>(),
+        fetchThemeUseCase: appLocator<FetchThemeUseCase>(),
       ),
       child: Stack(
         children: <Widget>[

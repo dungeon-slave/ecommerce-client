@@ -11,32 +11,32 @@ part 'settings_bloc_event.dart';
 part 'settings_bloc_state.dart';
 
 class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
-  final SetThemeUseCase _setThemeUseCase;
-  final FetchThemeUseCase _fetchThemeUseCase;
   final SignOutUseCase _signOutUseCase;
   final CheckUserUseCase _checkUserUseCase;
-  final SetTextScaleUseCase _setTextScaleUseCase;
+  final FetchThemeUseCase _fetchThemeUseCase;
   final FetchTextScaleUseCase _fetchTextScaleUseCase;
+  final SetThemeUseCase _setThemeUseCase;
+  final SetTextScaleUseCase _setTextScaleUseCase;
   final AuthService _authService;
   final UrlService _urlService;
   final AppRouter _appRouter;
 
   SettingsBloc({
-    required SetThemeUseCase setThemeUseCase,
     required FetchThemeUseCase fetchThemeUseCase,
-    required SetTextScaleUseCase setTextScaleUseCase,
+    required SetThemeUseCase setThemeUseCase,
     required FetchTextScaleUseCase fetchTextScaleUseCase,
+    required SetTextScaleUseCase setTextScaleUseCase,
     required SignOutUseCase signOutUseCase,
     required CheckUserUseCase checkUserUseCase,
     required UrlService urlService,
     required AuthService authService,
     required AppRouter appRouter,
-  })  : _fetchThemeUseCase = fetchThemeUseCase,
-        _setTextScaleUseCase = setTextScaleUseCase,
+  })  : _setTextScaleUseCase = setTextScaleUseCase,
         _fetchTextScaleUseCase = fetchTextScaleUseCase,
         _urlService = urlService,
         _signOutUseCase = signOutUseCase,
         _checkUserUseCase = checkUserUseCase,
+        _fetchThemeUseCase = fetchThemeUseCase,
         _setThemeUseCase = setThemeUseCase,
         _authService = authService,
         _appRouter = appRouter,
@@ -45,15 +45,21 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
           textScale: AppConstants.textScales.first,
         )) {
     on<SetThemeEvent>(_setTheme);
-    on<FetchThemeEvent>(_fetchTheme);
     on<SetTextScaleEvent>(_setTextScale);
-    on<FetchTextScaleEvent>(_fetchTextScale);
     on<OpenLinkEvent>(_openLink);
     on<SignOutEvent>(_signOut);
+    on<InitEvent>(_init);
 
-    //FIXME unite this in SettingsModel
-    add(FetchThemeEvent());
-    add(FetchTextScaleEvent());
+    add(InitEvent());
+  }
+
+  void _init(InitEvent event, Emitter<SettingsState> emit) {
+    emit(
+      state.copyWith(
+        isDark: _fetchThemeUseCase.execute(const NoParams()),
+        textScale: _fetchTextScaleUseCase.execute(const NoParams()),
+      ),
+    );
   }
 
   Future<void> _signOut(SignOutEvent event, Emitter<SettingsState> emit) async {
@@ -83,24 +89,6 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     emit(
       state.copyWith(
         textScale: event.textScale,
-      ),
-    );
-  }
-
-  void _fetchTheme(FetchThemeEvent event, Emitter<SettingsState> emit) {
-    emit(
-      state.copyWith(
-        isDark: _fetchThemeUseCase.execute(const NoParams()),
-      ),
-    );
-  }
-
-  void _fetchTextScale(FetchTextScaleEvent event, Emitter<SettingsState> emit) {
-    emit(
-      state.copyWith(
-        textScale: _fetchTextScaleUseCase.execute(
-          const NoParams(),
-        ),
       ),
     );
   }

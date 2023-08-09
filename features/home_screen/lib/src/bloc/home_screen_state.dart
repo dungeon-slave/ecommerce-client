@@ -15,6 +15,8 @@ class HomeScreenState {
     int? count,
     bool? isConnected,
     bool? isVisibleMessage,
+    bool? isDark,
+    double? textScale,
   }) {
     return HomeScreenState(
       count: count ?? this.count,
