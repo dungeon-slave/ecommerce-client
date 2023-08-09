@@ -33,14 +33,15 @@ final class AppConstants {
   static const String connectionLoss = 'Disconnected!';
   static const String connectionRestored = 'Connected!';
 
-  static const String signUpTitle = 'Sign up';
-  static const String signInTitle = 'Sign in';
+  static const String signUpPageTitle = 'Sign up';
+  static const String signInPageTitle = 'Sign in';
   static const String signOutTitle = 'Sign out';
-  static const String googleSignInTitle = 'Sign in with google';
+  static const String emailSignInTitle = 'Email sign in';
+  static const String googleSignInTitle = 'Google sign in';
   static const String createAccount = 'Create account';
   static const String passwordTitle = 'Password';
   static const String emailTitle = 'Email';
   static const String nameTitle = 'Name';
 
-  static const List<double> textScales = [0.8, 1.0, 1.2];
+  static const List<double> textScales = <double>[0.8, 1.0, 1.2];
 }

@@ -6,6 +6,7 @@ import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:navigation/navigation.dart';
 import 'package:sign_in_screen/sign_in_screen.dart';
+import 'package:sign_up_screen/sign_up_screen.gm.dart';
 
 @RoutePage()
 class SignInScreen extends StatelessWidget {
@@ -30,66 +31,92 @@ class SignInScreen extends StatelessWidget {
         body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              AppConstants.signInTitle,
-              style: AppFonts.normal30.copyWith(
-                color: Theme.of(context).primaryColor,
+            Container(
+              margin: const EdgeInsets.only(bottom: kToolbarHeight / 1.2),
+              child: Text(
+                AppConstants.signInPageTitle,
+                style: AppFonts.normal30.copyWith(
+                  color: Theme.of(context).primaryColor,
+                ),
               ),
             ),
             Container(
               margin: const EdgeInsets.only(
-                left: AppDimens.padding25,
-                right: AppDimens.padding25,
+                left: kToolbarHeight / 2,
+                right: kToolbarHeight / 2,
+                bottom: kToolbarHeight / 5,
               ),
-              child: TextField(
-                decoration: const InputDecoration(
-                  labelText: AppConstants.emailTitle,
-                ),
-                controller: _emailController,
+              child: AppTextField(
+                textController: _emailController,
+                label: AppConstants.emailTitle,
+                isObscure: false,
               ),
             ),
             Container(
               margin: const EdgeInsets.only(
-                left: AppDimens.padding25,
-                right: AppDimens.padding25,
+                left: kToolbarHeight / 2,
+                right: kToolbarHeight / 2,
+                bottom: kToolbarHeight,
               ),
-              child: TextField(
-                decoration: const InputDecoration(
-                  labelText: AppConstants.passwordTitle,
-                ),
-                controller: _passwordController,
+              child: AppTextField(
+                textController: _passwordController,
+                label: AppConstants.passwordTitle,
+                isObscure: true,
               ),
             ),
             BlocBuilder<SignInBloc, LoginScreenState>(
               builder: (context, state) {
-                return AppButton(
-                  text: AppConstants.signInTitle,
-                  handler: () => BlocProvider.of<SignInBloc>(context).add(
-                    EmailSignInEvent(
-                      model: EmailSignInModel(
-                        email: _emailController.text,
-                        password: _passwordController.text,
-                      ),
+                return Container(
+                  margin: const EdgeInsets.only(bottom: kToolbarHeight / 5),
+                  width: kToolbarHeight * 6,
+                  height: kToolbarHeight / 1.3,
+                  child: AppButton(
+                    text: AppConstants.emailSignInTitle,
+                    handler: () {
+                      BlocProvider.of<SignInBloc>(context).add(
+                        EmailSignInEvent(
+                          model: EmailSignInModel(
+                            email: _emailController.text,
+                            password: _passwordController.text,
+                          ),
+                        ),
+                      );
+                      if (state.errorMessage.isNotEmpty) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              state.errorMessage,
+                            ),
+                          ),
+                        );
+                      }
+                    },
+                  ),
+                );
+              },
+            ),
+            BlocBuilder<SignInBloc, LoginScreenState>(
+              builder: (context, state) {
+                return Container(
+                  margin: const EdgeInsets.only(bottom: kToolbarHeight / 5),
+                  width: kToolbarHeight * 6,
+                  height: kToolbarHeight / 1.3,
+                  child: AppButton(
+                    text: AppConstants.googleSignInTitle,
+                    handler: () => BlocProvider.of<SignInBloc>(context).add(
+                      GoogleSignInEvent(),
                     ),
                   ),
                 );
               },
             ),
-            BlocBuilder<SignInBloc, LoginScreenState>(
-              builder: (context, state) {
-                return AppButton(
-                  text: AppConstants.googleSignInTitle,
-                  handler: () => BlocProvider.of<SignInBloc>(context).add(
-                    GoogleSignInEvent(),
-                  ),
-                );
-              },
-            ),
-            AppButton(
-              text: AppConstants.signUpTitle,
-              handler: () => context.router.pushNamed('sign/up'
-                  //SignUpRoute('sign/up'),
-                  ),
+            SizedBox(
+              width: kToolbarHeight * 6,
+              height: kToolbarHeight / 1.3,
+              child: AppButton(
+                text: AppConstants.signUpPageTitle,
+                handler: () => context.router.push(SignUpRoute()),
+              ),
             ),
           ],
         ),
