@@ -1,10 +1,10 @@
-import 'package:core_ui/core_ui.dart';
+import 'package:core_ui/core_ui.dart' show AppFonts;
 import 'package:flutter/material.dart';
 
 class AppButton extends StatelessWidget {
   final String _text;
   final void Function() _handler;
-  
+
   const AppButton({
     super.key,
     required String text,
@@ -15,7 +15,8 @@ class AppButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      style: ElevatedButton.styleFrom(backgroundColor: Theme.of(context).indicatorColor),
+      style: ElevatedButton.styleFrom(
+          backgroundColor: Theme.of(context).indicatorColor),
       onPressed: _handler,
       child: Text(
         _text,

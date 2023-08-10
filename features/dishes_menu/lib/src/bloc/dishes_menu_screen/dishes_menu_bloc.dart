@@ -1,4 +1,4 @@
-import 'package:bloc/bloc.dart';
+import 'package:core/core.dart' show Bloc, Emitter;
 import 'package:domain/domain.dart';
 import 'package:domain/models/cart_items/cart_item_model.dart';
 import 'package:domain/models/dishes_items/dish_model.dart';
@@ -20,7 +20,7 @@ class MenuBloc extends Bloc<MenuEvent, MenuState> {
   })  : _fetchDishesUsecase = fetchDishesUsecase,
         _saveItemUseCase = saveItemsUseCase,
         _saveDishesUseCase = saveDishesUseCase,
-        super(MenuState(
+        super(const MenuState(
           items: <DishTypeModel>[],
           isLoading: true,
         )) {
@@ -31,11 +31,11 @@ class MenuBloc extends Bloc<MenuEvent, MenuState> {
     add(InitEvent());
   }
 
-  void _init(InitEvent event, Emitter<MenuState> emit) async {
+  Future<void> _init(InitEvent event, Emitter<MenuState> emit) async {
     try {
       final List<DishTypeModel> types =
           await _fetchDishesUsecase.execute(const NoParams());
-      await _saveDishesUseCase.execute(types); //TODO its wrong
+      await _saveDishesUseCase.execute(types); //FIXME its wrong
       emit(
         state.copyWith(
           isLoading: false,
@@ -56,8 +56,8 @@ class MenuBloc extends Bloc<MenuEvent, MenuState> {
     emit(state.copyWith(currentTab: event.typeIndex));
   }
 
-  void _addDish(AddDishEvent event, Emitter<MenuState> emit) {
-    _saveItemUseCase.execute(
+  Future<void> _addDish(AddDishEvent event, Emitter<MenuState> emit) async {
+    await _saveItemUseCase.execute(
       CartItemModel(
         dishModel: event.model,
         count: 1,

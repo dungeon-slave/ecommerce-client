@@ -1,10 +1,13 @@
-import 'package:core/core.dart';
+import 'package:core/core.dart' show BlocProvider, BlocBuilder, Bloc;
 import 'package:core/di/app_di.dart';
-import 'package:core_ui/core_ui.dart';
-import 'package:domain/usecase/home_screen/get_cart_count_usecase.dart';
+import 'package:core/services/network_service.dart';
+import 'package:core_ui/core_ui.dart' show AppIcons, AppConstants;
+import 'package:domain/usecase/home_screen/fetch_cart_count_usecase.dart';
 import 'package:flutter/material.dart';
 import 'package:home_screen/src/bloc/cart_observer.dart';
 import 'package:home_screen/src/bloc/home_screen_bloc.dart';
+import 'package:home_screen/src/ui/components/cart_count_badge.dart';
+import 'package:home_screen/src/ui/components/network_popup.dart';
 import 'package:navigation/navigation.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -14,16 +17,17 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (BuildContext context) => HomeScreenBloc(
-        appLocator<GetCartCountUseCase>(),
+        fetchCartCountUseCase: appLocator<FetchCartCountUseCase>(),
+        networkService: appLocator<NetworkService>(),
       ),
-      child: Stack( //TODO try overlay entry
+      child: Stack(
         children: <Widget>[
           AutoTabsScaffold(
             routes: const <PageRouteInfo>[
-              EmptyRoute(),
+              MenuRoute(),
               OrderHistoryRoute(),
               ShoppingCartRoute(),
-              AppSettingsRoute(),
+              SettingsRoute(),
             ],
             animationDuration: Duration.zero,
             bottomNavigationBuilder: (BuildContext context, TabsRouter router) {
@@ -52,29 +56,21 @@ class HomeScreen extends StatelessWidget {
                       label: AppConstants.orderHistoryTitle,
                     ),
                     BottomNavigationBarItem(
-                      activeIcon: Badge(
-                        offset: const Offset(
-                          AppDimens.margin5,
-                          -AppDimens.margin5,
-                        ),
-                        label: BlocBuilder<HomeScreenBloc, HomeScreenState>(
-                          builder: (context, state) {
-                            return Text(state.count.toString());
-                          },
-                        ),
-                        child: AppIcons.selectedShoppingCart,
+                      activeIcon: BlocBuilder<HomeScreenBloc, HomeScreenState>(
+                        builder: (context, state) {
+                          return CartCountBadge(
+                            count: state.count,
+                            themeIcon: AppIcons.selectedShoppingCart,
+                          );
+                        },
                       ),
-                      icon: Badge(
-                        offset: const Offset(
-                          AppDimens.margin5,
-                          -AppDimens.margin5,
-                        ),
-                        label: BlocBuilder<HomeScreenBloc, HomeScreenState>(
-                          builder: (context, state) {
-                            return Text(state.count.toString());
-                          },
-                        ),
-                        child: AppIcons.unselectedShoppingCart,
+                      icon: BlocBuilder<HomeScreenBloc, HomeScreenState>(
+                        builder: (context, state) {
+                          return CartCountBadge(
+                            count: state.count,
+                            themeIcon: AppIcons.unselectedShoppingCart,
+                          );
+                        },
                       ),
                       label: AppConstants.shoppingCartTitle,
                     ),
@@ -90,40 +86,9 @@ class HomeScreen extends StatelessWidget {
           ),
           BlocBuilder<HomeScreenBloc, HomeScreenState>(
             builder: (BuildContext context, HomeScreenState state) {
-              if (Bloc.observer is! CartObserver) {
-                Bloc.observer = CartObserver(context: context);
-              }
+              Bloc.observer = CartObserver(context: context);
               if (state.isVisibleMessage) {
-                return Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Container(
-                    width: AppDimens.size380,
-                    margin: const EdgeInsets.only(
-                      bottom: AppDimens.padding65,
-                    ),
-                    decoration: BoxDecoration(
-                      color:
-                          state.isConnected ? AppColors.green : AppColors.red,
-                      borderRadius: const BorderRadius.all(
-                        Radius.circular(AppDimens.radius10),
-                      ),
-                    ),
-                    padding: const EdgeInsets.only(
-                      top: AppDimens.padding10,
-                      bottom: AppDimens.padding10,
-                    ),
-                    child: Text(
-                      textAlign: TextAlign.center,
-                      state.isConnected
-                          ? AppConstants.connectionRestored
-                          : AppConstants.connectionLoss,
-                      style: AppFonts.normal24.copyWith(
-                        color: AppColors.absWhite,
-                        decoration: TextDecoration.none,
-                      ),
-                    ),
-                  ),
-                );
+                return NetworkPopUp(isConnected: state.isConnected);
               }
               return const SizedBox.shrink();
             },

@@ -1,66 +1,64 @@
 import 'package:core/core.dart';
 import 'package:core/di/app_di.dart';
+import 'package:core/services/network_service.dart';
 import 'package:data/entities/cart_item_entity/cart_item_entity.dart';
 import 'package:data/entities/dish_entity/dish_entity.dart';
 import 'package:data/entities/dish_type_enity/dish_type_entity.dart';
+import 'package:data/providers/remote/firebase_auth_provider.dart';
 import 'package:data/providers/remote/firebase_provider.dart';
 import 'package:data/providers/local/hive_provider.dart';
-import 'package:data/repositories/cart/cart_repository_impl.dart';
-import 'package:data/repositories/dishes/dishes_repository_impl.dart';
-import 'package:data/repositories/textScale/text_scale_repository.dart';
-import 'package:data/repositories/theme/theme_repository_impl.dart';
+import 'package:data/repositories/authentication_repository_impl.dart';
+import 'package:data/repositories/cart_repository_impl.dart';
+import 'package:data/repositories/dishes_repository_impl.dart';
+import 'package:data/repositories/text_scale_repository.dart';
+import 'package:data/repositories/theme_repository_impl.dart';
 import 'package:domain/domain.dart';
+import 'package:domain/repositories/authentication_repository.dart';
 
 final DataDI dataDI = DataDI();
 
 class DataDI {
-  Future<void> initDependencies() async {
+  void initDependencies() {
     _initServices();
-    _initFirebase();
-    _initDishes();
-    _initHive();
-    _initTheme();
-    _initTextScale();
-    _initCart();
-    _initHomeScreen();
+    _initProviders();
+    _initAdapters();
+    _initRepositories();
+    _initUseCases();
   }
 
   void _initServices() {
     appLocator.registerLazySingleton<UrlService>(
       () => UrlService(),
     );
+    appLocator.registerLazySingleton<AuthService>(
+      () => AuthService(),
+    );
+    appLocator.registerLazySingleton<NetworkService>(
+      () => NetworkService(
+        connectivity: Connectivity(),
+        internetConnectionChecker: InternetConnectionChecker(),
+      ),
+    );
   }
 
-  void _initFirebase() {
+  void _initProviders() {
     appLocator.registerLazySingleton<FirebaseProvider>(
       () => FirebaseProvider(),
     );
-  }
 
-  void _initDishes() {
-    appLocator.registerLazySingleton<DishesRepository>(
-      () => DishesRepositoryImpl(
-        firebaseProvider: appLocator<FirebaseProvider>(),
-        hiveProvider: appLocator<HiveProvider>(),
-      ),
-    );
-
-    appLocator.registerLazySingleton<FetchDishesUsecase>(
-      () => FetchDishesUsecase(
-        dishesRepository: appLocator<DishesRepository>(),
-      ),
-    );
-    appLocator.registerLazySingleton<SaveDishesUseCase>(
-      () => SaveDishesUseCase(
-        dishesRepository: appLocator<DishesRepository>(),
-      ),
-    );
-  }
-
-  void _initHive() {
     appLocator.registerLazySingleton<HiveProvider>(
       () => HiveProvider(),
     );
+
+    appLocator.registerLazySingleton<FirebaseAuthProvider>(
+      () => FirebaseAuthProvider(
+        firebaseAuth: FirebaseAuth.instance,
+        googleSignIn: GoogleSignIn(),
+      ),
+    );
+  }
+
+  void _initAdapters() {
     Hive.registerAdapter<CartItemEntity>(
       CartItemEntityAdapter(),
     );
@@ -72,10 +70,50 @@ class DataDI {
     );
   }
 
-  void _initTheme() {
+  void _initRepositories() {
+    appLocator.registerLazySingleton<DishesRepository>(
+      () => DishesRepositoryImpl(
+        firebaseProvider: appLocator<FirebaseProvider>(),
+        hiveProvider: appLocator<HiveProvider>(),
+        networkService: appLocator<NetworkService>(),
+      ),
+    );
+
     appLocator.registerLazySingleton<ThemeRepository>(
       () => ThemeRepositoryImpl(
         hiveProvider: appLocator<HiveProvider>(),
+      ),
+    );
+
+    appLocator.registerLazySingleton<TextScaleRepository>(
+      () => TextScaleRepositoryImpl(
+        hiveProvider: appLocator<HiveProvider>(),
+      ),
+    );
+
+    appLocator.registerLazySingleton<CartRepository>(
+      () => CartRepositoryImpl(
+        hiveProvider: appLocator<HiveProvider>(),
+      ),
+    );
+
+    appLocator.registerLazySingleton<AuthenticationRepository>(
+      () => AuthenticationRepositoryImpl(
+        authProvider: appLocator<FirebaseAuthProvider>(),
+        hiveProvider: appLocator<HiveProvider>(),
+      ),
+    );
+  }
+
+  void _initUseCases() {
+    appLocator.registerLazySingleton<FetchDishesUsecase>(
+      () => FetchDishesUsecase(
+        dishesRepository: appLocator<DishesRepository>(),
+      ),
+    );
+    appLocator.registerLazySingleton<SaveDishesUseCase>(
+      () => SaveDishesUseCase(
+        dishesRepository: appLocator<DishesRepository>(),
       ),
     );
 
@@ -85,17 +123,9 @@ class DataDI {
       ),
     );
 
-    appLocator.registerLazySingleton<GetThemeUseCase>(
-      () => GetThemeUseCase(
+    appLocator.registerLazySingleton<FetchThemeUseCase>(
+      () => FetchThemeUseCase(
         themeRepository: appLocator<ThemeRepository>(),
-      ),
-    );
-  }
-
-  void _initTextScale() {
-    appLocator.registerLazySingleton<TextScaleRepository>(
-      () => TextScaleRepositoryImpl(
-        hiveProvider: appLocator<HiveProvider>(),
       ),
     );
 
@@ -105,17 +135,9 @@ class DataDI {
       ),
     );
 
-    appLocator.registerLazySingleton<GetTextScaleUseCase>(
-      () => GetTextScaleUseCase(
+    appLocator.registerLazySingleton<FetchTextScaleUseCase>(
+      () => FetchTextScaleUseCase(
         textScaleRepository: appLocator<TextScaleRepository>(),
-      ),
-    );
-  }
-
-  void _initCart() {
-    appLocator.registerLazySingleton<CartRepository>(
-      () => CartRepositoryImpl(
-        hiveProvider: appLocator<HiveProvider>(),
       ),
     );
 
@@ -124,8 +146,8 @@ class DataDI {
         cartRepository: appLocator<CartRepository>(),
       ),
     );
-    appLocator.registerLazySingleton<GetItemsUseCase>(
-      () => GetItemsUseCase(
+    appLocator.registerLazySingleton<FetchItemsUseCase>(
+      () => FetchItemsUseCase(
         cartRepository: appLocator<CartRepository>(),
       ),
     );
@@ -139,12 +161,45 @@ class DataDI {
         cartRepository: appLocator<CartRepository>(),
       ),
     );
-  }
+    appLocator.registerLazySingleton<EmailSignInUseCase>(
+      () => EmailSignInUseCase(
+        authenticationRepository: appLocator<AuthenticationRepository>(),
+      ),
+    );
 
-  void _initHomeScreen() {
-    appLocator.registerLazySingleton<GetCartCountUseCase>(
-      () => GetCartCountUseCase(
+    appLocator.registerLazySingleton<EmailSignUpUseCase>(
+      () => EmailSignUpUseCase(
+        authenticationRepository: appLocator<AuthenticationRepository>(),
+      ),
+    );
+
+    appLocator.registerLazySingleton<GoogleSignInUseCase>(
+      () => GoogleSignInUseCase(
+        authenticationRepository: appLocator<AuthenticationRepository>(),
+      ),
+    );
+
+    appLocator.registerLazySingleton<SignOutUseCase>(
+      () => SignOutUseCase(
+        authenticationRepository: appLocator<AuthenticationRepository>(),
+      ),
+    );
+
+    appLocator.registerLazySingleton<SaveUserUseCase>(
+      () => SaveUserUseCase(
+        authenticationRepository: appLocator<AuthenticationRepository>(),
+      ),
+    );
+
+    appLocator.registerLazySingleton<FetchCartCountUseCase>(
+      () => FetchCartCountUseCase(
         cartRepository: appLocator<CartRepository>(),
+      ),
+    );
+
+    appLocator.registerLazySingleton<CheckUserUseCase>(
+      () => CheckUserUseCase(
+        authenticationRepository: appLocator<AuthenticationRepository>(),
       ),
     );
   }

@@ -6,9 +6,13 @@ import 'package:domain/models/dishes_items/dish_model.dart';
 import 'package:flutter/material.dart';
 
 import 'package:home_screen/home_screen.dart';
+import 'package:main_page_screen/main_page_screen.dart';
+import 'package:navigation/src/app_router/auth_guard.dart';
 import 'package:order_history/order_history.dart';
 import 'package:settings/settings.dart';
 import 'package:shopping_cart/shopping_cart.dart';
+import 'package:sign_in_screen/sign_in_screen.dart';
+import 'package:sign_up_screen/sign_up_screen.dart';
 
 part 'app_router.gr.dart';
 
@@ -17,44 +21,75 @@ part 'app_router.gr.dart';
   routes: <AutoRoute>[
     AutoRoute(
       path: '/',
-      page: HomeScreen,
+      page: MainPageScreen,
+      name: 'MainPageRoute',
+      initial: true,
       children: <AutoRoute>[
         AutoRoute(
-          name: 'EmptyRoute',
-          path: 'dishes_menu',
+          path: 'sign',
+          name: 'SignRoute',
           page: EmptyRouterPage,
           children: [
             AutoRoute(
               initial: true,
-              name: 'DishesMenuRouter',
-              path: '',
-              page: DishesMenuScreen,
+              page: SignInScreen,
+              path: 'sign',
             ),
             AutoRoute(
-              path: ':dishId',
-              page: DetailedPageScreen,
+              page: SignUpScreen,
+              path: 'up',
             ),
             RedirectRoute(
-              path: ':dishId',
+              path: 'up',
               redirectTo: '',
             ),
           ],
         ),
         AutoRoute(
-          path: 'order_history',
-          page: OrderHistoryScreen,
-        ),
-        AutoRoute(
-          path: 'shopping_cart',
-          page: ShoppingCartScreen,
-          maintainState: false,
-        ),
-        AutoRoute(
-          path: 'settings',
-          page: AppSettingsScreen,
+          path: 'home',
+          name: 'HomeRoute',
+          page: HomeScreen,
+          guards: [AuthGuard],
+          children: <AutoRoute>[
+            AutoRoute(
+              name: 'MenuRoute',
+              path: 'dishes_menu',
+              page: EmptyRouterPage,
+              children: [
+                AutoRoute(
+                  initial: true,
+                  path: '',
+                  page: DishesMenuScreen,
+                ),
+                AutoRoute(
+                  path: ':dishId',
+                  page: DetailedPageScreen,
+                ),
+                RedirectRoute(
+                  path: ':dishId',
+                  redirectTo: '',
+                ),
+              ],
+            ),
+            AutoRoute(
+              path: 'order_history',
+              page: OrderHistoryScreen,
+            ),
+            AutoRoute(
+              path: 'shopping_cart',
+              page: ShoppingCartScreen,
+              maintainState: false,
+            ),
+            AutoRoute(
+              path: 'settings',
+              page: SettingsScreen,
+            ),
+          ],
         ),
       ],
     ),
   ],
 )
-class AppRouter extends _$AppRouter {}
+class AppRouter extends _$AppRouter {
+  AppRouter({required super.authGuard});
+}

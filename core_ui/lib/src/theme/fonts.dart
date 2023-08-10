@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' show TextStyle, FontWeight;
 
 final class AppFonts {
   static const normal25 = TextStyle(
@@ -16,7 +16,7 @@ final class AppFonts {
     fontWeight: FontWeight.bold,
   );
 
-    static const bold24 = TextStyle(
+  static const bold24 = TextStyle(
     fontSize: 24,
     fontWeight: FontWeight.bold,
   );

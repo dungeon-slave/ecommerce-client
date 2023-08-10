@@ -1,7 +1,8 @@
-import 'dart:io';
-import 'package:core/core.dart';
+import 'dart:io' show File;
+import 'package:core/core.dart' show DownloadProgress, CachedNetworkImage;
+import 'package:core_ui/core_ui.dart'
+    show AppLoadingCircle, AppError, AppConstants;
 import 'package:flutter/material.dart';
-import '../../core_ui.dart';
 
 class AppImage extends StatelessWidget {
   final String _imageRef;

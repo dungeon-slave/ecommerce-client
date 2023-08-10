@@ -1,12 +1,11 @@
-import 'package:core/core.dart';
+import 'package:core/core.dart' show BlocProvider, BlocBuilder;
 import 'package:core/di/app_di.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:domain/domain.dart';
 import 'package:domain/models/cart_items/cart_item_model.dart';
 import 'package:flutter/material.dart';
+import 'package:shopping_cart/src/bloc/shopping_cart/shopping_cart_bloc.dart';
 import 'package:shopping_cart/src/ui/cart_item.dart';
-
-import '../bloc/shopping_cart/shopping_cart_bloc.dart';
 
 class ShoppingCartScreen extends StatelessWidget {
   const ShoppingCartScreen({super.key});
@@ -15,7 +14,7 @@ class ShoppingCartScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (BuildContext context) => ShoppingCartBloc(
-        getItemsUseCase: appLocator<GetItemsUseCase>(),
+        fetchItemsUseCase: appLocator<FetchItemsUseCase>(),
         changeItemCountUseCase: appLocator<ChangeItemCountUseCase>(),
         clearCartUseCase: appLocator<ClearCartUseCase>(),
       ),
@@ -33,8 +32,8 @@ class ShoppingCartScreen extends StatelessWidget {
                 Container(
                   margin: const EdgeInsets.only(right: AppDimens.padding10),
                   child: IconButton(
-                    iconSize: 30,
-                    icon: const Icon(Icons.delete),
+                    iconSize: AppConstants.deleteIconSize,
+                    icon: AppIcons.clearCart,
                     onPressed: () =>
                         BlocProvider.of<ShoppingCartBloc>(context).add(
                       ClearCartEvent(),
@@ -92,7 +91,7 @@ class ShoppingCartScreen extends StatelessWidget {
                     ],
                   ),
                   SizedBox(
-                    width: AppDimens.size400,
+                    width: AppDimens.size400, //FIXME make adaptive size
                     child: AppButton(
                       text: AppConstants.cartCheckout,
                       handler: () =>

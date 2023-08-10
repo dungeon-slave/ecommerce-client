@@ -5,7 +5,7 @@ class ShoppingCartState {
   final String errorMessage;
   final List<CartItemModel> items;
 
-  ShoppingCartState({
+  const ShoppingCartState({
     this.isLoading = false,
     this.errorMessage = '',
     required this.items,

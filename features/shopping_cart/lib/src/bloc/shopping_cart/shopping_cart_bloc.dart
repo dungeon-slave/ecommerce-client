@@ -1,4 +1,4 @@
-import 'package:bloc/bloc.dart';
+import 'package:core/core.dart' show Bloc, Emitter;
 import 'package:domain/domain.dart';
 import 'package:domain/models/cart_items/cart_item_model.dart';
 import 'package:domain/usecase/usecase.dart';
@@ -7,19 +7,22 @@ part 'shopping_cart_event.dart';
 part 'shopping_cart_state.dart';
 
 class ShoppingCartBloc extends Bloc<ShoppingCartEvent, ShoppingCartState> {
-  final ChangeItemCountUseCase _changeItemCountUseCase; //TODO implement
-  final GetItemsUseCase _getItemsUseCase;
+  final ChangeItemCountUseCase _changeItemCountUseCase;
+  final FetchItemsUseCase _fetchItemsUseCase;
   final ClearCartUseCase _clearCartUseCase;
 
   ShoppingCartBloc({
     required ChangeItemCountUseCase changeItemCountUseCase,
-    required GetItemsUseCase getItemsUseCase,
+    required FetchItemsUseCase fetchItemsUseCase,
     required ClearCartUseCase clearCartUseCase,
   })  : _changeItemCountUseCase = changeItemCountUseCase,
-        _getItemsUseCase = getItemsUseCase,
+        _fetchItemsUseCase = fetchItemsUseCase,
         _clearCartUseCase = clearCartUseCase,
         super(
-          ShoppingCartState(items: <CartItemModel>[]),
+          const ShoppingCartState(
+            items: <CartItemModel>[],
+            isLoading: true,
+          ),
         ) {
     on<InitEvent>(_init);
     on<ClearCartEvent>(_clearCart);
@@ -31,14 +34,15 @@ class ShoppingCartBloc extends Bloc<ShoppingCartEvent, ShoppingCartState> {
   }
 
   void _init(InitEvent event, Emitter<ShoppingCartState> emit) {
-    emit(state.copyWith(isLoading: true));
     try {
       final List<CartItemModel> items =
-          _getItemsUseCase.execute(const NoParams());
-      emit(state.copyWith(
-        isLoading: false,
-        items: items,
-      ));
+          _fetchItemsUseCase.execute(const NoParams());
+      emit(
+        state.copyWith(
+          isLoading: false,
+          items: items,
+        ),
+      );
     } catch (e) {
       emit(
         state.copyWith(
@@ -49,12 +53,13 @@ class ShoppingCartBloc extends Bloc<ShoppingCartEvent, ShoppingCartState> {
     }
   }
 
-  void _decrementItem(DecrementEvent event, Emitter<ShoppingCartState> emit) {
+  Future<void> _decrementItem(
+      DecrementEvent event, Emitter<ShoppingCartState> emit) async {
     int index = state.items.indexWhere((CartItemModel element) =>
         element.dishModel.id == event.model.dishModel.id);
     CartItemModel currElement =
         state.items[index].copyWith(count: state.items[index].count - 1);
-    _changeItemCountUseCase.execute(currElement);
+    await _changeItemCountUseCase.execute(currElement);
     if (currElement.count != 0) {
       state.items[index] = currElement;
     } else {
@@ -63,19 +68,21 @@ class ShoppingCartBloc extends Bloc<ShoppingCartEvent, ShoppingCartState> {
     emit(state.copyWith(items: state.items));
   }
 
-  void _incrementItem(IncrementEvent event, Emitter<ShoppingCartState> emit) {
+  Future<void> _incrementItem(
+      IncrementEvent event, Emitter<ShoppingCartState> emit) async {
     int index = state.items.indexWhere((CartItemModel element) =>
         element.dishModel.id == event.model.dishModel.id);
     CartItemModel currElement =
         state.items[index].copyWith(count: state.items[index].count + 1);
-    _changeItemCountUseCase.execute(currElement);
+    await _changeItemCountUseCase.execute(currElement);
     state.items[index] = currElement;
     emit(state.copyWith(items: state.items));
   }
 
-  void _clearCart(ClearCartEvent event, Emitter<ShoppingCartState> emit) async {
+  Future<void> _clearCart(
+      ClearCartEvent event, Emitter<ShoppingCartState> emit) async {
     await _clearCartUseCase.execute(const NoParams());
-    add(InitEvent());
+    add(InitEvent()); //FIXME remove
   }
 
   void _checkout(CheckoutEvent event, Emitter<ShoppingCartState> emit) {

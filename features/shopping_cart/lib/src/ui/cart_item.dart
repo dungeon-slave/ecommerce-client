@@ -1,4 +1,4 @@
-import 'package:core/core.dart';
+import 'package:core/core.dart' show BlocProvider;
 import 'package:core_ui/core_ui.dart';
 import 'package:domain/models/cart_items/cart_item_model.dart';
 import 'package:flutter/material.dart';

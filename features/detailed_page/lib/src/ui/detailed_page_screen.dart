@@ -21,7 +21,7 @@ class DetailedPageScreen extends StatelessWidget {
         iconTheme: Theme.of(context).iconTheme,
         leading: IconButton(
           icon: AppIcons.closeDetailedPage,
-          onPressed: () => Navigator.of(context).pop(), //TODO remove pop
+          onPressed: () => Navigator.of(context).pop(),
         ),
         centerTitle: true,
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
@@ -35,7 +35,8 @@ class DetailedPageScreen extends StatelessWidget {
       ),
       body: ListView(
         padding: const EdgeInsets.only(
-            bottom: AppDimens.padding100), //TODO try replace with margin
+          bottom: AppDimens.padding100,
+        ),
         children: <Container>[
           Container(
             margin: const EdgeInsets.all(AppDimens.padding50),

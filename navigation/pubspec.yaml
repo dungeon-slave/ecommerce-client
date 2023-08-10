@@ -23,6 +23,12 @@ dependencies:
     path: ../features/settings
   detailed_page:
     path: ../features/detailed_page
+  sign_in_screen:
+    path: ../features/sign_in_screen
+  sign_up_screen:
+    path: ../features/sign_up_screen
+  main_page_screen:
+    path: ../features/main_page_screen
 
   core:
     path: ../core
@@ -30,10 +36,10 @@ dependencies:
     path: ../domain
 
   build_runner: ^2.4.6
-  auto_route: ^5.0.4
+  auto_route: 5.0.4
+  auto_route_generator: 5.0.2
   
 dev_dependencies:
-  auto_route_generator: 5.0.2
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.0

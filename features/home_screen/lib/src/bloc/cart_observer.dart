@@ -1,6 +1,7 @@
-import 'package:core/core.dart';
+import 'package:core/core.dart'
+    show Bloc, Transition, BlocObserver, BlocProvider;
 import 'package:dishes_menu/dishes_menu.dart' show InitEvent, AddDishEvent;
-import 'package:flutter/widgets.dart';
+import 'package:flutter/widgets.dart' show BuildContext;
 import 'package:home_screen/src/bloc/home_screen_bloc.dart';
 import 'package:shopping_cart/shopping_cart.dart' hide InitEvent;
 

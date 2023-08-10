@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "1378537675",
+    "firebase_url": "https://food-app-db-207d8-default-rtdb.europe-west1.firebasedatabase.app",
     "project_id": "food-app-db-207d8",
     "storage_bucket": "food-app-db-207d8.appspot.com"
   },
@@ -14,7 +15,15 @@
       },
       "oauth_client": [
         {
-          "client_id": "1378537675-auca1vfcgq4dvgtiviuesmhf5vdrdo6k.apps.googleusercontent.com",
+          "client_id": "1378537675-826njnm0h0jj0nbobiv42fe8kbb38qq2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.market_client",
+            "certificate_hash": "4d31ddb5f0408b4f5e4839bb0683eaf4f7821366"
+          }
+        },
+        {
+          "client_id": "1378537675-o84t85e7qf74pua8hrpdspcnp6rv7g2v.apps.googleusercontent.com",
           "client_type": 3
         }
       ],

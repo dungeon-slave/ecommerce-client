@@ -1,7 +1,7 @@
 name: core_ui
 version: 0.0.1
 publish_to: none
-description: Packkage that contains reusable widgets.
+description: Core ui package.
 
 environment:
   sdk: '>=3.0.3 <4.0.0'
