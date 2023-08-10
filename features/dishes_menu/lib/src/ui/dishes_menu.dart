@@ -26,7 +26,6 @@ class DishesMenuScreenState extends State<DishesMenuScreen>
     if (details.primaryVelocity! > sensitivy && _tabController.index > 0) {
       _tabController.index--;
     }
-
     // Swiping in left direction.
     if (details.primaryVelocity! < -sensitivy &&
         _tabController.index < _tabController.length - 1) {
@@ -39,8 +38,9 @@ class DishesMenuScreenState extends State<DishesMenuScreen>
     return BlocProvider(
       create: (BuildContext context) {
         return MenuBloc(
-           fetchDishesUsecase: appLocator<FetchDishesUsecase>(), 
-           saveItemsUseCase: appLocator<SaveItemUseCase>(),
+          fetchDishesUsecase: appLocator<FetchDishesUsecase>(),
+          saveItemsUseCase: appLocator<SaveItemUseCase>(),
+          saveDishesUseCase: appLocator<SaveDishesUseCase>(),
         );
       },
       child: BlocConsumer<MenuBloc, MenuState>(

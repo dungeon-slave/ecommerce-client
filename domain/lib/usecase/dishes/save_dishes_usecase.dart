@@ -1,17 +1,15 @@
-import 'package:domain/domain.dart';
 import 'package:domain/models/dishes_items/dish_type_model.dart';
+import 'package:domain/repositories/dishes_repository.dart';
 import 'package:domain/usecase/usecase.dart';
 
-class FetchDishesUsecase
-    implements AsyncUseCase<NoParams, List<DishTypeModel>> {
+class SaveDishesUseCase implements AsyncUseCase<List<DishTypeModel>, void> {
   final DishesRepository _dishesRepository;
 
-  const FetchDishesUsecase({
+  const SaveDishesUseCase({
     required DishesRepository dishesRepository,
   }) : _dishesRepository = dishesRepository;
 
   @override
-  Future<List<DishTypeModel>> execute(NoParams empty) async {
-    return _dishesRepository.getMenu();
-  }
+  Future<void> execute(List<DishTypeModel> input) async =>
+      _dishesRepository.saveMenu(input);
 }

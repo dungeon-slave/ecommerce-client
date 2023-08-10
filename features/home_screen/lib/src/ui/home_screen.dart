@@ -12,21 +12,21 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AutoTabsScaffold(
-      routes: const <PageRouteInfo>[
-        EmptyRoute(),
-        OrderHistoryRoute(),
-        ShoppingCartRoute(),
-        AppSettingsRoute(),
-      ],
-      animationDuration: Duration.zero,
-      bottomNavigationBuilder: (BuildContext context, TabsRouter router) {
-        return BlocProvider(
-          create: (BuildContext context) =>
-              HomeScreenBloc(appLocator<GetCartCountUseCase>()),
-          child: BlocBuilder<HomeScreenBloc, HomeScreenState>(
-            builder: (BuildContext context, HomeScreenState state) {
-              Bloc.observer = CartObserver(context: context);
+    return BlocProvider(
+      create: (BuildContext context) => HomeScreenBloc(
+        appLocator<GetCartCountUseCase>(),
+      ),
+      child: Stack( //TODO try overlay entry
+        children: <Widget>[
+          AutoTabsScaffold(
+            routes: const <PageRouteInfo>[
+              EmptyRoute(),
+              OrderHistoryRoute(),
+              ShoppingCartRoute(),
+              AppSettingsRoute(),
+            ],
+            animationDuration: Duration.zero,
+            bottomNavigationBuilder: (BuildContext context, TabsRouter router) {
               return Container(
                 decoration: BoxDecoration(
                   border: Border(
@@ -57,7 +57,11 @@ class HomeScreen extends StatelessWidget {
                           AppDimens.margin5,
                           -AppDimens.margin5,
                         ),
-                        label: Text(state.count.toString()),
+                        label: BlocBuilder<HomeScreenBloc, HomeScreenState>(
+                          builder: (context, state) {
+                            return Text(state.count.toString());
+                          },
+                        ),
                         child: AppIcons.selectedShoppingCart,
                       ),
                       icon: Badge(
@@ -65,7 +69,11 @@ class HomeScreen extends StatelessWidget {
                           AppDimens.margin5,
                           -AppDimens.margin5,
                         ),
-                        label: Text(state.count.toString()),
+                        label: BlocBuilder<HomeScreenBloc, HomeScreenState>(
+                          builder: (context, state) {
+                            return Text(state.count.toString());
+                          },
+                        ),
                         child: AppIcons.unselectedShoppingCart,
                       ),
                       label: AppConstants.shoppingCartTitle,
@@ -80,8 +88,48 @@ class HomeScreen extends StatelessWidget {
               );
             },
           ),
-        );
-      },
+          BlocBuilder<HomeScreenBloc, HomeScreenState>(
+            builder: (BuildContext context, HomeScreenState state) {
+              if (Bloc.observer is! CartObserver) {
+                Bloc.observer = CartObserver(context: context);
+              }
+              if (state.isVisibleMessage) {
+                return Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Container(
+                    width: AppDimens.size380,
+                    margin: const EdgeInsets.only(
+                      bottom: AppDimens.padding65,
+                    ),
+                    decoration: BoxDecoration(
+                      color:
+                          state.isConnected ? AppColors.green : AppColors.red,
+                      borderRadius: const BorderRadius.all(
+                        Radius.circular(AppDimens.radius10),
+                      ),
+                    ),
+                    padding: const EdgeInsets.only(
+                      top: AppDimens.padding10,
+                      bottom: AppDimens.padding10,
+                    ),
+                    child: Text(
+                      textAlign: TextAlign.center,
+                      state.isConnected
+                          ? AppConstants.connectionRestored
+                          : AppConstants.connectionLoss,
+                      style: AppFonts.normal24.copyWith(
+                        color: AppColors.absWhite,
+                        decoration: TextDecoration.none,
+                      ),
+                    ),
+                  ),
+                );
+              }
+              return const SizedBox.shrink();
+            },
+          ),
+        ],
+      ),
     );
   }
 }
