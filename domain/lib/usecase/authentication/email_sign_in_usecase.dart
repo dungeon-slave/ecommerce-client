@@ -11,5 +11,5 @@ class EmailSignInUseCase implements AsyncUseCase<EmailSignInModel, String> {
 
   @override
   Future<String> execute(EmailSignInModel input) async =>
-      await _authenticationRepository.emailSignIn(data: input);
+      await _authenticationRepository.emailSignIn(input);
 }

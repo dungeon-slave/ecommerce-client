@@ -8,10 +8,10 @@ import 'package:core_ui/core_ui.dart';
 class DishItem extends StatefulWidget {
   final DishModel _model;
 
-  void Function() _addToCartHandler(BuildContext context) {
-    return () =>
-        BlocProvider.of<MenuBloc>(context).add(AddDishEvent(model: _model));
-  }
+  void Function() _addToCartHandler(BuildContext context) =>
+      () => BlocProvider.of<MenuBloc>(context).add(
+            AddDishEvent(model: _model)
+          );
 
   const DishItem({
     required DishModel model,
@@ -26,12 +26,12 @@ class _DishItemState extends State<DishItem> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => context.navigateTo( //FIXME maybe remove in bloc
+      onTap: () => context.router.push(
         DetailedPageRoute(
           model: widget._model,
           addToCartHandler: widget._addToCartHandler(context),
         ),
-      ), 
+      ),
       child: Container(
         margin: const EdgeInsets.only(
           top: AppDimens.margin5,
@@ -49,8 +49,9 @@ class _DishItemState extends State<DishItem> {
               color: Theme.of(context).cardColor,
             ),
           ],
-          borderRadius:
-              const BorderRadius.all(Radius.circular(AppDimens.radius10)),
+          borderRadius: const BorderRadius.all(
+            Radius.circular(AppDimens.radius10),
+          ),
         ),
         child: Column(
           children: <Widget>[

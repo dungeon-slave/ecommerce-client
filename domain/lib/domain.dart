@@ -4,6 +4,7 @@ export 'package:domain/repositories/dishes_repository.dart';
 export 'package:domain/repositories/theme_repository.dart';
 export 'package:domain/repositories/cart_repository.dart';
 export 'package:domain/repositories/text_scale_repository.dart';
+export 'package:domain/repositories/order_history_repository.dart';
 
 export 'package:domain/usecase/dishes/fetch_dishes_usecase.dart';
 export 'package:domain/usecase/dishes/save_dishes_usecase.dart';

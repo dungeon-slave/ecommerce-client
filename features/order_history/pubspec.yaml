@@ -14,6 +14,8 @@ dependencies:
     path: ../../core_ui
   core:
     path: ../../core
+  domain:
+    path: ../../domain
   build_runner: ^2.4.6
   auto_route_generator: ^7.3.0
 

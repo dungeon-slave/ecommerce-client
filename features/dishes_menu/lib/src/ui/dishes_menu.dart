@@ -87,7 +87,7 @@ class DishesMenuScreenState extends State<DishesMenuScreen>
                       state.items.length,
                       (int index) => Tab(
                         child: Text(
-                          state.items[index].typeName,
+                          state.items[index].name,
                           style: AppFonts.normal25,
                         ),
                       ),
@@ -99,11 +99,11 @@ class DishesMenuScreenState extends State<DishesMenuScreen>
                   child: ListView.builder(
                     padding: const EdgeInsets.all(AppDimens.padding10),
                     itemCount:
-                        state.items[state.currentTab].dishesModels.length,
+                        state.items[state.currentTab].dishes.length,
                     itemBuilder: (BuildContext context, int index) {
                       return DishItem(
                         model:
-                            state.items[state.currentTab].dishesModels[index],
+                            state.items[state.currentTab].dishes[index],
                       );
                     },
                   ),
