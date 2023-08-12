@@ -34,11 +34,27 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
   }
 
   Future<void> _emailSignUp(
-      SignUpEvent event, Emitter<SignUpState> emit) async {
-    String userId = await _emailSignUpUseCase.execute(event.data);
-    await _saveUserUseCase.execute(userId);
-    _authService.authenticated = _checkUserUseCase.execute(const NoParams());
-    _appRouter.replace(const HomeRoute());
-    //TODO implement state change
+    SignUpEvent event,
+    Emitter<SignUpState> emit,
+  ) async {
+    emit(
+      state.copyWith(
+        isLoading: true,
+        errorMessage: '',
+      ),
+    );
+    try {
+      String userId = await _emailSignUpUseCase.execute(event.data);
+      await _saveUserUseCase.execute(userId);
+      _authService.authenticated = _checkUserUseCase.execute(const NoParams());
+      _appRouter.replace(const HomeRoute());
+    } catch (e) {
+      emit(
+        state.copyWith(
+          isLoading: false,
+          errorMessage: e.toString(),
+        ),
+      );
+    }
   }
 }

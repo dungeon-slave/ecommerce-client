@@ -69,12 +69,16 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
   }
 
   Future<void> _openLink(
-      OpenLinkEvent event, Emitter<SettingsState> emit) async {
-    _urlService.openDefault(event.link);
+    OpenLinkEvent event,
+    Emitter<SettingsState> emit,
+  ) async {
+    _urlService.openDefault(Uri.parse(event.link));
   }
 
   Future<void> _setTheme(
-      SetThemeEvent event, Emitter<SettingsState> emit) async {
+    SetThemeEvent event,
+    Emitter<SettingsState> emit,
+  ) async {
     await _setThemeUseCase.execute(event.isDark);
     emit(
       state.copyWith(
@@ -84,7 +88,9 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
   }
 
   Future<void> _setTextScale(
-      SetTextScaleEvent event, Emitter<SettingsState> emit) async {
+    SetTextScaleEvent event,
+    Emitter<SettingsState> emit,
+  ) async {
     await _setTextScaleUseCase.execute(event.textScale);
     emit(
       state.copyWith(

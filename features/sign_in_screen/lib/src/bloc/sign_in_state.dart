@@ -1,16 +1,20 @@
 part of 'sign_in_bloc.dart';
 
-class LoginScreenState {
+class SignInState {
+  final bool isLoading;
   final String errorMessage;
 
-  const LoginScreenState({
-    required this.errorMessage,
+  const SignInState({
+    this.isLoading = false,
+    this.errorMessage = '',
   });
 
-  LoginScreenState copyWith({
+  SignInState copyWith({
+    bool? isLoading,
     String? errorMessage,
   }) {
-    return LoginScreenState(
+    return SignInState(
+      isLoading: isLoading ?? this.isLoading,
       errorMessage: errorMessage ?? this.errorMessage,
     );
   }

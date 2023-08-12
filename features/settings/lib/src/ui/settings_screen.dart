@@ -1,10 +1,5 @@
 import 'package:core/core.dart'
-    show
-        AuthService,
-        BlocBuilder,
-        BlocProvider,
-        RoutePage,
-        UrlService;
+    show AuthService, BlocBuilder, BlocProvider, RoutePage, UrlService;
 import 'package:core/di/app_di.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:domain/domain.dart';
@@ -12,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:navigation/navigation.dart';
 import 'package:settings/src/bloc/settings/settings_bloc_bloc.dart';
 
-//FIXME rework layout
 @RoutePage()
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -117,9 +111,8 @@ class SettingsScreen extends StatelessWidget {
                     ),
                     AppButton(
                       text: AppConstants.signOutTitle,
-                      handler: () => BlocProvider.of<SettingsBloc>(context).add(
-                        SignOutEvent(),
-                      ),
+                      handler: () => BlocProvider.of<SettingsBloc>(context)
+                          .add(SignOutEvent()),
                     ),
                     Container(
                       margin: const EdgeInsets.only(
@@ -147,9 +140,7 @@ class SettingsScreen extends StatelessWidget {
                                 handler: () =>
                                     BlocProvider.of<SettingsBloc>(context).add(
                                   OpenLinkEvent(
-                                    link: Uri.parse(
-                                      AppConstants.telegramLink,
-                                    ),
+                                    link: AppConstants.telegramLink,
                                   ),
                                 ),
                               ),
@@ -158,9 +149,7 @@ class SettingsScreen extends StatelessWidget {
                                 handler: () =>
                                     BlocProvider.of<SettingsBloc>(context).add(
                                   OpenLinkEvent(
-                                    link: Uri.parse(
-                                      AppConstants.instagramLink,
-                                    ),
+                                    link: AppConstants.instagramLink,
                                   ),
                                 ),
                               ),

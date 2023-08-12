@@ -14,8 +14,10 @@ class AuthGuard extends AutoRouteGuard {
     if (_authService.authenticated) {
       resolver.next();
     } else {
-      router.pushAndPopUntil(const EmptySign(),
-          predicate: (Route<dynamic> predicate) => false);
+      router.pushAndPopUntil(
+        const EmptySign(),
+        predicate: (Route<dynamic> predicate) => false,
+      );
     }
   }
 }

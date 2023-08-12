@@ -84,6 +84,7 @@ class AppRouter extends _$AppRouter {
                 AutoRoute(
                   path: 'orderHistory',
                   page: OrderHistoryRoute.page,
+                  maintainState: false,
                 ),
                 AutoRoute(
                   path: 'shoppingCart',
