@@ -15,11 +15,11 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
         _hiveProvider = hiveProvider;
 
   @override
-  Future<String> emailSignIn({required EmailSignInModel data}) async =>
+  Future<String> emailSignIn(EmailSignInModel data) async =>
       await _authProvider.emailSignIn(data: data);
 
   @override
-  Future<String> emailSignUp({required EmailSignUpModel data}) async =>
+  Future<String> emailSignUp(EmailSignUpModel data) async =>
       await _authProvider.emailSignUp(data: data);
 
   @override
@@ -36,5 +36,5 @@ class AuthenticationRepositoryImpl implements AuthenticationRepository {
       await _hiveProvider.saveUserId(userId);
 
   @override
-  bool checkUser() => _hiveProvider.fetchUserId() != null ? true : false;
+  bool checkUser() => _hiveProvider.fetchUserId() != '' ? true : false;
 }

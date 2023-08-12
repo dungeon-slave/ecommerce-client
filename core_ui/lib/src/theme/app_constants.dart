@@ -1,15 +1,28 @@
 final class AppConstants {
   static const String menuCollection = 'dishes_menu';
+  static const String usersCollection = 'users';
+  static const String userOrdersCollection = 'orders';
+  static const String userCartCollection = 'cart';
 
   static const String contactUs = 'Contact us';
+  static const String showDetails = 'Show details';
+  static const String hideDetails = 'Hide details';
+
+  static const emptyList = 'It\'s empty here...';
+
+  static const emptyOrder = 'Nothing to order';
 
   static const String telegramContactTitle = 'Telegram';
   static const String instagramContactTitle = 'Instagram';
 
-  static const String telegramLink = 'https://pub.dev/packages/url_launcher/example';
-  static const String instagramLink = 'https://api.flutter.dev/flutter/material/Icons-class.html';
+  static const String telegramLink =
+      'https://pub.dev/packages/url_launcher/example';
+  static const String instagramLink =
+      'https://api.flutter.dev/flutter/material/Icons-class.html';
 
   static const int priceSize = 2;
+  static const int cartSnackBarDuration = 2;
+  static const double orderDividerThickness = 1;
   static const int swipesSensivity = 3;
   static const double deleteIconSize = 30;
 
@@ -18,6 +31,9 @@ final class AppConstants {
 
   static const String addToCart = 'Add to cart';
   static const String undefinedImageType = 'Undefined image type!';
+  static const String orderSent = 'The order has been sent!';
+
+  static const String authException = 'Can' 't get your account info';
 
   static const String menuTitle = 'Menu';
   static const String orderHistoryTitle = 'Order history';
@@ -28,7 +44,10 @@ final class AppConstants {
   static const String detailedIngredients = 'Ingredients';
 
   static const String cartCheckout = 'Checkout';
-  static const String cartTotal = 'Total';
+  static const String total = 'Total';
+  static const String time = 'Time';
+  static const String date = 'Date';
+  static const String orderN = 'Order №';
 
   static const String connectionLoss = 'Disconnected!';
   static const String connectionRestored = 'Connected!';

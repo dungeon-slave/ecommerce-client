@@ -17,7 +17,9 @@ class CartItemModel extends Equatable {
     int? count,
   }) {
     return CartItemModel(
-        dishModel: model ?? dishModel, count: count ?? this.count);
+      dishModel: model ?? dishModel,
+      count: count ?? this.count,
+    );
   }
 
   @override

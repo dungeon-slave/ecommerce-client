@@ -90,7 +90,7 @@ class HiveProvider {
   Future<void> saveUserId(String userId) async =>
       await _userIdBox.put(_HiveKeys.userIdKey, userId);
 
-  String? fetchUserId() => _userIdBox.get(_HiveKeys.userIdKey);
+  String fetchUserId() => _userIdBox.get(_HiveKeys.userIdKey) ?? '';
 
   Future<void> removeUser() async => await _userIdBox.clear();
 }

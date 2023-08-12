@@ -6,10 +6,15 @@ part 'dish_type_entity.freezed.dart';
 part 'dish_type_entity.g.dart';
 
 @freezed
+@HiveType(typeId: 2)
 class DishTypeEntity with _$DishTypeEntity {
-  @HiveType(typeId: 2)
+  // ignore: invalid_annotation_target
+  @JsonSerializable(explicitToJson: true)
   const factory DishTypeEntity({
-    @HiveField(0) required String typeName,
-    @HiveField(1) required List<DishEntity> dishesEntities,
+    @HiveField(0) required String name,
+    @HiveField(1) required List<DishEntity> dishes,
   }) = _DishTypeEntity;
+
+    factory DishTypeEntity.fromJson(Map<String, dynamic> json) =>
+      _$DishTypeEntityFromJson(json);
 }

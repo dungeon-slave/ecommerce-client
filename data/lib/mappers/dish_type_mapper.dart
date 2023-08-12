@@ -7,8 +7,8 @@ import 'package:domain/models/dishes_items/dish_type_model.dart';
 abstract class DishTypeMapper {
   static DishTypeEntity toEntity(DishTypeModel model) {
     return DishTypeEntity(
-      typeName: model.typeName,
-      dishesEntities: model.dishesModels
+      name: model.name,
+      dishes: model.dishes
           .map(
             (DishModel model) => DishMapper.toEntity(model),
           )
@@ -18,8 +18,8 @@ abstract class DishTypeMapper {
 
   static DishTypeModel toModel(DishTypeEntity entity) {
     return DishTypeModel(
-      typeName: entity.typeName,
-      dishesModels: entity.dishesEntities
+      name: entity.name,
+      dishes: entity.dishes
           .map(
             (DishEntity entity) => DishMapper.toModel(entity),
           )
