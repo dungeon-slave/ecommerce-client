@@ -9,5 +9,6 @@ class SetTextScaleUseCase implements AsyncUseCase<double, void> {
   }) : _textScaleRepository = textScaleRepository;
 
   @override
-  Future<void> execute(double input) async => await _textScaleRepository.saveTextScale(input);
+  Future<void> execute(double input) async =>
+      await _textScaleRepository.saveTextScale(input);
 }
