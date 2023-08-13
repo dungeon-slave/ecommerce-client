@@ -9,7 +9,7 @@ import 'package:core/core.dart'
         TabsRouter;
 import 'package:core/di/app_di.dart';
 import 'package:core/services/network_service.dart';
-import 'package:core_ui/core_ui.dart' show AppIcons, AppConstants;
+import 'package:core_ui/core_ui.dart' show AppConstants, AppIcon, AppIconsData;
 import 'package:dishes_menu/dishes_menu.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
@@ -60,13 +60,13 @@ class HomeScreen extends StatelessWidget {
                   unselectedItemColor: Theme.of(context).indicatorColor,
                   items: <BottomNavigationBarItem>[
                     const BottomNavigationBarItem(
-                      activeIcon: AppIcons.selectedMenu,
-                      icon: AppIcons.unselectedMenu,
+                      activeIcon: AppIcon(AppIconsData.selectedMenu),
+                      icon: AppIcon(AppIconsData.unselectedMenu),
                       label: AppConstants.menuTitle,
                     ),
                     const BottomNavigationBarItem(
-                      activeIcon: AppIcons.selectedOrderHistory,
-                      icon: AppIcons.unselectedOrderHistory,
+                      activeIcon: AppIcon(AppIconsData.selectedOrderHistory),
+                      icon: AppIcon(AppIconsData.unselectedOrderHistory),
                       label: AppConstants.orderHistoryTitle,
                     ),
                     BottomNavigationBarItem(
@@ -74,7 +74,8 @@ class HomeScreen extends StatelessWidget {
                         builder: (context, state) {
                           return CartCountBadge(
                             count: state.count,
-                            themeIcon: AppIcons.selectedShoppingCart,
+                            themeIcon:
+                                const AppIcon(AppIconsData.selectedShoppingCart),
                           );
                         },
                       ),
@@ -82,15 +83,16 @@ class HomeScreen extends StatelessWidget {
                         builder: (context, state) {
                           return CartCountBadge(
                             count: state.count,
-                            themeIcon: AppIcons.unselectedShoppingCart,
+                            themeIcon:
+                                const AppIcon(AppIconsData.unselectedShoppingCart),
                           );
                         },
                       ),
                       label: AppConstants.shoppingCartTitle,
                     ),
                     const BottomNavigationBarItem(
-                      activeIcon: AppIcons.selectedSettings,
-                      icon: AppIcons.unselectedSettings,
+                      activeIcon: AppIcon(AppIconsData.selectedSettings),
+                      icon: AppIcon(AppIconsData.unselectedSettings),
                       label: AppConstants.settingsTitle,
                     ),
                   ],

@@ -30,8 +30,11 @@ class DetailedPageScreen extends StatelessWidget {
               margin: const EdgeInsets.only(right: AppDimens.padding10),
               child: IconButton(
                 iconSize: AppConstants.deleteIconSize,
-                icon: AppIcons.closeDetailedPage,
-            color: Theme.of(context).primaryColor,
+                icon: const AppIcon(
+                  AppIconsData.closeDetailedPage,
+                  size: AppDimens.size40,
+                ),
+                color: Theme.of(context).primaryColor,
                 onPressed: () => context.router.pop(),
               ),
             ),

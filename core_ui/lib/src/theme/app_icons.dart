@@ -1,37 +1,14 @@
-import 'package:core_ui/core_ui.dart' show AppDimens;
-import 'package:flutter/material.dart' show Icon, Icons;
+import 'package:flutter/material.dart' show IconData, Icons;
 
-final class AppIcons {
-  //TODO make app icon
-  static const Icon closeDetailedPage = Icon(
-    Icons.clear,
-    size: AppDimens.size40,
-  );
-  static const Icon unselectedMenu = Icon(
-    Icons.storefront,
-  );
-  static const Icon selectedMenu = Icon(
-    Icons.storefront_rounded,
-  );
-  static const Icon selectedOrderHistory = Icon(
-    Icons.verified,
-  );
-  static const Icon unselectedOrderHistory = Icon(
-    Icons.verified_outlined,
-  );
-  static const Icon selectedShoppingCart = Icon(
-    Icons.shopping_cart,
-  );
-  static const Icon unselectedShoppingCart = Icon(
-    Icons.shopping_cart_outlined,
-  );
-  static const Icon selectedSettings = Icon(
-    Icons.settings,
-  );
-  static const Icon unselectedSettings = Icon(
-    Icons.settings_outlined,
-  );
-  static const Icon clearCart = Icon(
-    Icons.delete,
-  );
+final class AppIconsData {
+  static const IconData closeDetailedPage = Icons.clear;
+  static const IconData unselectedMenu = Icons.storefront;
+  static const IconData selectedMenu = Icons.storefront_rounded;
+  static const IconData selectedOrderHistory = Icons.verified;
+  static const IconData unselectedOrderHistory = Icons.verified_outlined;
+  static const IconData selectedShoppingCart = Icons.shopping_cart;
+  static const IconData unselectedShoppingCart = Icons.shopping_cart_outlined;
+  static const IconData selectedSettings = Icons.settings;
+  static const IconData unselectedSettings = Icons.settings_outlined;
+  static const IconData clearCart = Icons.delete;
 }

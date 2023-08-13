@@ -32,7 +32,7 @@ class ShoppingCartScreen extends StatelessWidget {
                   builder: (context, state) {
                     return IconButton(
                       iconSize: AppConstants.deleteIconSize,
-                      icon: AppIcons.clearCart,
+                      icon: const AppIcon(AppIconsData.clearCart),
                       onPressed: () =>
                           BlocProvider.of<ShoppingCartBloc>(context).add(
                         ClearCartEvent(),
