@@ -26,7 +26,6 @@ dependencies:
   google_sign_in: ^6.1.4
   connectivity_plus: ^4.0.2
   auto_route: ^7.8.0
-  auto_route_generator: ^7.3.0
 
 dev_dependencies:
   flutter_test:

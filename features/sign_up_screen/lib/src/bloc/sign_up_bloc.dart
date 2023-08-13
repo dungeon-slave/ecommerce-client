@@ -34,7 +34,9 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
   }
 
   Future<void> _emailSignUp(
-      SignUpEvent event, Emitter<SignUpState> emit) async {
+    SignUpEvent event,
+    Emitter<SignUpState> emit,
+  ) async {
     String userId = await _emailSignUpUseCase.execute(event.data);
     await _saveUserUseCase.execute(userId);
     _authService.authenticated = _checkUserUseCase.execute(const NoParams());
