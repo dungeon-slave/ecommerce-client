@@ -7,5 +7,5 @@ abstract class AuthenticationRepository {
   Future<String> googleSignIn();
   Future<void> signOut();
   Future<void> saveUser(String userId);
-  bool checkUser();
+  bool isUserAuthorized();
 }

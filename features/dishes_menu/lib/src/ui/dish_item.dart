@@ -10,7 +10,7 @@ class DishItem extends StatefulWidget {
 
   void Function() _addToCartHandler(BuildContext context) =>
       () => BlocProvider.of<MenuBloc>(context).add(
-            AddDishEvent(model: _model)
+            AddDishEvent(model: _model),
           );
 
   const DishItem({

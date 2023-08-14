@@ -74,8 +74,9 @@ class HomeScreen extends StatelessWidget {
                         builder: (context, state) {
                           return CartCountBadge(
                             count: state.count,
-                            themeIcon:
-                                const AppIcon(AppIconsData.selectedShoppingCart),
+                            themeIcon: const AppIcon(
+                              AppIconsData.selectedShoppingCart,
+                            ),
                           );
                         },
                       ),
@@ -83,8 +84,9 @@ class HomeScreen extends StatelessWidget {
                         builder: (context, state) {
                           return CartCountBadge(
                             count: state.count,
-                            themeIcon:
-                                const AppIcon(AppIconsData.unselectedShoppingCart),
+                            themeIcon: const AppIcon(
+                              AppIconsData.unselectedShoppingCart,
+                            ),
                           );
                         },
                       ),

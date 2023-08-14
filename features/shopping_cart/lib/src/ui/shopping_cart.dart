@@ -29,7 +29,7 @@ class ShoppingCartScreen extends StatelessWidget {
               Container(
                 margin: const EdgeInsets.only(right: AppDimens.padding10),
                 child: BlocBuilder<ShoppingCartBloc, ShoppingCartState>(
-                  builder: (context, state) {
+                  builder: (BuildContext context, ShoppingCartState state) {
                     return IconButton(
                       iconSize: AppConstants.deleteIconSize,
                       icon: const AppIcon(AppIconsData.clearCart),
@@ -111,7 +111,7 @@ class ShoppingCartScreen extends StatelessWidget {
                 SizedBox(
                   width: kTextTabBarHeight * 8,
                   child: BlocBuilder<ShoppingCartBloc, ShoppingCartState>(
-                    builder: (context, state) {
+                    builder: (BuildContext context, ShoppingCartState state) {
                       return AppButton(
                         text: AppConstants.cartCheckout,
                         handler: () {

@@ -9,5 +9,5 @@ class CheckUserUseCase implements UseCase<NoParams, bool> {
   }) : _authenticationRepository = authenticationRepository;
 
   @override
-  bool execute(NoParams input) => _authenticationRepository.checkUser();
+  bool execute(NoParams input) => _authenticationRepository.isUserAuthorized();
 }

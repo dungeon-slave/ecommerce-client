@@ -16,8 +16,8 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUpScreen> {
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   @override
   void dispose() {
@@ -38,12 +38,12 @@ class _SignUpState extends State<SignUpScreen> {
       ),
       child: Scaffold(
         body: BlocConsumer<SignUpBloc, SignUpState>(
-          listener: (context, state) {
+          listener: (BuildContext context, SignUpState state) {
             if (state.errorMessage.isNotEmpty) {
               showAppSnackBar(context: context, title: state.errorMessage);
             }
           },
-          builder: (context, state) {
+          builder: (BuildContext context, SignUpState state) {
             if (state.isLoading) {
               return const AppLoadingCircle();
             }

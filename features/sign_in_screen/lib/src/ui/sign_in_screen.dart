@@ -41,12 +41,12 @@ class _SignInState extends State<SignInScreen> {
       child: Scaffold(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         body: BlocConsumer<SignInBloc, SignInState>(
-          listener: (context, state) {
+          listener: (BuildContext context, SignInState state) {
             if (state.errorMessage.isNotEmpty) {
               showAppSnackBar(context: context, title: state.errorMessage);
             }
           },
-          builder: (context, state) {
+          builder: (BuildContext context, SignInState state) {
             if (state.isLoading) {
               return const AppLoadingCircle();
             }
