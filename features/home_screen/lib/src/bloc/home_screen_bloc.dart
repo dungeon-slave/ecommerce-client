@@ -1,6 +1,8 @@
 import 'package:core/core.dart';
 import 'package:core/services/network_service.dart';
 import 'package:domain/usecase/home_screen/fetch_cart_count_usecase.dart';
+import 'package:domain/usecase/text_scale/fetch_text_scale_usecase.dart';
+import 'package:domain/usecase/theme/fetch_theme_usecase.dart';
 import 'package:domain/usecase/usecase.dart';
 
 part 'home_screen_event.dart';
@@ -13,6 +15,8 @@ class HomeScreenBloc extends Bloc<HomeScreenEvent, HomeScreenState> {
   HomeScreenBloc({
     required FetchCartCountUseCase fetchCartCountUseCase,
     required NetworkService networkService,
+    required FetchThemeUseCase fetchThemeUseCase,
+    required FetchTextScaleUseCase fetchTextScaleUseCase,
   })  : _fetchCartCountUseCase = fetchCartCountUseCase,
         _networkService = networkService,
         super(
@@ -25,12 +29,23 @@ class HomeScreenBloc extends Bloc<HomeScreenEvent, HomeScreenState> {
     on<ChangeCartCountEvent>(_changeCartCount);
     on<ChangeConnectionEvent>(_changeConnectionStatus);
     on<ShowMessageEvent>(_changeMessageVisibility);
+    on<InitEvent>(_init);
 
     _networkService.addListener(
       () async => add(
         ChangeConnectionEvent(
           isConnected: await _networkService.checkConnection(),
         ),
+      ),
+    );
+
+    add(InitEvent());
+  }
+
+  Future<void> _init(InitEvent event, Emitter<HomeScreenState> emit) async {
+    emit(
+      state.copyWith(
+        count: _fetchCartCountUseCase.execute(const NoParams()),
       ),
     );
   }
@@ -55,10 +70,12 @@ class HomeScreenBloc extends Bloc<HomeScreenEvent, HomeScreenState> {
 
   void _changeConnectionStatus(
       ChangeConnectionEvent event, Emitter<HomeScreenState> emit) {
-    emit(state.copyWith(
-      isConnected: event.isConnected,
-      isVisibleMessage: true,
-    ));
+    emit(
+      state.copyWith(
+        isConnected: event.isConnected,
+        isVisibleMessage: true,
+      ),
+    );
     Future.delayed(
       const Duration(seconds: 3),
       () => add(ShowMessageEvent(isVisible: false)),

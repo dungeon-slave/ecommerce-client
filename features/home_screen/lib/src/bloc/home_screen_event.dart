@@ -2,6 +2,8 @@ part of 'home_screen_bloc.dart';
 
 abstract class HomeScreenEvent {}
 
+class InitEvent extends HomeScreenEvent {}
+
 class ChangeCartCountEvent extends HomeScreenEvent {}
 
 class ChangeConnectionEvent extends HomeScreenEvent {

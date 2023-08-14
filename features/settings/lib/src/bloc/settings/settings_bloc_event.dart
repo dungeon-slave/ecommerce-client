@@ -2,6 +2,8 @@ part of 'settings_bloc_bloc.dart';
 
 abstract class SettingsEvent {}
 
+class InitEvent extends SettingsEvent {}
+
 class SetThemeEvent extends SettingsEvent {
   final bool isDark;
 

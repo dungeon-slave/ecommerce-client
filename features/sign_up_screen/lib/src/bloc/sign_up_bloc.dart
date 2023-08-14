@@ -5,6 +5,7 @@ import 'package:domain/usecase/authentication/check_user_usecase.dart';
 import 'package:domain/usecase/authentication/email_sign_up_usecase.dart';
 import 'package:domain/usecase/authentication/save_user_usecase.dart';
 import 'package:domain/usecase/usecase.dart';
+import 'package:home_screen/home_screen.gm.dart';
 import 'package:navigation/navigation.dart';
 
 part 'sign_up_event.dart';
@@ -33,7 +34,9 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
   }
 
   Future<void> _emailSignUp(
-      SignUpEvent event, Emitter<SignUpState> emit) async {
+    SignUpEvent event,
+    Emitter<SignUpState> emit,
+  ) async {
     String userId = await _emailSignUpUseCase.execute(event.data);
     await _saveUserUseCase.execute(userId);
     _authService.authenticated = _checkUserUseCase.execute(const NoParams());

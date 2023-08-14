@@ -1,10 +1,6 @@
-import 'package:auto_route/auto_route.dart';
-import 'package:auto_route/empty_router_widgets.dart';
+import 'package:core/core.dart';
 import 'package:detailed_page/detailed_page.dart';
 import 'package:dishes_menu/dishes_menu.dart';
-import 'package:domain/models/dishes_items/dish_model.dart';
-import 'package:flutter/material.dart';
-
 import 'package:home_screen/home_screen.dart';
 import 'package:main_page_screen/main_page_screen.dart';
 import 'package:navigation/src/app_router/auth_guard.dart';
@@ -16,80 +12,91 @@ import 'package:sign_up_screen/sign_up_screen.dart';
 
 part 'app_router.gr.dart';
 
-@MaterialAutoRouter(
+@AutoRouterConfig(
+  modules: <Type>[
+    MainPageModule,
+    HomeScreenModule,
+    SignInModule,
+    SignUpModule,
+    DishesMenuModule,
+    DetailedPageModule,
+    OrderHistoryModule,
+    ShoppingCartModule,
+    SettingsModule,
+  ],
   replaceInRouteName: 'Screen,Route',
-  routes: <AutoRoute>[
-    AutoRoute(
-      path: '/',
-      page: MainPageScreen,
-      name: 'MainPageRoute',
-      initial: true,
-      children: <AutoRoute>[
+)
+class AppRouter extends _$AppRouter {
+  final AuthGuard _authGuard;
+
+  AppRouter({
+    required AuthGuard authGuard,
+  }) : _authGuard = authGuard;
+
+  @override
+  List<AutoRoute> get routes => [
         AutoRoute(
-          path: 'sign',
-          name: 'SignRoute',
-          page: EmptyRouterPage,
-          children: [
-            AutoRoute(
-              initial: true,
-              page: SignInScreen,
-              path: 'sign',
-            ),
-            AutoRoute(
-              page: SignUpScreen,
-              path: 'up',
-            ),
-            RedirectRoute(
-              path: 'up',
-              redirectTo: '',
-            ),
-          ],
-        ),
-        AutoRoute(
-          path: 'home',
-          name: 'HomeRoute',
-          page: HomeScreen,
-          guards: [AuthGuard],
+          path: '/',
+          page: MainPageRoute.page,
           children: <AutoRoute>[
             AutoRoute(
-              name: 'MenuRoute',
-              path: 'dishes_menu',
-              page: EmptyRouterPage,
-              children: [
+              path: 'sign',
+              page: EmptySign.page,
+              children: <AutoRoute>[
                 AutoRoute(
-                  initial: true,
                   path: '',
-                  page: DishesMenuScreen,
+                  page: SignInRoute.page,
                 ),
                 AutoRoute(
-                  path: ':dishId',
-                  page: DetailedPageScreen,
+                  path: 'up',
+                  page: SignUpRoute.page,
                 ),
                 RedirectRoute(
-                  path: ':dishId',
+                  path: 'up',
                   redirectTo: '',
                 ),
               ],
             ),
             AutoRoute(
-              path: 'order_history',
-              page: OrderHistoryScreen,
-            ),
-            AutoRoute(
-              path: 'shopping_cart',
-              page: ShoppingCartScreen,
-              maintainState: false,
-            ),
-            AutoRoute(
-              path: 'settings',
-              page: SettingsScreen,
+              path: 'home',
+              page: HomeRoute.page,
+              initial: true,
+              guards: <AutoRouteGuard>[_authGuard],
+              children: <AutoRoute>[
+                AutoRoute(
+                  path: 'dishesMenu',
+                  page: EmptyDishesMenu.page,
+                  children: <AutoRoute>[
+                    AutoRoute(
+                      path: '',
+                      page: DishesMenuRoute.page,
+                    ),
+                    AutoRoute(
+                      path: 'detailedPage',
+                      page: DetailedPageRoute.page,
+                    ),
+                    RedirectRoute(
+                      path: 'detailedPage',
+                      redirectTo: '',
+                    ),
+                  ],
+                ),
+                AutoRoute(
+                  path: 'orderHistory',
+                  page: OrderHistoryRoute.page,
+                ),
+                AutoRoute(
+                  path: 'shoppingCart',
+                  page: ShoppingCartRoute.page,
+                  maintainState: false,
+                ),
+                AutoRoute(
+                  path: 'settings',
+                  page: SettingsRoute.page,
+                ),
+              ],
             ),
           ],
         ),
-      ],
-    ),
-  ],
-)
-class AppRouter extends _$AppRouter {
-  AppRouter({required super.authGuard});
+      ];
 }

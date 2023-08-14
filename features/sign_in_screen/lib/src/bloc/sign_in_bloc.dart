@@ -6,6 +6,7 @@ import 'package:domain/usecase/authentication/email_sign_in_usecase.dart';
 import 'package:domain/usecase/authentication/google_sign_in_usecase.dart';
 import 'package:domain/usecase/authentication/save_user_usecase.dart';
 import 'package:domain/usecase/usecase.dart';
+import 'package:home_screen/home_screen.gm.dart';
 import 'package:navigation/navigation.dart';
 
 part 'sign_in_event.dart';
@@ -32,28 +33,50 @@ class SignInBloc extends Bloc<LoginScreenEvent, LoginScreenState> {
         _checkUserUseCase = checkUserUseCase,
         _authService = authService,
         _appRouter = appRouter,
-        super(const LoginScreenState()) {
+        super(const LoginScreenState(errorMessage: '')) {
     on<EmailSignInEvent>(_emailSignIn);
     on<GoogleSignInEvent>(_googleSignIn);
   }
 
   Future<void> _emailSignIn(
       EmailSignInEvent event, Emitter<LoginScreenState> emit) async {
-    String userId = await _emailSignInUseCase.execute(event.model);
-    await _saveUserUseCase.execute(userId);
-    _authService.authenticated =
-        _checkUserUseCase.execute(const NoParams());
-    _appRouter.replace(const HomeRoute());
-    //TODO implement state change
+    try {
+      String userId = await _emailSignInUseCase.execute(event.model);
+      await _saveUserUseCase.execute(userId);
+      _authService.authenticated = _checkUserUseCase.execute(const NoParams());
+      _appRouter.replace(const HomeRoute());
+      emit(
+        state.copyWith(
+          errorMessage: '',
+        ),
+      );
+    } catch (e) {
+      emit(
+        state.copyWith(
+          errorMessage: e.toString(),
+        ),
+      );
+    }
   }
 
   Future<void> _googleSignIn(
       GoogleSignInEvent event, Emitter<LoginScreenState> emit) async {
-    String userId = await _googleSignInUseCase.execute(const NoParams());
-    await _saveUserUseCase.execute(userId);
-    _authService.authenticated =
-        _checkUserUseCase.execute(const NoParams());
-    _appRouter.replace(const HomeRoute());
-    //TODO implement state change
+    try {
+      String userId = await _googleSignInUseCase.execute(const NoParams());
+      await _saveUserUseCase.execute(userId);
+      _authService.authenticated = _checkUserUseCase.execute(const NoParams());
+      _appRouter.replace(const HomeRoute());
+      emit(
+        state.copyWith(
+          errorMessage: '',
+        ),
+      );
+    } catch (e) {
+      emit(
+        state.copyWith(
+          errorMessage: e.toString(),
+        ),
+      );
+    }
   }
 }

@@ -30,4 +30,9 @@ final class AppFonts {
     fontSize: 22,
     fontWeight: FontWeight.normal,
   );
+
+    static const normal20 = TextStyle(
+    fontSize: 20,
+    fontWeight: FontWeight.normal,
+  );
 }
