@@ -10,5 +10,6 @@ class SendOrderUseCase implements AsyncUseCase<OrderModel, void> {
   }) : _cartRepository = cartRepository;
 
   @override
-  Future<void> execute(OrderModel input) => _cartRepository.sendOrder(input);
+  Future<void> execute(OrderModel input) async =>
+      await _cartRepository.sendOrder(input);
 }

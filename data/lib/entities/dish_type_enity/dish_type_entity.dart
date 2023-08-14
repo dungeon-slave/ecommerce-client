@@ -15,6 +15,6 @@ class DishTypeEntity with _$DishTypeEntity {
     @HiveField(1) required List<DishEntity> dishes,
   }) = _DishTypeEntity;
 
-    factory DishTypeEntity.fromJson(Map<String, dynamic> json) =>
+  factory DishTypeEntity.fromJson(Map<String, dynamic> json) =>
       _$DishTypeEntityFromJson(json);
 }
