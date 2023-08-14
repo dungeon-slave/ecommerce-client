@@ -37,7 +37,7 @@ class HiveProvider {
 
   double fetchTextScale() =>
       _textScaleBox.get(_HiveKeys.textScaleKey) ??
-      AppConstants.textScales.first;
+      AppConstants.minScale;
 
   Future<void> changeItemCount(CartItemEntity item) async {
     for (CartItemEntity element in _cartBox.values) {

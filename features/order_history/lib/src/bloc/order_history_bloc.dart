@@ -14,7 +14,7 @@ class OrderHistoryBloc extends Bloc<OrderHistoryEvent, OrderHistoryState> {
   })  : _fetchOrderHistoryUseCase = fetchOrderHistoryUseCase,
         super(
           const OrderHistoryState(
-            items: <OrderModel>[],
+             items: <OrderModel>[],
           ),
         ) {
     on<InitEvent>(_init);

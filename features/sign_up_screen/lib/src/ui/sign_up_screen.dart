@@ -40,13 +40,7 @@ class _SignUpState extends State<SignUpScreen> {
         body: BlocConsumer<SignUpBloc, SignUpState>(
           listener: (context, state) {
             if (state.errorMessage.isNotEmpty) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(
-                    state.errorMessage,
-                  ),
-                ),
-              );
+              showAppSnackBar(context: context, title: state.errorMessage);
             }
           },
           builder: (context, state) {

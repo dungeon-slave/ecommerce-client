@@ -39,7 +39,6 @@ class DishesMenuScreenState extends State<DishesMenuScreen>
         return MenuBloc(
           fetchDishesUsecase: appLocator<FetchDishesUsecase>(),
           saveItemsUseCase: appLocator<SaveItemUseCase>(),
-          saveDishesUseCase: appLocator<SaveDishesUseCase>(),
         );
       },
       child: BlocConsumer<MenuBloc, MenuState>(

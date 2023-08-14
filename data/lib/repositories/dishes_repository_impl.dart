@@ -21,27 +21,19 @@ class DishesRepositoryImpl implements DishesRepository {
 
   @override
   Future<List<DishTypeModel>> fetchMenu() async {
-    final bool connectivityResult = 
-        await _networkService.checkConnection();
-    final List<DishTypeEntity> result = connectivityResult
-        ? await _firebaseProvider.fetchMenu()
-        : _hiveProvider.fetchMenu();
+    final List<DishTypeEntity> result;
+    
+    if (await _networkService.checkConnection()) {
+      result = await _firebaseProvider.fetchMenu();
+      _hiveProvider.saveMenu(result);
+    } else {
+      result = _hiveProvider.fetchMenu();
+    }
 
     return result
         .map(
           (DishTypeEntity e) => DishTypeMapper.toModel(e),
         )
         .toList();
-  }
-
-  @override
-  Future<void> saveMenu(List<DishTypeModel> menu) async {
-    _hiveProvider.saveMenu(
-      menu
-          .map(
-            (DishTypeModel e) => DishTypeMapper.toEntity(e),
-          )
-          .toList(),
-    );
   }
 }

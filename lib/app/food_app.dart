@@ -13,7 +13,7 @@ class FoodApp extends StatefulWidget {
 
 class _FoodAppState extends State<FoodApp> {
   ThemeData _currentTheme = AppTheme.dark;
-  double _textScale = AppConstants.textScales.first;
+  double _textScale = AppConstants.minScale;
 
   void _changeTheme(bool isDark) =>
       setState(() => _currentTheme = isDark ? AppTheme.dark : AppTheme.light);

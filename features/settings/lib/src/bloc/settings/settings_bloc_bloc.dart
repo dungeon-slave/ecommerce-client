@@ -40,9 +40,9 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
         _setThemeUseCase = setThemeUseCase,
         _authService = authService,
         _appRouter = appRouter,
-        super(SettingsState(
+        super(const SettingsState(
           isDark: true,
-          textScale: AppConstants.textScales.first,
+          textScale: AppConstants.minScale,
         )) {
     on<SetThemeEvent>(_setTheme);
     on<SetTextScaleEvent>(_setTextScale);

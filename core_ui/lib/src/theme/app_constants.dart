@@ -62,5 +62,7 @@ final class AppConstants {
   static const String emailTitle = 'Email';
   static const String nameTitle = 'Name';
 
-  static const List<double> textScales = <double>[0.8, 1.0, 1.2];
+  static const double minScale = 0.8;
+  static const double maxScale = 1.2;
+  static const int divisions = 3;
 }

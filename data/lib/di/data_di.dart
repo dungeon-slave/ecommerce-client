@@ -136,11 +136,6 @@ class DataDI {
         dishesRepository: appLocator<DishesRepository>(),
       ),
     );
-    appLocator.registerLazySingleton<SaveDishesUseCase>(
-      () => SaveDishesUseCase(
-        dishesRepository: appLocator<DishesRepository>(),
-      ),
-    );
 
     appLocator.registerLazySingleton<SetThemeUseCase>(
       () => SetThemeUseCase(

@@ -11,3 +11,4 @@ export 'src/widgets/settings_widget.dart';
 export 'src/widgets/empty_list_title.dart';
 export 'src/widgets/app_text_button.dart';
 export 'src/widgets/app_icon.dart';
+export 'src/widgets/app_snack_bar.dart';

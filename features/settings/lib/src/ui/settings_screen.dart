@@ -101,9 +101,9 @@ class SettingsScreen extends StatelessWidget {
                               );
                               SettingsWidget.of(context).changeTextScale(value);
                             },
-                            min: AppConstants.textScales.first,
-                            max: AppConstants.textScales.last,
-                            divisions: AppConstants.textScales.length - 1,
+                            min: AppConstants.minScale,
+                            max: AppConstants.maxScale,
+                            divisions: AppConstants.divisions,
                             activeColor: Theme.of(context).indicatorColor,
                           ),
                         ],

@@ -7,7 +7,6 @@ export 'package:domain/repositories/text_scale_repository.dart';
 export 'package:domain/repositories/order_history_repository.dart';
 
 export 'package:domain/usecase/dishes/fetch_dishes_usecase.dart';
-export 'package:domain/usecase/dishes/save_dishes_usecase.dart';
 export 'package:domain/usecase/theme/fetch_theme_usecase.dart';
 export 'package:domain/usecase/theme/set_theme_usecase.dart';
 export 'package:domain/usecase/shopping_cart/fetch_items_usecase.dart';

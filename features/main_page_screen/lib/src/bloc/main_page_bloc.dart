@@ -23,10 +23,10 @@ class MainPageBloc extends Bloc<MainPageEvent, MainPageState> {
         _authService = authService,
         _fetchThemeUseCase = fetchThemeUseCase,
         _fetchTextScaleUseCase = fetchTextScaleUseCase,
-        super(MainPageState(
+        super(const MainPageState(
           isChecked: false,
           isDark: true,
-          textScale: AppConstants.textScales.first,
+          textScale: AppConstants.minScale,
         )) {
     on<InitEvent>(_init);
 
