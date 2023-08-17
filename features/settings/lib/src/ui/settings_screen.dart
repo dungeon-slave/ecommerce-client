@@ -14,7 +14,7 @@ class SettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => SettingsBloc(
+      create: (BuildContext context) => SettingsBloc(
         appRouter: appLocator<AppRouter>(),
         authService: appLocator<AuthService>(),
         urlService: appLocator<UrlService>(),
@@ -30,6 +30,7 @@ class SettingsScreen extends StatelessWidget {
         child: Scaffold(
           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           appBar: AppBar(
+            shadowColor: Theme.of(context).indicatorColor,
             backgroundColor: Theme.of(context).scaffoldBackgroundColor,
             centerTitle: true,
             automaticallyImplyLeading: false,
@@ -44,7 +45,7 @@ class SettingsScreen extends StatelessWidget {
             ),
           ),
           body: BlocBuilder<SettingsBloc, SettingsState>(
-            builder: (context, state) {
+            builder: (BuildContext context, SettingsState state) {
               return Container(
                 padding: const EdgeInsets.all(
                   AppDimens.padding20,
@@ -111,8 +112,9 @@ class SettingsScreen extends StatelessWidget {
                     ),
                     AppButton(
                       text: AppConstants.signOutTitle,
-                      handler: () => BlocProvider.of<SettingsBloc>(context)
-                          .add(SignOutEvent()),
+                      handler: () => BlocProvider.of<SettingsBloc>(context).add(
+                        SignOutEvent(),
+                      ),
                     ),
                     Container(
                       margin: const EdgeInsets.only(

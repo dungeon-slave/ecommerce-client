@@ -49,7 +49,9 @@ class DishesMenuScreenState extends State<DishesMenuScreen>
               initialIndex: 0,
               length: state.items.length,
               vsync: this,
-              animationDuration: Duration.zero,
+              animationDuration: const Duration(
+                milliseconds: AppConstants.nestedDurarion,
+              ),
             );
             _tabController.addListener(
               () => BlocProvider.of<MenuBloc>(context).add(
@@ -63,10 +65,7 @@ class DishesMenuScreenState extends State<DishesMenuScreen>
             return AppError(errorText: state.errorMessage);
           }
           if (state.isLoading) {
-            return Container(
-              color: Theme.of(context).scaffoldBackgroundColor,
-              child: const AppLoadingCircle(),
-            );
+            return const AppLoadingCircle();
           }
           return GestureDetector(
             onHorizontalDragEnd: _handleSwipe,
@@ -78,6 +77,7 @@ class DishesMenuScreenState extends State<DishesMenuScreen>
                   toolbarHeight: 0,
                   bottom: TabBar(
                     controller: _tabController,
+                    dividerColor: Theme.of(context).indicatorColor,
                     indicatorColor: Theme.of(context).indicatorColor,
                     unselectedLabelColor: Theme.of(context).primaryColor,
                     labelColor: Theme.of(context).indicatorColor,
@@ -97,12 +97,10 @@ class DishesMenuScreenState extends State<DishesMenuScreen>
                   color: Theme.of(context).scaffoldBackgroundColor,
                   child: ListView.builder(
                     padding: const EdgeInsets.all(AppDimens.padding10),
-                    itemCount:
-                        state.items[state.currentTab].dishes.length,
-                    itemBuilder: (BuildContext context, int index) {
+                    itemCount: state.items[state.currentTab].dishes.length,
+                    itemBuilder: (_, int index) {
                       return DishItem(
-                        model:
-                            state.items[state.currentTab].dishes[index],
+                        model: state.items[state.currentTab].dishes[index],
                       );
                     },
                   ),

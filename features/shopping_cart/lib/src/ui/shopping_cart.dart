@@ -25,6 +25,8 @@ class ShoppingCartScreen extends StatelessWidget {
         minimum: const EdgeInsets.only(top: kToolbarHeight / 2),
         child: Scaffold(
           appBar: AppBar(
+            shadowColor: Theme.of(context).indicatorColor,
+            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
             actions: <Container>[
               Container(
                 margin: const EdgeInsets.only(right: AppDimens.padding10),
@@ -44,7 +46,6 @@ class ShoppingCartScreen extends StatelessWidget {
             ],
             iconTheme: Theme.of(context).iconTheme,
             centerTitle: true,
-            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
             title: Text(
               AppConstants.shoppingCartTitle,
               style: AppFonts.normal30.copyWith(
@@ -53,7 +54,7 @@ class ShoppingCartScreen extends StatelessWidget {
             ),
           ),
           body: BlocBuilder<ShoppingCartBloc, ShoppingCartState>(
-            builder: (context, state) {
+            builder: (BuildContext context, ShoppingCartState state) {
               if (state.isLoading) {
                 return const AppLoadingCircle();
               }
@@ -61,7 +62,14 @@ class ShoppingCartScreen extends StatelessWidget {
                 return AppError(errorText: state.errorMessage);
               }
               if (state.items.isEmpty) {
-                return const EmptyListTitle();
+                return EmptyList(
+                  margin: const EdgeInsets.only(
+                    bottom: kToolbarHeight * 2,
+                  ),
+                  link: state.isOrdered
+                      ? AppAnimations.ordered
+                      : AppAnimations.emptyList,
+                );
               }
               return Container(
                 margin: const EdgeInsets.only(bottom: AppDimens.padding100),
@@ -99,7 +107,7 @@ class ShoppingCartScreen extends StatelessWidget {
                       style: AppFonts.normal22,
                     ),
                     BlocBuilder<ShoppingCartBloc, ShoppingCartState>(
-                      builder: (context, state) {
+                      builder: (BuildContext context, ShoppingCartState state) {
                         return Text(
                           '${state.totalPrice().toStringAsFixed(AppConstants.priceSize)}\$',
                           style: AppFonts.normal22,

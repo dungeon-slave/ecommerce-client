@@ -8,8 +8,6 @@ final class AppConstants {
   static const String showDetails = 'Show details';
   static const String hideDetails = 'Hide details';
 
-  static const emptyList = 'It\'s empty here...';
-
   static const emptyOrder = 'Nothing to order';
 
   static const String telegramContactTitle = 'Telegram';
@@ -25,6 +23,8 @@ final class AppConstants {
   static const double orderDividerThickness = 1;
   static const int swipesSensivity = 3;
   static const double deleteIconSize = 30;
+  static const int mainDuration = 700;
+  static const int nestedDurarion = 350;
 
   static const String darkTheme = 'Dark theme';
   static const String textScale = 'Text scale';

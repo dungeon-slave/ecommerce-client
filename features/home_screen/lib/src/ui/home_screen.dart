@@ -43,7 +43,20 @@ class HomeScreen extends StatelessWidget {
               ShoppingCartRoute(),
               SettingsRoute(),
             ],
-            animationDuration: Duration.zero,
+            animationCurve: Curves.linear,
+            animationDuration: const Duration(
+              milliseconds: AppConstants.mainDuration,
+            ),
+            transitionBuilder: (
+              BuildContext context,
+              Widget child,
+              Animation<double> animation,
+            ) {
+              return FadeTransition(
+                opacity: animation,
+                child: child,
+              );
+            },
             bottomNavigationBuilder: (BuildContext context, TabsRouter router) {
               return Container(
                 decoration: BoxDecoration(
@@ -52,10 +65,11 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
                 child: BottomNavigationBar(
+                  backgroundColor: Theme.of(context).scaffoldBackgroundColor,
                   currentIndex: router.activeIndex,
                   onTap: router.setActiveIndex,
+                  showUnselectedLabels: true,
                   type: BottomNavigationBarType.fixed,
-                  backgroundColor: Theme.of(context).scaffoldBackgroundColor,
                   selectedItemColor: Theme.of(context).indicatorColor,
                   unselectedItemColor: Theme.of(context).indicatorColor,
                   items: <BottomNavigationBarItem>[

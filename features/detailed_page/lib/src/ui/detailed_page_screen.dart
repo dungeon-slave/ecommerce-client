@@ -22,6 +22,7 @@ class DetailedPageScreen extends StatelessWidget {
       child: Scaffold(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         appBar: AppBar(
+          shadowColor: Theme.of(context).indicatorColor,
           leading: const SizedBox.shrink(),
           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           centerTitle: true,

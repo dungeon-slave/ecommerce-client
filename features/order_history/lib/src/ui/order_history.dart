@@ -14,15 +14,16 @@ class OrderHistoryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => OrderHistoryBloc(
+      create: (BuildContext context) => OrderHistoryBloc(
         fetchOrderHistoryUseCase: appLocator<FetchOrderHistoryUseCase>(),
       ),
       child: SafeArea(
         minimum: const EdgeInsets.only(top: kToolbarHeight / 2),
         child: Scaffold(
           appBar: AppBar(
-            centerTitle: true,
+            shadowColor: Theme.of(context).indicatorColor,
             backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+            centerTitle: true,
             title: Text(
               AppConstants.orderHistoryTitle,
               style: AppFonts.normal30.copyWith(
@@ -31,7 +32,7 @@ class OrderHistoryScreen extends StatelessWidget {
             ),
           ),
           body: BlocBuilder<OrderHistoryBloc, OrderHistoryState>(
-            builder: (context, state) {
+            builder: (BuildContext context, OrderHistoryState state) {
               if (state.isLoading) {
                 return const AppLoadingCircle();
               }
@@ -39,7 +40,7 @@ class OrderHistoryScreen extends StatelessWidget {
                 return AppError(errorText: state.errorMessage);
               }
               if (state.items.isEmpty) {
-                return const EmptyListTitle();
+                return const EmptyList(link: AppAnimations.emptyList);
               }
               return ListView.builder(
                 padding: const EdgeInsets.all(AppDimens.padding10),
