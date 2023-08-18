@@ -9,7 +9,7 @@ import 'package:core/core.dart'
         TabsRouter;
 import 'package:core/di/app_di.dart';
 import 'package:core/services/network_service.dart';
-import 'package:core_ui/core_ui.dart' show AppConstants, AppIcon, AppIconsData;
+import 'package:core_ui/core_ui.dart' show AppStrConstants, AppIcon, AppIconsData;
 import 'package:dishes_menu/dishes_menu.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
@@ -76,16 +76,16 @@ class HomeScreen extends StatelessWidget {
                     const BottomNavigationBarItem(
                       activeIcon: AppIcon(AppIconsData.selectedMenu),
                       icon: AppIcon(AppIconsData.unselectedMenu),
-                      label: AppConstants.menuTitle,
+                      label: AppStrConstants.menuTitle,
                     ),
                     const BottomNavigationBarItem(
                       activeIcon: AppIcon(AppIconsData.selectedOrderHistory),
                       icon: AppIcon(AppIconsData.unselectedOrderHistory),
-                      label: AppConstants.orderHistoryTitle,
+                      label: AppStrConstants.orderHistoryTitle,
                     ),
                     BottomNavigationBarItem(
                       activeIcon: BlocBuilder<HomeScreenBloc, HomeScreenState>(
-                        builder: (context, state) {
+                        builder: (BuildContext context, HomeScreenState state) {
                           return CartCountBadge(
                             count: state.count,
                             themeIcon: const AppIcon(
@@ -95,7 +95,7 @@ class HomeScreen extends StatelessWidget {
                         },
                       ),
                       icon: BlocBuilder<HomeScreenBloc, HomeScreenState>(
-                        builder: (context, state) {
+                        builder: (BuildContext context, HomeScreenState state) {
                           return CartCountBadge(
                             count: state.count,
                             themeIcon: const AppIcon(
@@ -104,12 +104,12 @@ class HomeScreen extends StatelessWidget {
                           );
                         },
                       ),
-                      label: AppConstants.shoppingCartTitle,
+                      label: AppStrConstants.shoppingCartTitle,
                     ),
                     const BottomNavigationBarItem(
                       activeIcon: AppIcon(AppIconsData.selectedSettings),
                       icon: AppIcon(AppIconsData.unselectedSettings),
-                      label: AppConstants.settingsTitle,
+                      label: AppStrConstants.settingsTitle,
                     ),
                   ],
                 ),

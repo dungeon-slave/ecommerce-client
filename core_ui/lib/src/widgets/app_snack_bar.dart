@@ -1,5 +1,5 @@
-import 'package:core_ui/src/theme/app_constants.dart';
 import 'package:core_ui/src/theme/app_dimens.dart';
+import 'package:core_ui/src/theme/app_num_constants.dart';
 import 'package:core_ui/src/theme/fonts.dart';
 import 'package:flutter/material.dart';
 
@@ -14,7 +14,7 @@ void showAppSnackBar({
       SnackBar(
         behavior: SnackBarBehavior.floating,
         duration: const Duration(
-          seconds: AppConstants.cartSnackBarDuration,
+          seconds: AppNumConstants.cartSnackBarDuration,
         ),
         shape: RoundedRectangleBorder(
           side: BorderSide(

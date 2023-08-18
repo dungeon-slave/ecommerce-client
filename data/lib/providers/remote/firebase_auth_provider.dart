@@ -21,7 +21,7 @@ class FirebaseAuthProvider {
     ))
         .user;
     if (user == null) {
-      throw (Exception(AppConstants.authException));
+      throw (Exception(AppStrConstants.authException));
     }
     return user.uid;
   }
@@ -35,7 +35,7 @@ class FirebaseAuthProvider {
     ))
         .user;
     if (user == null) {
-      throw (Exception(AppConstants.authException));
+      throw (Exception(AppStrConstants.authException));
     }
     return user.uid;
   }
@@ -53,7 +53,7 @@ class FirebaseAuthProvider {
       user = (await _firebaseAuth.signInWithCredential(credential)).user;
     }
     if (user == null) {
-      throw (Exception(AppConstants.authException));
+      throw (Exception(AppStrConstants.authException));
     }
     return user.uid;
   }

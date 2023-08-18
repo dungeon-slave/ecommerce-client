@@ -42,7 +42,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
         _appRouter = appRouter,
         super(const SettingsState(
           isDark: true,
-          textScale: AppConstants.minScale,
+          textScale: AppNumConstants.minScale,
         )) {
     on<SetThemeEvent>(_setTheme);
     on<SetTextScaleEvent>(_setTextScale);
@@ -72,7 +72,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     OpenLinkEvent event,
     Emitter<SettingsState> emit,
   ) async {
-    _urlService.openDefault(Uri.parse(event.link));
+    await _urlService.openDefault(Uri.parse(event.link));
   }
 
   Future<void> _setTheme(

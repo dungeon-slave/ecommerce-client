@@ -1,4 +1,4 @@
-import 'package:core/core.dart' show Bloc, Emitter;
+import 'package:core/core.dart' show Bloc, Emitter, Uuid;
 import 'package:domain/domain.dart';
 import 'package:domain/models/cart_items/cart_item_model.dart';
 import 'package:domain/models/order_history/order_model.dart';
@@ -60,38 +60,23 @@ class ShoppingCartBloc extends Bloc<ShoppingCartEvent, ShoppingCartState> {
     DecrementEvent event,
     Emitter<ShoppingCartState> emit,
   ) async {
-    int index = state.items.indexWhere((CartItemModel element) =>
-        element.dishModel.id == event.model.dishModel.id);
-    CartItemModel currElement =
-        state.items[index].copyWith(count: state.items[index].count - 1);
-    await _changeItemCountUseCase.execute(currElement);
-    if (currElement.count != 0) {
-      state.items[index] = currElement;
-    } else {
-      state.items.removeAt(index);
+    event.model.decrementCount();
+    if (event.model.count == 0) {
+      state.items.removeWhere(
+        (CartItemModel element) => element == event.model,
+      );
     }
-    emit(
-      state.copyWith(
-        items: state.items,
-      ),
-    );
+    await _changeItemCountUseCase.execute(event.model);
+    emit(state.copyWith());
   }
 
   Future<void> _incrementItem(
     IncrementEvent event,
     Emitter<ShoppingCartState> emit,
   ) async {
-    int index = state.items.indexWhere((CartItemModel element) =>
-        element.dishModel.id == event.model.dishModel.id);
-    CartItemModel currElement =
-        state.items[index].copyWith(count: state.items[index].count + 1);
-    await _changeItemCountUseCase.execute(currElement);
-    state.items[index] = currElement;
-    emit(
-      state.copyWith(
-        items: state.items,
-      ),
-    );
+    event.model.incrementCount();
+    await _changeItemCountUseCase.execute(event.model);
+    emit(state.copyWith());
   }
 
   Future<void> _clearCart(
@@ -101,7 +86,6 @@ class ShoppingCartBloc extends Bloc<ShoppingCartEvent, ShoppingCartState> {
     await _clearCartUseCase.execute(const NoParams());
     emit(
       state.copyWith(
-        isLoading: false,
         items: _fetchItemsUseCase.execute(const NoParams()),
       ),
     );
@@ -114,7 +98,7 @@ class ShoppingCartBloc extends Bloc<ShoppingCartEvent, ShoppingCartState> {
     try {
       await _sendOrderUseCase.execute(
         OrderModel(
-          id: DateTime.now().microsecondsSinceEpoch.toString(),
+          id: const Uuid().v4(),
           dateTime: DateTime.now(),
           price: state.totalPrice(),
           products: state.items,

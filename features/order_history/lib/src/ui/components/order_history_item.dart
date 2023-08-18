@@ -57,34 +57,33 @@ class _OrderHistoryItemState extends State<OrderHistoryItem>
                   MainInfo(model: widget._model),
                   AppTextButton(
                     text: _isVisible
-                        ? AppConstants.hideDetails
-                        : AppConstants.showDetails,
+                        ? AppStrConstants.hideDetails
+                        : AppStrConstants.showDetails,
                     handler: _changeVisibility,
                     textStyle: AppFonts.normal24.copyWith(
                       color: Theme.of(context).indicatorColor,
                     ),
                   ),
-                  _isVisible
-                      ? ListView.builder(
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          itemCount: widget._model.products.length,
-                          itemBuilder: (context, index) {
-                            return Container(
-                              margin: const EdgeInsets.only(
-                                top: AppDimens.margin5,
-                                bottom: AppDimens.margin5,
-                                left: AppDimens.margin5,
-                              ),
-                              alignment: Alignment.centerLeft,
-                              child: Text(
-                                '${index + 1}. ${widget._model.products[index].dishModel.name} x ${widget._model.products[index].count}',
-                                style: AppFonts.normal22,
-                              ),
-                            );
-                          },
-                        )
-                      : const SizedBox.shrink(),
+                  if (_isVisible)
+                    ListView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: widget._model.products.length,
+                      itemBuilder: (context, index) {
+                        return Container(
+                          margin: const EdgeInsets.only(
+                            top: AppDimens.margin5,
+                            bottom: AppDimens.margin5,
+                            left: AppDimens.margin5,
+                          ),
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            '${index + 1}. ${widget._model.products[index].dishModel.name} x ${widget._model.products[index].count}',
+                            style: AppFonts.normal22,
+                          ),
+                        );
+                      },
+                    ),
                 ],
               );
             },

@@ -1,7 +1,7 @@
 import 'dart:io' show File;
 import 'package:core/core.dart' show DownloadProgress, CachedNetworkImage;
 import 'package:core_ui/core_ui.dart'
-    show AppLoadingCircle, AppError, AppConstants;
+    show AppLoadingCircle, AppError, AppStrConstants;
 import 'package:flutter/material.dart';
 
 class AppImage extends StatelessWidget {
@@ -63,7 +63,7 @@ class AppImage extends StatelessWidget {
           return SizedBox(
             width: _width,
             height: _height,
-            child: const AppError(errorText: AppConstants.undefinedImageType),
+            child: const AppError(errorText: AppStrConstants.undefinedImageType),
           );
         }
     }

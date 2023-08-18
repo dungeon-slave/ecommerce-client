@@ -1,13 +1,13 @@
-import 'package:domain/repositories/authentication_repository.dart';
+import 'package:domain/repositories/user_repository.dart';
 import 'package:domain/usecase/usecase.dart';
 
 class CheckUserUseCase implements UseCase<NoParams, bool> {
-  final AuthenticationRepository _authenticationRepository;
+  final UserRepository _userRepository;
 
   const CheckUserUseCase({
-    required AuthenticationRepository authenticationRepository,
-  }) : _authenticationRepository = authenticationRepository;
+    required UserRepository userRepository,
+  }) : _userRepository = userRepository;
 
   @override
-  bool execute(NoParams input) => _authenticationRepository.isUserAuthorized();
+  bool execute(NoParams input) => _userRepository.isUserAuthorized();
 }

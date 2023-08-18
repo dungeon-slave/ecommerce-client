@@ -9,3 +9,5 @@ class EmailSignInEvent extends LoginScreenEvent {
 }
 
 class GoogleSignInEvent extends LoginScreenEvent {}
+
+class SignUpNavigateEvent extends LoginScreenEvent {}

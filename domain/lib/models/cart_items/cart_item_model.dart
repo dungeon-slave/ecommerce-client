@@ -1,16 +1,23 @@
 import 'package:core/core.dart' show Equatable;
 import 'package:domain/models/dishes_items/dish_model.dart';
 
+
 class CartItemModel extends Equatable {
   final DishModel dishModel;
-  final int count;
+  int _count;
 
-  double get averagePrice => count * dishModel.price;
+  int get count => _count;
 
-  const CartItemModel({
+  void incrementCount() => _count++;
+
+  void decrementCount() => _count--;
+
+  double get averagePrice => _count * dishModel.price;
+
+  CartItemModel({
     required this.dishModel,
-    required this.count,
-  });
+    required int count,
+  }) : _count = count;
 
   CartItemModel copyWith({
     DishModel? model,
@@ -18,10 +25,10 @@ class CartItemModel extends Equatable {
   }) {
     return CartItemModel(
       dishModel: model ?? dishModel,
-      count: count ?? this.count,
+      count: count ?? _count,
     );
   }
 
   @override
-  List<Object?> get props => [count];
+  List<Object?> get props => [_count];
 }

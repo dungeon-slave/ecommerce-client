@@ -30,80 +30,85 @@ class _SignUpState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => SignUpBloc(
+      create: (BuildContext context) => SignUpBloc(
         emailSignUpUseCase: appLocator<EmailSignUpUseCase>(),
         saveUserUseCase: appLocator<SaveUserUseCase>(),
         checkUserUseCase: appLocator<CheckUserUseCase>(),
         appRouter: appLocator<AppRouter>(),
         authService: appLocator<AuthService>(),
       ),
-      child: Scaffold(
-        body: BlocConsumer<SignUpBloc, SignUpState>(
-          listener: (BuildContext context, SignUpState state) {
-            if (state.errorMessage.isNotEmpty) {
-              showAppSnackBar(context: context, title: state.errorMessage);
-            }
-          },
-          builder: (BuildContext context, SignUpState state) {
-            if (state.isLoading) {
-              return const AppLoadingCircle();
-            }
-            return Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Container(
-                  margin: const EdgeInsets.only(bottom: kToolbarHeight / 1.2),
-                  child: Text(
-                    AppConstants.signUpPageTitle,
-                    style: AppFonts.normal30.copyWith(
-                      color: Theme.of(context).primaryColor,
-                    ),
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(
-                    left: kToolbarHeight / 2,
-                    right: kToolbarHeight / 2,
-                    bottom: kToolbarHeight / 5,
-                  ),
-                  child: AppTextField(
-                    label: AppConstants.emailTitle,
-                    textController: _emailController,
-                    isObscure: false,
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(
-                    left: kToolbarHeight / 2,
-                    right: kToolbarHeight / 2,
-                    bottom: kToolbarHeight,
-                  ),
-                  child: AppTextField(
-                    label: AppConstants.passwordTitle,
-                    textController: _passwordController,
-                    isObscure: true,
-                  ),
-                ),
-                SizedBox(
-                  width: kToolbarHeight * 6,
-                  height: kToolbarHeight / 1.3,
-                  child: AppButton(
-                    text: AppConstants.createAccount,
-                    handler: () => BlocProvider.of<SignUpBloc>(context).add(
-                      SignUpEvent(
-                        data: EmailSignUpModel(
-                          name: '',
-                          email: _emailController.text,
-                          password: _passwordController.text,
+      child: LayoutBuilder(
+        builder: (BuildContext context, BoxConstraints constraints) {
+          return Scaffold(
+            body: BlocConsumer<SignUpBloc, SignUpState>(
+              listener: (BuildContext context, SignUpState state) {
+                if (state.errorMessage.isNotEmpty) {
+                  showAppSnackBar(context: context, title: state.errorMessage);
+                }
+              },
+              builder: (BuildContext context, SignUpState state) {
+                if (state.isLoading) {
+                  return const AppLoadingCircle();
+                }
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Container(
+                      margin:
+                          EdgeInsets.only(bottom: constraints.minHeight / 18),
+                      child: Text(
+                        AppStrConstants.signUpPageTitle,
+                        style: AppFonts.normal30.copyWith(
+                          color: Theme.of(context).primaryColor,
                         ),
                       ),
                     ),
-                  ),
-                ),
-              ],
-            );
-          },
-        ),
+                    Container(
+                      margin: EdgeInsets.only(
+                        left: constraints.minWidth / 14,
+                        right: constraints.minWidth / 14,
+                        bottom: constraints.minHeight / 60,
+                      ),
+                      child: AppTextField(
+                        label: AppStrConstants.emailTitle,
+                        textController: _emailController,
+                        isObscure: false,
+                      ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(
+                        left: constraints.minWidth / 14,
+                        right: constraints.minWidth / 14,
+                        bottom: constraints.minHeight / 15,
+                      ),
+                      child: AppTextField(
+                        label: AppStrConstants.passwordTitle,
+                        textController: _passwordController,
+                        isObscure: true,
+                      ),
+                    ),
+                    SizedBox(
+                      width: constraints.minWidth / 1.15,
+                      height: constraints.minHeight / 20,
+                      child: AppButton(
+                        text: AppStrConstants.createAccount,
+                        handler: () => BlocProvider.of<SignUpBloc>(context).add(
+                          SignUpEvent(
+                            data: EmailSignUpModel(
+                              name: '',
+                              email: _emailController.text,
+                              password: _passwordController.text,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                );
+              },
+            ),
+          );
+        },
       ),
     );
   }

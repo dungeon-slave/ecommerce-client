@@ -17,48 +17,51 @@ class OrderHistoryScreen extends StatelessWidget {
       create: (BuildContext context) => OrderHistoryBloc(
         fetchOrderHistoryUseCase: appLocator<FetchOrderHistoryUseCase>(),
       ),
-      child: SafeArea(
-        minimum: const EdgeInsets.only(top: kToolbarHeight / 2),
-        child: Scaffold(
-          appBar: AppBar(
-            shadowColor: Theme.of(context).indicatorColor,
-            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-            centerTitle: true,
-            title: Text(
-              AppConstants.orderHistoryTitle,
-              style: AppFonts.normal30.copyWith(
-                color: Theme.of(context).primaryColor,
+      child: LayoutBuilder(
+        builder: (BuildContext context, BoxConstraints constraints) {
+          return SafeArea(
+            minimum: EdgeInsets.only(top: constraints.minHeight / 28),
+            child: Scaffold(
+              appBar: AppBar(
+                centerTitle: true,
+                backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                title: Text(
+                  AppStrConstants.orderHistoryTitle,
+                  style: AppFonts.normal30.copyWith(
+                    color: Theme.of(context).primaryColor,
+                  ),
+                ),
               ),
-            ),
-          ),
-          body: BlocBuilder<OrderHistoryBloc, OrderHistoryState>(
-            builder: (BuildContext context, OrderHistoryState state) {
-              if (state.isLoading) {
-                return const AppLoadingCircle();
-              }
-              if (state.errorMessage.isNotEmpty) {
-                return AppError(errorText: state.errorMessage);
-              }
-              if (state.items.isEmpty) {
-                return const EmptyList(link: AppAnimations.emptyList);
-              }
-              return ListView.builder(
-                padding: const EdgeInsets.all(AppDimens.padding10),
-                itemCount: state.items.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return OrderHistoryItem(
-                    model: OrderModel(
-                      id: state.items[index].id,
-                      dateTime: state.items[index].dateTime,
-                      price: state.items[index].price,
-                      products: state.items[index].products,
-                    ),
+              body: BlocBuilder<OrderHistoryBloc, OrderHistoryState>(
+                builder: (BuildContext context, OrderHistoryState state) {
+                  if (state.isLoading) {
+                    return const AppLoadingCircle();
+                  }
+                  if (state.errorMessage.isNotEmpty) {
+                    return AppError(errorText: state.errorMessage);
+                  }
+                  if (state.items.isEmpty) {
+                    return const EmptyListTitle();
+                  }
+                  return ListView.builder(
+                    padding: const EdgeInsets.all(AppDimens.padding10),
+                    itemCount: state.items.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return OrderHistoryItem(
+                        model: OrderModel(
+                          id: state.items[index].id,
+                          dateTime: state.items[index].dateTime,
+                          price: state.items[index].price,
+                          products: state.items[index].products,
+                        ),
+                      );
+                    },
                   );
                 },
-              );
-            },
-          ),
-        ),
+              ),
+            ),
+          );
+        },
       ),
     );
   }
