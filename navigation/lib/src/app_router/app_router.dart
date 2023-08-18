@@ -47,13 +47,13 @@ class AppRouter extends _$AppRouter {
                 CustomRoute(
                   path: '',
                   page: SignInRoute.page,
-                  durationInMilliseconds: AppConstants.nestedDurarion,
+                  durationInMilliseconds: AppNumConstants.nestedDuration,
                   transitionsBuilder: TransitionsBuilders.fadeIn,
                 ),
                 CustomRoute(
                   path: 'up',
                   page: SignUpRoute.page,
-                  durationInMilliseconds: AppConstants.nestedDurarion,
+                  durationInMilliseconds: AppNumConstants.nestedDuration,
                   transitionsBuilder: TransitionsBuilders.fadeIn,
                 ),
               ],

@@ -50,7 +50,7 @@ class DishesMenuScreenState extends State<DishesMenuScreen>
               length: state.items.length,
               vsync: this,
               animationDuration: const Duration(
-                milliseconds: AppConstants.nestedDurarion,
+                milliseconds: AppNumConstants.nestedDuration,
               ),
             );
             _tabController.addListener(

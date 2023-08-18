@@ -1,10 +1,10 @@
 import 'package:core/core.dart'
     show BlocProvider, ContainerTransitionType, OpenContainer;
+import 'package:core_ui/core_ui.dart';
 import 'package:detailed_page/detailed_page.dart';
 import 'package:dishes_menu/src/bloc/dishes_menu_screen/dishes_menu_bloc.dart';
 import 'package:domain/models/dishes_items/dish_model.dart';
 import 'package:flutter/material.dart';
-import 'package:core_ui/core_ui.dart';
 
 class DishItem extends StatefulWidget {
   final DishModel _model;
@@ -35,7 +35,7 @@ class _DishItemState extends State<DishItem> {
       closedColor: Theme.of(context).scaffoldBackgroundColor,
       middleColor: Theme.of(context).scaffoldBackgroundColor,
       transitionDuration: const Duration(
-        milliseconds: AppConstants.nestedDurarion,
+        milliseconds: AppNumConstants.nestedDuration,
       ),
       closedBuilder: (_, __) {
         return Container(
@@ -79,7 +79,7 @@ class _DishItemState extends State<DishItem> {
                     ),
                   ),
                   AppButton(
-                    text: AppConstants.addToCart,
+                    text: AppStrConstants.addToCart,
                     handler: widget._addToCartHandler(context),
                   ),
                 ],

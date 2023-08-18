@@ -9,7 +9,8 @@ import 'package:core/core.dart'
         TabsRouter;
 import 'package:core/di/app_di.dart';
 import 'package:core/services/network_service.dart';
-import 'package:core_ui/core_ui.dart' show AppStrConstants, AppIcon, AppIconsData;
+import 'package:core_ui/core_ui.dart'
+    show AppIcon, AppIconsData, AppNumConstants, AppStrConstants;
 import 'package:dishes_menu/dishes_menu.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
@@ -45,7 +46,7 @@ class HomeScreen extends StatelessWidget {
             ],
             animationCurve: Curves.linear,
             animationDuration: const Duration(
-              milliseconds: AppConstants.mainDuration,
+              milliseconds: AppNumConstants.mainDuration,
             ),
             transitionBuilder: (
               BuildContext context,

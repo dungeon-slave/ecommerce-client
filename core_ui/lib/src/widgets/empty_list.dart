@@ -1,4 +1,4 @@
-import 'package:core/core.dart';
+import 'package:core/core.dart' show Lottie;
 import 'package:flutter/material.dart';
 
 class EmptyList extends StatelessWidget {
