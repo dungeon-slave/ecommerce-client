@@ -20,7 +20,7 @@ abstract class OrderMapper {
 
   static OrderModel toModel(OrderEntity entity) {
     return OrderModel(
-      id: entity.id,
+      id: entity.id.hashCode.toString(),
       dateTime: entity.dateTime,
       price: entity.price,
       products: entity.products

@@ -2,7 +2,6 @@ import 'package:core/core.dart' show BlocBuilder, BlocProvider, RoutePage;
 import 'package:core/di/app_di.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:domain/domain.dart';
-import 'package:domain/models/cart_items/cart_item_model.dart';
 import 'package:domain/usecase/shopping_cart/send_order_usecase.dart';
 import 'package:flutter/material.dart';
 import 'package:shopping_cart/src/bloc/shopping_cart/shopping_cart_bloc.dart';
@@ -21,125 +20,130 @@ class ShoppingCartScreen extends StatelessWidget {
         clearCartUseCase: appLocator<ClearCartUseCase>(),
         sendOrderUseCase: appLocator<SendOrderUseCase>(),
       ),
-      child: SafeArea(
-        minimum: const EdgeInsets.only(top: kToolbarHeight / 2),
-        child: Scaffold(
-          appBar: AppBar(
-            actions: <Container>[
-              Container(
-                margin: const EdgeInsets.only(right: AppDimens.padding10),
-                child: BlocBuilder<ShoppingCartBloc, ShoppingCartState>(
-                  builder: (BuildContext context, ShoppingCartState state) {
-                    return IconButton(
-                      iconSize: AppConstants.deleteIconSize,
-                      icon: const AppIcon(AppIconsData.clearCart),
-                      onPressed: () =>
-                          BlocProvider.of<ShoppingCartBloc>(context).add(
-                        ClearCartEvent(),
-                      ),
-                    );
-                  },
-                ),
-              ),
-            ],
-            iconTheme: Theme.of(context).iconTheme,
-            centerTitle: true,
-            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-            title: Text(
-              AppConstants.shoppingCartTitle,
-              style: AppFonts.normal30.copyWith(
-                color: Theme.of(context).primaryColor,
-              ),
-            ),
-          ),
-          body: BlocBuilder<ShoppingCartBloc, ShoppingCartState>(
-            builder: (context, state) {
-              if (state.isLoading) {
-                return const AppLoadingCircle();
-              }
-              if (state.errorMessage.isNotEmpty) {
-                return AppError(errorText: state.errorMessage);
-              }
-              if (state.items.isEmpty) {
-                return const EmptyListTitle();
-              }
-              return Container(
-                margin: const EdgeInsets.only(bottom: AppDimens.padding100),
-                child: ListView.builder(
-                  padding: const EdgeInsets.all(AppDimens.padding10),
-                  itemCount: state.items.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return CartItem(
-                      model: CartItemModel(
-                        dishModel: state.items[index].dishModel,
-                        count: state.items[index].count,
-                      ),
-                    );
-                  },
-                ),
-              );
-            },
-          ),
-          bottomSheet: Container(
-            padding: const EdgeInsets.all(AppDimens.padding10),
-            decoration: BoxDecoration(
-              color: Theme.of(context).scaffoldBackgroundColor,
-              border: Border(
-                top: BorderSide(color: Theme.of(context).indicatorColor),
-              ),
-            ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    const Text(
-                      AppConstants.total,
-                      style: AppFonts.normal22,
-                    ),
-                    BlocBuilder<ShoppingCartBloc, ShoppingCartState>(
-                      builder: (context, state) {
-                        return Text(
-                          '${state.totalPrice().toStringAsFixed(AppConstants.priceSize)}\$',
-                          style: AppFonts.normal22,
+      child: LayoutBuilder(
+        builder: (BuildContext context, BoxConstraints constraints) {
+          return SafeArea(
+            minimum: EdgeInsets.only(top: constraints.minHeight / 28),
+            child: Scaffold(
+              appBar: AppBar(
+                actions: <Container>[
+                  Container(
+                    margin: const EdgeInsets.only(right: AppDimens.padding10),
+                    child: BlocBuilder<ShoppingCartBloc, ShoppingCartState>(
+                      builder: (BuildContext context, ShoppingCartState state) {
+                        return IconButton(
+                          iconSize: AppNumConstants.deleteIconSize,
+                          icon: const AppIcon(AppIconsData.clearCart),
+                          onPressed: () =>
+                              BlocProvider.of<ShoppingCartBloc>(context).add(
+                            ClearCartEvent(),
+                          ),
                         );
                       },
                     ),
-                  ],
-                ),
-                SizedBox(
-                  width: kTextTabBarHeight * 8,
-                  child: BlocBuilder<ShoppingCartBloc, ShoppingCartState>(
-                    builder: (BuildContext context, ShoppingCartState state) {
-                      return AppButton(
-                        text: AppConstants.cartCheckout,
-                        handler: () {
-                          if (state.items.isNotEmpty) {
-                            BlocProvider.of<ShoppingCartBloc>(context).add(
-                              CheckoutEvent(),
-                            );
-                          }
-                          showAppSnackBar(
-                            context: context,
-                            title: state.items.isNotEmpty
-                                ? AppConstants.orderSent
-                                : AppConstants.emptyOrder,
-                            snackMargin: const EdgeInsets.only(
-                              left: kToolbarHeight / 8,
-                              right: kToolbarHeight / 8,
-                              bottom: kToolbarHeight * 1.8,
-                            ),
-                          );
-                        },
-                      );
-                    },
+                  ),
+                ],
+                iconTheme: Theme.of(context).iconTheme,
+                centerTitle: true,
+                backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                title: Text(
+                  AppStrConstants.shoppingCartTitle,
+                  style: AppFonts.normal30.copyWith(
+                    color: Theme.of(context).primaryColor,
                   ),
                 ),
-              ],
+              ),
+              body: BlocBuilder<ShoppingCartBloc, ShoppingCartState>(
+                builder: (BuildContext context, ShoppingCartState state) {
+                  if (state.isLoading) {
+                    return const AppLoadingCircle();
+                  }
+                  if (state.errorMessage.isNotEmpty) {
+                    return AppError(errorText: state.errorMessage);
+                  }
+                  if (state.items.isEmpty) {
+                    return const EmptyListTitle();
+                  }
+                  return Container(
+                    margin: const EdgeInsets.only(bottom: AppDimens.padding100),
+                    child: ListView.builder(
+                      padding: const EdgeInsets.all(AppDimens.padding10),
+                      itemCount: state.items.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return CartItem(
+                          model: state.items[index],
+                        );
+                      },
+                    ),
+                  );
+                },
+              ),
+              bottomSheet: Container(
+                padding: const EdgeInsets.all(AppDimens.padding10),
+                decoration: BoxDecoration(
+                  color: Theme.of(context).scaffoldBackgroundColor,
+                  border: Border(
+                    top: BorderSide(color: Theme.of(context).indicatorColor),
+                  ),
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        const Text(
+                          AppStrConstants.total,
+                          style: AppFonts.normal22,
+                        ),
+                        BlocBuilder<ShoppingCartBloc, ShoppingCartState>(
+                          builder:
+                              (BuildContext context, ShoppingCartState state) {
+                            return Text(
+                              '${state.totalPrice().toStringAsFixed(AppNumConstants.priceSize)}\$',
+                              style: AppFonts.normal22,
+                            );
+                          },
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      width: constraints.minWidth,
+                      child: BlocBuilder<ShoppingCartBloc, ShoppingCartState>(
+                        builder: (
+                          BuildContext context,
+                          ShoppingCartState state,
+                        ) {
+                          return AppButton(
+                            text: AppStrConstants.cartCheckout,
+                            handler: () {
+                              if (state.items.isNotEmpty) {
+                                BlocProvider.of<ShoppingCartBloc>(context).add(
+                                  CheckoutEvent(),
+                                );
+                              }
+                              showAppSnackBar(
+                                context: context,
+                                title: state.items.isNotEmpty
+                                    ? AppStrConstants.orderSent
+                                    : AppStrConstants.emptyOrder,
+                                snackMargin: EdgeInsets.only(
+                                  left: constraints.minWidth / 40,
+                                  right: constraints.minWidth / 40,
+                                  bottom: constraints.minHeight / 7.5,
+                                ),
+                              );
+                            },
+                          );
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ),
-          ),
-        ),
+          );
+        },
       ),
     );
   }

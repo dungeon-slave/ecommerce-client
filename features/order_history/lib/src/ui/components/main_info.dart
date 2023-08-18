@@ -17,7 +17,7 @@ class MainInfo extends StatelessWidget {
         Container(
           alignment: Alignment.center,
           child: Text(
-            '${AppConstants.orderN}${_model.id}',
+            '${AppStrConstants.orderN}${_model.id}',
             style: AppFonts.normal22,
           ),
         ),
@@ -27,7 +27,7 @@ class MainInfo extends StatelessWidget {
             bottom: AppDimens.margin5,
           ),
           child: Divider(
-            thickness: AppConstants.orderDividerThickness,
+            thickness: AppNumConstants.orderDividerThickness,
             endIndent: AppDimens.padding15,
             color: Theme.of(context).indicatorColor,
           ),
@@ -36,7 +36,7 @@ class MainInfo extends StatelessWidget {
           padding: const EdgeInsets.only(bottom: AppDimens.padding10),
           alignment: Alignment.centerLeft,
           child: Text(
-            '${AppConstants.date}: ${_model.dateTime.day}.${_model.dateTime.month}.${_model.dateTime.year}',
+            '${AppStrConstants.date}: ${_model.dateTime.day}.${_model.dateTime.month}.${_model.dateTime.year}',
             style: AppFonts.normal22,
           ),
         ),
@@ -44,7 +44,7 @@ class MainInfo extends StatelessWidget {
           padding: const EdgeInsets.only(bottom: AppDimens.padding10),
           alignment: Alignment.centerLeft,
           child: Text(
-            '${AppConstants.time}: ${_model.dateTime.hour}:${_model.dateTime.minute}',
+            '${AppStrConstants.time}: ${_model.dateTime.hour}:${_model.dateTime.minute}',
             style: AppFonts.normal22,
           ),
         ),
@@ -52,7 +52,7 @@ class MainInfo extends StatelessWidget {
           padding: const EdgeInsets.only(bottom: AppDimens.margin5),
           alignment: Alignment.centerLeft,
           child: Text(
-            '${AppConstants.total}: ${_model.price.toStringAsFixed(AppConstants.priceSize)}\$',
+            '${AppStrConstants.total}: ${_model.price.toStringAsFixed(AppNumConstants.priceSize)}\$',
             style: AppFonts.normal22,
           ),
         ),

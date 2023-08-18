@@ -6,6 +6,4 @@ abstract class AuthenticationRepository {
   Future<String> emailSignIn(EmailSignInModel data);
   Future<String> googleSignIn();
   Future<void> signOut();
-  Future<void> saveUser(String userId);
-  bool isUserAuthorized();
 }

@@ -1,5 +1,5 @@
 import 'package:core_ui/core_ui.dart'
-    show AppDimens, AppColors, AppConstants, AppFonts;
+    show AppDimens, AppColors, AppStrConstants, AppFonts;
 import 'package:flutter/material.dart';
 
 class NetworkPopUp extends StatelessWidget {
@@ -32,8 +32,8 @@ class NetworkPopUp extends StatelessWidget {
         child: Text(
           textAlign: TextAlign.center,
           _isConnected
-              ? AppConstants.connectionRestored
-              : AppConstants.connectionLoss,
+              ? AppStrConstants.connectionRestored
+              : AppStrConstants.connectionLoss,
           style: AppFonts.normal24.copyWith(
             color: AppColors.absWhite,
             decoration: TextDecoration.none,

@@ -1,4 +1,4 @@
-import 'package:core_ui/src/theme/app_constants.dart';
+import 'package:core_ui/src/theme/app_str_constants.dart';
 import 'package:core_ui/src/theme/fonts.dart';
 import 'package:flutter/material.dart';
 
@@ -9,7 +9,7 @@ class EmptyListTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Text(
-        AppConstants.emptyList,
+        AppStrConstants.emptyList,
         style: AppFonts.normal30.copyWith(
           color: Theme.of(context).indicatorColor,
         ),

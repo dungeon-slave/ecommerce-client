@@ -44,7 +44,7 @@ class SignUpBloc extends Bloc<SignUpEvent, SignUpState> {
       ),
     );
     try {
-      String userId = await _emailSignUpUseCase.execute(event.data);
+      final String userId = await _emailSignUpUseCase.execute(event.data);
       await _saveUserUseCase.execute(userId);
       _authService.authenticated = _checkUserUseCase.execute(const NoParams());
       _appRouter.replace(const HomeRoute());

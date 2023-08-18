@@ -26,7 +26,7 @@ class MainPageBloc extends Bloc<MainPageEvent, MainPageState> {
         super(const MainPageState(
           isChecked: false,
           isDark: true,
-          textScale: AppConstants.minScale,
+          textScale: AppNumConstants.minScale,
         )) {
     on<InitEvent>(_init);
 

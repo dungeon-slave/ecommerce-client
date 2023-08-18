@@ -1,5 +1,4 @@
-import 'package:core/services/network_service.dart';
-import 'package:core_ui/core_ui.dart' show AppConstants;
+import 'package:core/safe_request.dart';
 import 'package:data/entities/cart_item_entity/cart_item_entity.dart';
 import 'package:data/mappers/cart_item_mapper.dart';
 import 'package:data/mappers/order_mapper.dart';
@@ -12,15 +11,12 @@ import 'package:domain/repositories/cart_repository.dart';
 class CartRepositoryImpl implements CartRepository {
   final HiveProvider _hiveProvider;
   final FirebaseProvider _firebaseProvider;
-  final NetworkService _networkService;
 
   const CartRepositoryImpl({
     required HiveProvider hiveProvider,
     required FirebaseProvider firebaseProvider,
-    required NetworkService networkService,
   })  : _hiveProvider = hiveProvider,
-        _firebaseProvider = firebaseProvider,
-        _networkService = networkService;
+        _firebaseProvider = firebaseProvider;
 
   @override
   List<CartItemModel> fetchItems() {
@@ -48,12 +44,12 @@ class CartRepositoryImpl implements CartRepository {
       _hiveProvider.changeItemCount(CartItemMapper.toEntity(item));
 
   @override
-  Future<void> sendOrder(OrderModel item) async {
-    await _networkService.checkConnection()
-        ? await _firebaseProvider.sendOrder(
-            OrderMapper.toEntity(item),
-            _hiveProvider.fetchUserId(),
-          )
-        : throw Exception(AppConstants.connectionLoss);
+  Future<void> sendOrder(OrderModel item) {
+    return safeRequest<void>(
+      () => _firebaseProvider.sendOrder(
+        OrderMapper.toEntity(item),
+        _hiveProvider.fetchUserId(),
+      ),
+    );
   }
 }

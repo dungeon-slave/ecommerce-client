@@ -1,14 +1,13 @@
-import 'package:domain/repositories/authentication_repository.dart';
+import 'package:domain/repositories/user_repository.dart';
 import 'package:domain/usecase/usecase.dart';
 
 class SaveUserUseCase implements AsyncUseCase<String, void> {
-  final AuthenticationRepository _authenticationRepository;
+  final UserRepository _userRepository;
 
   const SaveUserUseCase({
-    required AuthenticationRepository authenticationRepository,
-  }) : _authenticationRepository = authenticationRepository;
+    required UserRepository userRepository,
+  }) : _userRepository = userRepository;
 
   @override
-  Future<void> execute(String input) async =>
-      await _authenticationRepository.saveUser(input);
+  Future<void> execute(String input) => _userRepository.saveUser(input);
 }

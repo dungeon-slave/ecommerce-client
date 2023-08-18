@@ -75,7 +75,7 @@ class _DishItemState extends State<DishItem> {
                   ),
                 ),
                 AppButton(
-                  text: AppConstants.addToCart,
+                  text: AppStrConstants.addToCart,
                   handler: widget._addToCartHandler(context),
                 ),
               ],

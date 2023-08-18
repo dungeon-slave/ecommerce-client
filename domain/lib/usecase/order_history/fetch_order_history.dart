@@ -11,7 +11,6 @@ class FetchOrderHistoryUseCase
   }) : _orderHistoryRepository = orderHistoryRepository;
 
   @override
-  Future<List<OrderModel>> execute(NoParams input) async {
-    return await _orderHistoryRepository.fetchOrderHistory();
-  }
+  Future<List<OrderModel>> execute(NoParams input) =>
+      _orderHistoryRepository.fetchOrderHistory();
 }

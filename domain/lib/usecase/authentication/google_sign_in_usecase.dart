@@ -9,6 +9,6 @@ class GoogleSignInUseCase implements AsyncUseCase<NoParams, String> {
   }) : _authenticationRepository = authenticationRepository;
 
   @override
-  Future<String> execute(NoParams input) async =>
-      await _authenticationRepository.googleSignIn();
+  Future<String> execute(NoParams input) =>
+      _authenticationRepository.googleSignIn();
 }

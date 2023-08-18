@@ -1,16 +1,16 @@
-final class AppConstants {
+final class AppStrConstants {
   static const String menuCollection = 'dishes_menu';
   static const String usersCollection = 'users';
   static const String userOrdersCollection = 'orders';
   static const String userCartCollection = 'cart';
 
   static const String contactUs = 'Contact us';
+
+  static const String emptyOrder = 'Nothing to order';
   static const String showDetails = 'Show details';
   static const String hideDetails = 'Hide details';
 
-  static const emptyList = 'It\'s empty here...';
-
-  static const emptyOrder = 'Nothing to order';
+  static const String emptyList = 'It\'s empty here...';
 
   static const String telegramContactTitle = 'Telegram';
   static const String instagramContactTitle = 'Instagram';
@@ -19,12 +19,6 @@ final class AppConstants {
       'https://pub.dev/packages/url_launcher/example';
   static const String instagramLink =
       'https://api.flutter.dev/flutter/material/Icons-class.html';
-
-  static const int priceSize = 2;
-  static const int cartSnackBarDuration = 2;
-  static const double orderDividerThickness = 1;
-  static const int swipesSensivity = 3;
-  static const double deleteIconSize = 30;
 
   static const String darkTheme = 'Dark theme';
   static const String textScale = 'Text scale';
@@ -61,8 +55,4 @@ final class AppConstants {
   static const String passwordTitle = 'Password';
   static const String emailTitle = 'Email';
   static const String nameTitle = 'Name';
-
-  static const double minScale = 0.8;
-  static const double maxScale = 1.2;
-  static const int divisions = 3;
 }
