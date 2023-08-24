@@ -1,5 +1,5 @@
 import 'package:core/core.dart' show Hive, Box;
-import 'package:core_ui/core_ui.dart' show AppConstants;
+import 'package:core_ui/core_ui.dart' show AppNumConstants;
 import 'package:data/entities/cart_item_entity/cart_item_entity.dart';
 import 'package:data/entities/dish_type_enity/dish_type_entity.dart';
 
@@ -27,33 +27,30 @@ class HiveProvider {
 
   List<DishTypeEntity> fetchMenu() => _menuBox.values.toList();
 
-  Future<void> saveTheme(bool isDark) async =>
-      await _themeBox.put(_HiveKeys.themeKey, isDark);
+  Future<void> saveTheme(bool isDark) =>
+      _themeBox.put(_HiveKeys.themeKey, isDark);
 
   bool fetchTheme() => _themeBox.get(_HiveKeys.themeKey) ?? true;
 
-  Future<void> saveTextScale(double textScale) async =>
-      await _textScaleBox.put(_HiveKeys.textScaleKey, textScale);
+  Future<void> saveTextScale(double textScale) =>
+      _textScaleBox.put(_HiveKeys.textScaleKey, textScale);
 
   double fetchTextScale() =>
-      _textScaleBox.get(_HiveKeys.textScaleKey) ??
-      AppConstants.textScales.first;
+      _textScaleBox.get(_HiveKeys.textScaleKey) ?? AppNumConstants.minScale;
 
   Future<void> changeItemCount(CartItemEntity item) async {
     for (CartItemEntity element in _cartBox.values) {
       if (element.dishEntity.id == item.dishEntity.id) {
         if (item.count == 0) {
-          await _cartBox.delete(element.dishEntity.id);
-          break;
+          return await _cartBox.delete(element.dishEntity.id);
         }
-        await _cartBox.put(
+        return await _cartBox.put(
           element.dishEntity.id,
           CartItemEntity(
             dishEntity: element.dishEntity,
             count: item.count,
           ),
         );
-        break;
       }
     }
   }
@@ -69,30 +66,29 @@ class HiveProvider {
     return count;
   }
 
-  Future<void> saveCartItem(CartItemEntity item) async {
+  Future<void> saveCartItem(CartItemEntity item) {
     for (CartItemEntity element in _cartBox.values) {
       if (element.dishEntity.id == item.dishEntity.id) {
-        await _cartBox.put(
+        return _cartBox.put(
           element.dishEntity.id,
           CartItemEntity(
             dishEntity: element.dishEntity,
             count: element.count + 1,
           ),
         );
-        return;
       }
     }
-    await _cartBox.put(item.dishEntity.id, item);
+    return _cartBox.put(item.dishEntity.id, item);
   }
 
-  Future<void> clearCart() async => await _cartBox.clear();
+  Future<void> clearCart() => _cartBox.clear();
 
-  Future<void> saveUserId(String userId) async =>
-      await _userIdBox.put(_HiveKeys.userIdKey, userId);
+  Future<void> saveUserId(String userId) =>
+      _userIdBox.put(_HiveKeys.userIdKey, userId);
 
-  String? fetchUserId() => _userIdBox.get(_HiveKeys.userIdKey);
+  String fetchUserId() => _userIdBox.get(_HiveKeys.userIdKey) ?? '';
 
-  Future<void> removeUser() async => await _userIdBox.clear();
+  Future<void> removeUser() => _userIdBox.clear();
 }
 
 class _HiveKeys {

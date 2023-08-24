@@ -21,7 +21,7 @@ class SetTextScaleEvent extends SettingsEvent {
 class FetchTextScaleEvent extends SettingsEvent {}
 
 class OpenLinkEvent extends SettingsEvent {
-  final Uri link;
+  final String link;
 
   OpenLinkEvent({required this.link});
 }

@@ -7,8 +7,8 @@ class SettingsWidget extends InheritedWidget {
   const SettingsWidget({
     required this.changeTheme,
     required this.changeTextScale,
-    super.key,
     required super.child,
+    super.key,
   });
 
   static SettingsWidget of(BuildContext context) {

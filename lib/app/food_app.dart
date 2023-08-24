@@ -13,7 +13,7 @@ class FoodApp extends StatefulWidget {
 
 class _FoodAppState extends State<FoodApp> {
   ThemeData _currentTheme = AppTheme.dark;
-  double _textScale = AppConstants.textScales.first;
+  double _textScale = AppNumConstants.minScale;
 
   void _changeTheme(bool isDark) =>
       setState(() => _currentTheme = isDark ? AppTheme.dark : AppTheme.light);
@@ -29,7 +29,7 @@ class _FoodAppState extends State<FoodApp> {
         routerConfig: appLocator<AppRouter>().config(
           reevaluateListenable: appLocator<AuthService>(),
         ),
-        builder: (context, child) => MediaQuery(
+        builder: (BuildContext context, Widget? child) => MediaQuery(
           data: const MediaQueryData().copyWith(textScaleFactor: _textScale),
           child: child ?? const SizedBox.shrink(),
         ),

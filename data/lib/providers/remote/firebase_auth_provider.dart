@@ -1,4 +1,5 @@
 import 'package:core/core.dart';
+import 'package:core_ui/core_ui.dart';
 import 'package:domain/domain.dart' show EmailSignInModel, EmailSignUpModel;
 
 class FirebaseAuthProvider {
@@ -14,39 +15,47 @@ class FirebaseAuthProvider {
   Future<String> emailSignUp({
     required EmailSignUpModel data,
   }) async {
-    return (await _firebaseAuth.createUserWithEmailAndPassword(
+    final User? user = (await _firebaseAuth.createUserWithEmailAndPassword(
       email: data.email,
       password: data.password,
     ))
-        .user!
-        .uid; //TODO remove ! operator
+        .user;
+    if (user == null) {
+      throw (Exception(AppStrConstants.authException));
+    }
+    return user.uid;
   }
 
   Future<String> emailSignIn({
     required EmailSignInModel data,
   }) async {
-    User? user = (await _firebaseAuth.signInWithEmailAndPassword(
+    final User? user = (await _firebaseAuth.signInWithEmailAndPassword(
       email: data.email,
       password: data.password,
     ))
         .user;
-    return user != null ? user.uid : '';
+    if (user == null) {
+      throw (Exception(AppStrConstants.authException));
+    }
+    return user.uid;
   }
 
   Future<String> googleSignIn() async {
-    //TODO refactor
     final GoogleSignInAccount? googleAccount = await _googleSignIn.signIn();
     final GoogleSignInAuthentication? googleAuth =
         await googleAccount?.authentication;
+    User? user;
     if (googleAuth?.accessToken != null && googleAuth?.idToken != null) {
-      //create new credential
-      final credential = GoogleAuthProvider.credential(
+      final OAuthCredential credential = GoogleAuthProvider.credential(
         accessToken: googleAuth?.accessToken,
         idToken: googleAuth?.idToken,
       );
-      return (await _firebaseAuth.signInWithCredential(credential)).user!.uid;
+      user = (await _firebaseAuth.signInWithCredential(credential)).user;
     }
-    return '';
+    if (user == null) {
+      throw (Exception(AppStrConstants.authException));
+    }
+    return user.uid;
   }
 
   Future<void> signOut() async {

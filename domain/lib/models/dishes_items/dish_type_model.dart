@@ -1,11 +1,11 @@
 import 'package:domain/models/dishes_items/dish_model.dart';
 
 class DishTypeModel {
-  final String typeName;
-  final List<DishModel> dishesModels;
+  final String name;
+  final List<DishModel> dishes;
 
   const DishTypeModel({
-    required this.typeName,
-    required this.dishesModels,
+    required this.name,
+    required this.dishes,
   });
 }

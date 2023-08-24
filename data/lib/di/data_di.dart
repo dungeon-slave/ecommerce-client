@@ -10,10 +10,14 @@ import 'package:data/providers/local/hive_provider.dart';
 import 'package:data/repositories/authentication_repository_impl.dart';
 import 'package:data/repositories/cart_repository_impl.dart';
 import 'package:data/repositories/dishes_repository_impl.dart';
+import 'package:data/repositories/order_history_repository_impl.dart';
 import 'package:data/repositories/text_scale_repository.dart';
 import 'package:data/repositories/theme_repository_impl.dart';
+import 'package:data/repositories/user_repository_impl.dart';
 import 'package:domain/domain.dart';
 import 'package:domain/repositories/authentication_repository.dart';
+import 'package:domain/usecase/order_history/fetch_order_history.dart';
+import 'package:domain/usecase/shopping_cart/send_order_usecase.dart';
 
 final DataDI dataDI = DataDI();
 
@@ -71,11 +75,23 @@ class DataDI {
   }
 
   void _initRepositories() {
+    appLocator.registerLazySingleton<UserRepository>(
+      () => UserRepositoryImpl(
+        hiveProvider: appLocator<HiveProvider>(),
+      ),
+    );
+
+    appLocator.registerLazySingleton<OrderHistoryRepository>(
+      () => OrderHistoryRepositoryImpl(
+        firebaseProvider: appLocator<FirebaseProvider>(),
+        hiveProvider: appLocator<HiveProvider>(),
+      ),
+    );
+
     appLocator.registerLazySingleton<DishesRepository>(
       () => DishesRepositoryImpl(
         firebaseProvider: appLocator<FirebaseProvider>(),
         hiveProvider: appLocator<HiveProvider>(),
-        networkService: appLocator<NetworkService>(),
       ),
     );
 
@@ -94,25 +110,32 @@ class DataDI {
     appLocator.registerLazySingleton<CartRepository>(
       () => CartRepositoryImpl(
         hiveProvider: appLocator<HiveProvider>(),
+        firebaseProvider: appLocator<FirebaseProvider>(),
       ),
     );
 
     appLocator.registerLazySingleton<AuthenticationRepository>(
       () => AuthenticationRepositoryImpl(
         authProvider: appLocator<FirebaseAuthProvider>(),
-        hiveProvider: appLocator<HiveProvider>(),
       ),
     );
   }
 
   void _initUseCases() {
-    appLocator.registerLazySingleton<FetchDishesUsecase>(
-      () => FetchDishesUsecase(
-        dishesRepository: appLocator<DishesRepository>(),
+    appLocator.registerLazySingleton<FetchOrderHistoryUseCase>(
+      () => FetchOrderHistoryUseCase(
+        orderHistoryRepository: appLocator<OrderHistoryRepository>(),
       ),
     );
-    appLocator.registerLazySingleton<SaveDishesUseCase>(
-      () => SaveDishesUseCase(
+
+    appLocator.registerLazySingleton<SendOrderUseCase>(
+      () => SendOrderUseCase(
+        cartRepository: appLocator<CartRepository>(),
+      ),
+    );
+
+    appLocator.registerLazySingleton<FetchDishesUsecase>(
+      () => FetchDishesUsecase(
         dishesRepository: appLocator<DishesRepository>(),
       ),
     );
@@ -181,13 +204,14 @@ class DataDI {
 
     appLocator.registerLazySingleton<SignOutUseCase>(
       () => SignOutUseCase(
+        userRepository: appLocator<UserRepository>(),
         authenticationRepository: appLocator<AuthenticationRepository>(),
       ),
     );
 
     appLocator.registerLazySingleton<SaveUserUseCase>(
       () => SaveUserUseCase(
-        authenticationRepository: appLocator<AuthenticationRepository>(),
+        userRepository: appLocator<UserRepository>(),
       ),
     );
 
@@ -199,7 +223,7 @@ class DataDI {
 
     appLocator.registerLazySingleton<CheckUserUseCase>(
       () => CheckUserUseCase(
-        authenticationRepository: appLocator<AuthenticationRepository>(),
+        userRepository: appLocator<UserRepository>(),
       ),
     );
   }

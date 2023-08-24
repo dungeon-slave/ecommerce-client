@@ -26,6 +26,9 @@ dependencies:
   google_sign_in: ^6.1.4
   connectivity_plus: ^4.0.2
   auto_route: ^7.8.0
+  uuid: ^3.0.7
+  core_ui:
+    path: ../core_ui
 
 dev_dependencies:
   flutter_test:

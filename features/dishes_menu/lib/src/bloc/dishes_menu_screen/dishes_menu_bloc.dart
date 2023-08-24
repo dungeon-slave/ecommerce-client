@@ -10,16 +10,13 @@ part 'dishes_menu_state.dart';
 
 class MenuBloc extends Bloc<MenuEvent, MenuState> {
   final FetchDishesUsecase _fetchDishesUsecase;
-  final SaveDishesUseCase _saveDishesUseCase;
   final SaveItemUseCase _saveItemUseCase;
 
   MenuBloc({
     required FetchDishesUsecase fetchDishesUsecase,
     required SaveItemUseCase saveItemsUseCase,
-    required SaveDishesUseCase saveDishesUseCase,
   })  : _fetchDishesUsecase = fetchDishesUsecase,
         _saveItemUseCase = saveItemsUseCase,
-        _saveDishesUseCase = saveDishesUseCase,
         super(const MenuState(
           items: <DishTypeModel>[],
           isLoading: true,
@@ -33,13 +30,10 @@ class MenuBloc extends Bloc<MenuEvent, MenuState> {
 
   Future<void> _init(InitEvent event, Emitter<MenuState> emit) async {
     try {
-      final List<DishTypeModel> types =
-          await _fetchDishesUsecase.execute(const NoParams());
-      await _saveDishesUseCase.execute(types); //FIXME its wrong
       emit(
         state.copyWith(
           isLoading: false,
-          items: types,
+          items: await _fetchDishesUsecase.execute(const NoParams()),
         ),
       );
     } catch (e) {
