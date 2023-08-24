@@ -13,10 +13,14 @@ dependencies:
     path: ./core
   data:
     path: ./data
+  domain:
+    path: ./domain
   navigation:
     path: ./navigation
   core_ui:
     path: ./core_ui
+  order_history:
+    path: ./features/order_history
 
 dev_dependencies:
   flutter_test:
