@@ -20,6 +20,8 @@ dependencies:
     path: ../order_history
   shopping_cart:
     path: ../shopping_cart
+  dishes_menu:
+    path: ../dishes_menu
   settings:
     path: ../settings
   navigation:
