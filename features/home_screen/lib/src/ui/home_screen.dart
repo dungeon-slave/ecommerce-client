@@ -11,13 +11,13 @@ import 'package:core/di/app_di.dart';
 import 'package:core/services/network_service.dart';
 import 'package:core_ui/core_ui.dart'
     show AppIcon, AppIconsData, AppNumConstants, AppStrConstants;
-import 'package:dishes_menu/dishes_menu.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:home_screen/src/bloc/cart_observer.dart';
 import 'package:home_screen/src/bloc/home_screen_bloc.dart';
 import 'package:home_screen/src/ui/components/cart_count_badge.dart';
 import 'package:home_screen/src/ui/components/network_popup.dart';
+import 'package:navigation/navigation.dart' show EmptyDishesMenu;
 import 'package:order_history/order_history.dart';
 import 'package:settings/settings.dart';
 import 'package:shopping_cart/shopping_cart.dart';
@@ -73,41 +73,31 @@ class HomeScreen extends StatelessWidget {
                   type: BottomNavigationBarType.fixed,
                   selectedItemColor: Theme.of(context).indicatorColor,
                   unselectedItemColor: Theme.of(context).indicatorColor,
-                  items: <BottomNavigationBarItem>[
-                    const BottomNavigationBarItem(
+                  items: const <BottomNavigationBarItem>[
+                    BottomNavigationBarItem(
                       activeIcon: AppIcon(AppIconsData.selectedMenu),
                       icon: AppIcon(AppIconsData.unselectedMenu),
                       label: AppStrConstants.menuTitle,
                     ),
-                    const BottomNavigationBarItem(
+                    BottomNavigationBarItem(
                       activeIcon: AppIcon(AppIconsData.selectedOrderHistory),
                       icon: AppIcon(AppIconsData.unselectedOrderHistory),
                       label: AppStrConstants.orderHistoryTitle,
                     ),
                     BottomNavigationBarItem(
-                      activeIcon: BlocBuilder<HomeScreenBloc, HomeScreenState>(
-                        builder: (BuildContext context, HomeScreenState state) {
-                          return CartCountBadge(
-                            count: state.count,
-                            themeIcon: const AppIcon(
-                              AppIconsData.selectedShoppingCart,
-                            ),
-                          );
-                        },
+                      activeIcon: CartCountBadge(
+                        themeIcon: AppIcon(
+                          AppIconsData.selectedShoppingCart,
+                        ),
                       ),
-                      icon: BlocBuilder<HomeScreenBloc, HomeScreenState>(
-                        builder: (BuildContext context, HomeScreenState state) {
-                          return CartCountBadge(
-                            count: state.count,
-                            themeIcon: const AppIcon(
-                              AppIconsData.unselectedShoppingCart,
-                            ),
-                          );
-                        },
+                      icon: CartCountBadge(
+                        themeIcon: AppIcon(
+                          AppIconsData.unselectedShoppingCart,
+                        ),
                       ),
                       label: AppStrConstants.shoppingCartTitle,
                     ),
-                    const BottomNavigationBarItem(
+                    BottomNavigationBarItem(
                       activeIcon: AppIcon(AppIconsData.selectedSettings),
                       icon: AppIcon(AppIconsData.unselectedSettings),
                       label: AppStrConstants.settingsTitle,
