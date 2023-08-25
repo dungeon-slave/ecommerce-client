@@ -19,13 +19,18 @@ dependencies:
     path: ./navigation
   core_ui:
     path: ./core_ui
-  order_history:
-    path: ./features/order_history
+  shopping_cart:
+    path: ./features/shopping_cart
+  dishes_menu:
+    path: ./features/dishes_menu
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  integration_test:
+    sdk: flutter
   flutter_lints: ^2.0.0
+  mocktail: ^1.0.0
 
 flutter:
   uses-material-design: true

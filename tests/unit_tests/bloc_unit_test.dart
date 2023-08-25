@@ -19,7 +19,7 @@ void main() {
         'Check init state results',
         () {
           bloc.add(InitEvent());
-          expect(validState.items, bloc.state.items);
+          expect(bloc.state.items, validState.items);
         },
       );
     },
