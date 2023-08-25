@@ -23,6 +23,8 @@ dependencies:
     path: ./features/shopping_cart
   dishes_menu:
     path: ./features/dishes_menu
+  order_history:
+    path: ./features/order_history
 
 dev_dependencies:
   flutter_test:
