@@ -1,4 +1,4 @@
-import 'package:data/entities/cart_item_entity/cart_item_entity.dart';
+import 'package:data/entities/cart_item/cart_item_entity.dart';
 import 'package:data/mappers/dish_mapper.dart';
 import 'package:domain/models/cart_items/cart_item_model.dart';
 

@@ -1,4 +1,4 @@
-import 'package:data/entities/dish_entity/dish_entity.dart';
+import 'package:data/entities/dish/dish_entity.dart';
 import 'package:data/mappers/dish_mapper.dart';
 import 'package:domain/models/dishes_items/dish_model.dart';
 import 'package:flutter_test/flutter_test.dart';

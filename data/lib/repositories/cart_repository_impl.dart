@@ -1,5 +1,5 @@
 import 'package:core/safe_request.dart';
-import 'package:data/entities/cart_item_entity/cart_item_entity.dart';
+import 'package:data/entities/cart_item/cart_item_entity.dart';
 import 'package:data/mappers/cart_item_mapper.dart';
 import 'package:data/mappers/order_mapper.dart';
 import 'package:data/providers/local/hive_provider.dart';

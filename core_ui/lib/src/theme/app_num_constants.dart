@@ -8,7 +8,6 @@ class AppNumConstants {
   static const int mainDuration = 700;
   static const int motionDuration = 1200;
   static const int scaleDuration = 150;
-  static const int addDelay = 1100;
 
   static const double orderDividerThickness = 1;
   static const double deleteIconSize = 30;

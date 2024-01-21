@@ -13,11 +13,11 @@ class NetworkService {
 
   void addListener(void Function() callBack) {
     _connectivity.onConnectivityChanged.listen(
-      (ConnectivityResult event) => callBack(),
+      (_) => callBack(),
     );
   }
 
-  Future<bool> checkConnection() async {
-    return await _internetConnectionChecker.hasConnection;
+  Future<bool> checkConnection() {
+    return _internetConnectionChecker.hasConnection;
   }
 }

@@ -21,8 +21,8 @@ export 'package:domain/usecase/authentication/email_sign_in_usecase.dart';
 export 'package:domain/usecase/authentication/email_sign_up_usecase.dart';
 export 'package:domain/usecase/authentication/google_sign_in_usecase.dart';
 export 'package:domain/usecase/authentication/sign_out_usecase.dart';
-export 'package:domain/usecase/authentication/save_user_usecase.dart';
-export 'package:domain/usecase/authentication/check_user_usecase.dart';
+export 'package:domain/usecase/authentication/check_user_role_usecase.dart';
 
 export 'package:domain/models/authentication/email_sign_in_model.dart';
 export 'package:domain/models/authentication/email_sign_up_model.dart';
+export 'package:domain/models/user/user_model.dart';

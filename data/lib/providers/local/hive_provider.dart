@@ -1,21 +1,27 @@
 import 'package:core/core.dart' show Hive, Box;
+import 'package:core/enums/role.dart';
 import 'package:core_ui/core_ui.dart' show AppNumConstants;
-import 'package:data/entities/cart_item_entity/cart_item_entity.dart';
-import 'package:data/entities/dish_type_enity/dish_type_entity.dart';
+import 'package:data/entities/cart_item/cart_item_entity.dart';
+import 'package:data/entities/dish_type/dish_type_entity.dart';
+import 'package:data/entities/user/user_entity.dart';
 
 class HiveProvider {
   late final Box<bool> _themeBox;
   late final Box<CartItemEntity> _cartBox;
   late final Box<DishTypeEntity> _menuBox;
   late final Box<double> _textScaleBox;
-  late final Box<String> _userIdBox;
+  late final Box<UserEntity> _userBox;
+  //late final Box<String> _userIdBox;
+  //late final Box<Roles> _userRoleBox;
 
   Future<void> openBoxes() async {
     _themeBox = await Hive.openBox<bool>(_HiveKeys.themeBox);
     _cartBox = await Hive.openBox<CartItemEntity>(_HiveKeys.cartBox);
     _menuBox = await Hive.openBox(_HiveKeys.menuBox);
     _textScaleBox = await Hive.openBox(_HiveKeys.textScaleBox);
-    _userIdBox = await Hive.openBox(_HiveKeys.userIdBox);
+    _userBox = await Hive.openBox(_HiveKeys.userBox);
+    // _userIdBox = await Hive.openBox(_HiveKeys.userIdBox);
+    // _userRoleBox = await Hive.openBox(_HiveKeys.userRoleBox);
   }
 
   Future<void> saveMenu(List<DishTypeEntity> dishesTypes) async {
@@ -83,12 +89,15 @@ class HiveProvider {
 
   Future<void> clearCart() => _cartBox.clear();
 
-  Future<void> saveUserId(String userId) =>
-      _userIdBox.put(_HiveKeys.userIdKey, userId);
+  Future<void> saveUser(UserEntity entity) =>
+      _userBox.put(_HiveKeys.userKey, entity);
 
-  String fetchUserId() => _userIdBox.get(_HiveKeys.userIdKey) ?? '';
+  String fetchUserId() => _userBox.get(_HiveKeys.userKey)?.id ?? '';
 
-  Future<void> removeUser() => _userIdBox.clear();
+  Role fetchUserRole() =>
+      _userBox.get(_HiveKeys.userKey)?.role ?? Role.undefined;
+
+  Future<void> removeUser() => _userBox.clear();
 }
 
 class _HiveKeys {
@@ -96,9 +105,13 @@ class _HiveKeys {
   static const String cartBox = 'appCart';
   static const String menuBox = 'appMenu';
   static const String textScaleBox = 'appTextScale';
-  static const String userIdBox = 'appUserId';
+  static const String userBox = 'appUser';
+  //static const String userIdBox = 'appUserId';
+  //static const String userRoleBox = 'appUserRole';
 
   static const String themeKey = 'theme';
   static const String textScaleKey = 'textScale';
-  static const String userIdKey = 'userId';
+  static const String userKey = 'user';
+  //static const String userIdKey = 'userId';
+  //static const String userRoleKey = 'userRole';
 }

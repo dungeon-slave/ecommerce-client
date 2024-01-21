@@ -1,8 +1,8 @@
 import 'package:url_launcher/url_launcher.dart';
 
 class UrlService {
-  Future<void> openDefault(Uri url) async {
-    await launchUrl(
+  Future<void> openDefault(Uri url) {
+    return launchUrl(
       url,
       mode: LaunchMode.platformDefault,
     );

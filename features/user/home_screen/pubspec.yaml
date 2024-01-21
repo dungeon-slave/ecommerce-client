@@ -1,0 +1,39 @@
+name: home_screen
+version: 0.0.1
+publish_to: none
+description: Home screen feature.
+
+environment:
+  sdk: '>=3.0.5 <4.0.0'
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  #main dependencies
+  core_ui:
+    path: ../../../core_ui
+  domain:
+    path: ../../../domain
+  core:
+    path: ../../../core
+  navigation:
+    path: ../../../navigation
+
+  #user dependencies
+  order_history:
+    path: ../order_history
+  shopping_cart:
+    path: ../shopping_cart
+  dishes_menu:
+    path: ../dishes_menu
+  settings:
+    path: ../../common/settings
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  build_runner: ^2.4.7
+  auto_route_generator: ^7.3.2

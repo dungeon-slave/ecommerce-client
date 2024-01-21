@@ -1,5 +1,5 @@
 import 'package:core/safe_request.dart';
-import 'package:data/entities/order_history_entity/order_entity.dart';
+import 'package:data/entities/order_history/order_entity.dart';
 import 'package:data/mappers/order_mapper.dart';
 import 'package:data/providers/local/hive_provider.dart';
 import 'package:data/providers/remote/firebase_provider.dart';

@@ -2,6 +2,7 @@ import 'package:core/core.dart' show Equatable;
 import 'package:domain/models/dishes_items/dish_model.dart';
 
 
+// ignore: must_be_immutable
 class CartItemModel extends Equatable {
   final DishModel dishModel;
   int _count;

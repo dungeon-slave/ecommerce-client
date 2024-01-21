@@ -11,35 +11,46 @@ dependencies:
   flutter:
     sdk: flutter
 
-  home_screen:
-    path: ../features/home_screen
-  dishes_menu:
-    path: ../features/dishes_menu
-  order_history:
-    path: ../features/order_history
-  shopping_cart:
-    path: ../features/shopping_cart
-  settings:
-    path: ../features/settings
-  detailed_page:
-    path: ../features/detailed_page
-  sign_in_screen:
-    path: ../features/sign_in_screen
-  sign_up_screen:
-    path: ../features/sign_up_screen
-  main_page_screen:
-    path: ../features/main_page_screen
-
+  #main dependencies
   core:
     path: ../core
-  domain: 
+  domain:
     path: ../domain
   core_ui:
     path: ../core_ui
+
+  #common features
+  settings:
+    path: ../features/common/settings
+  sign_in_screen:
+    path: ../features/common/sign_in_screen
+  sign_up_screen:
+    path: ../features/common/sign_up_screen
+  main_screen:
+    path: ../features/common/main_screen
+
+  #user features
+  home_screen:
+    path: ../features/user/home_screen
+  dishes_menu:
+    path: ../features/user/dishes_menu
+  order_history:
+    path: ../features/user/order_history
+  shopping_cart:
+    path: ../features/user/shopping_cart
+  detailed_page:
+    path: ../features/user/detailed_page
+
+  #admin features
+  admin_home:
+    path: ../features/admin/admin_home
+  admin_menu:
+    path: ../features/admin/admin_menu
+  users:
+    path: ../features/admin/users
   
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.0
-  build_runner: ^2.4.6
-  auto_route_generator: ^7.3.0
+  build_runner: ^2.4.7
+  auto_route_generator: ^7.3.2

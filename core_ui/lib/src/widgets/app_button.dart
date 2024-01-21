@@ -14,15 +14,17 @@ class AppButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData themeData = Theme.of(context);
+
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        backgroundColor: Theme.of(context).indicatorColor,
+        backgroundColor: themeData.indicatorColor,
       ),
       onPressed: _handler,
       child: Text(
         _text,
         style: AppFonts.normal25.copyWith(
-          color: Theme.of(context).scaffoldBackgroundColor,
+          color: themeData.scaffoldBackgroundColor,
         ),
       ),
     );

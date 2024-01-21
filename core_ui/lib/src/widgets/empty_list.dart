@@ -14,12 +14,14 @@ class EmptyList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: _margin,
+    return Align(
       alignment: Alignment.center,
-      child: Lottie.asset(
-        _link,
-        repeat: false,
+      child: Padding(
+        padding: _margin ?? EdgeInsets.zero,
+        child: Lottie.asset(
+          _link,
+          repeat: false,
+        ),
       ),
     );
   }

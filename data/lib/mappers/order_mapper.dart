@@ -1,5 +1,5 @@
-import 'package:data/entities/cart_item_entity/cart_item_entity.dart';
-import 'package:data/entities/order_history_entity/order_entity.dart';
+import 'package:data/entities/cart_item/cart_item_entity.dart';
+import 'package:data/entities/order_history/order_entity.dart';
 import 'package:data/mappers/cart_item_mapper.dart';
 import 'package:domain/models/cart_items/cart_item_model.dart';
 import 'package:domain/models/order_history/order_model.dart';

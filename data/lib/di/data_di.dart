@@ -1,12 +1,14 @@
 import 'package:core/core.dart';
 import 'package:core/di/app_di.dart';
+import 'package:core/enums/role.dart';
 import 'package:core/services/network_service.dart';
-import 'package:data/entities/cart_item_entity/cart_item_entity.dart';
-import 'package:data/entities/dish_entity/dish_entity.dart';
-import 'package:data/entities/dish_type_enity/dish_type_entity.dart';
+import 'package:data/entities/cart_item/cart_item_entity.dart';
+import 'package:data/entities/dish/dish_entity.dart';
+import 'package:data/entities/dish_type/dish_type_entity.dart';
+import 'package:data/entities/user/user_entity.dart';
+import 'package:data/providers/local/hive_provider.dart';
 import 'package:data/providers/remote/firebase_auth_provider.dart';
 import 'package:data/providers/remote/firebase_provider.dart';
-import 'package:data/providers/local/hive_provider.dart';
 import 'package:data/repositories/authentication_repository_impl.dart';
 import 'package:data/repositories/cart_repository_impl.dart';
 import 'package:data/repositories/dishes_repository_impl.dart';
@@ -72,12 +74,19 @@ class DataDI {
     Hive.registerAdapter<DishTypeEntity>(
       DishTypeEntityAdapter(),
     );
+    Hive.registerAdapter<UserEntity>(
+      UserEntityAdapter(),
+    );
+    Hive.registerAdapter<Role>(
+      RoleAdapter(),
+    );
   }
 
   void _initRepositories() {
     appLocator.registerLazySingleton<UserRepository>(
       () => UserRepositoryImpl(
         hiveProvider: appLocator<HiveProvider>(),
+        firebaseProvider: appLocator<FirebaseProvider>(),
       ),
     );
 
@@ -187,18 +196,21 @@ class DataDI {
     appLocator.registerLazySingleton<EmailSignInUseCase>(
       () => EmailSignInUseCase(
         authenticationRepository: appLocator<AuthenticationRepository>(),
+        userRepository: appLocator<UserRepository>(),
       ),
     );
 
     appLocator.registerLazySingleton<EmailSignUpUseCase>(
       () => EmailSignUpUseCase(
         authenticationRepository: appLocator<AuthenticationRepository>(),
+        userRepository: appLocator<UserRepository>(),
       ),
     );
 
     appLocator.registerLazySingleton<GoogleSignInUseCase>(
       () => GoogleSignInUseCase(
         authenticationRepository: appLocator<AuthenticationRepository>(),
+        userRepository: appLocator<UserRepository>(),
       ),
     );
 
@@ -209,20 +221,14 @@ class DataDI {
       ),
     );
 
-    appLocator.registerLazySingleton<SaveUserUseCase>(
-      () => SaveUserUseCase(
-        userRepository: appLocator<UserRepository>(),
-      ),
-    );
-
     appLocator.registerLazySingleton<FetchCartCountUseCase>(
       () => FetchCartCountUseCase(
         cartRepository: appLocator<CartRepository>(),
       ),
     );
 
-    appLocator.registerLazySingleton<CheckUserUseCase>(
-      () => CheckUserUseCase(
+    appLocator.registerLazySingleton<CheckUserRoleUseCase>(
+      () => CheckUserRoleUseCase(
         userRepository: appLocator<UserRepository>(),
       ),
     );

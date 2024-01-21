@@ -1,6 +1,5 @@
-import 'package:core_ui/core_ui.dart' show AppColors;
-import 'package:flutter/material.dart'
-    show Brightness, IconThemeData, ThemeData;
+import 'package:core_ui/core_ui.dart';
+import 'package:flutter/material.dart';
 
 class AppTheme {
   static ThemeData get light {

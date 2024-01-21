@@ -9,6 +9,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+
   core:
     path: ./core
   data:
@@ -20,19 +21,18 @@ dependencies:
   core_ui:
     path: ./core_ui
   shopping_cart:
-    path: ./features/shopping_cart
+    path: ./features/user/shopping_cart
   dishes_menu:
-    path: ./features/dishes_menu
+    path: ./features/user/dishes_menu
   order_history:
-    path: ./features/order_history
+    path: ./features/user/order_history
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   integration_test:
     sdk: flutter
-  flutter_lints: ^2.0.0
-  mocktail: ^1.0.0
+  mocktail: ^1.0.2
 
 flutter:
   uses-material-design: true

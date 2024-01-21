@@ -3,6 +3,7 @@ final class AppStrConstants {
   static const String usersCollection = 'users';
   static const String userOrdersCollection = 'orders';
   static const String userCartCollection = 'cart';
+  static const String userRoleField = 'role';
 
   static const String contactUs = 'Contact us';
 
@@ -23,6 +24,7 @@ final class AppStrConstants {
 
   static const String addToCart = 'Add to cart';
   static const String undefinedImageType = 'Undefined image type!';
+  static const String nonExistentRole = 'Non-existent user role!';
   static const String orderSent = 'The order has been sent!';
 
   static const String authException = 'Can' 't get your account info';
@@ -31,6 +33,8 @@ final class AppStrConstants {
   static const String orderHistoryTitle = 'Order history';
   static const String shoppingCartTitle = 'Shopping cart';
   static const String settingsTitle = 'Settings';
+
+  static const String users = 'Users';
 
   static const String detailedDescription = 'Description';
   static const String detailedIngredients = 'Ingredients';

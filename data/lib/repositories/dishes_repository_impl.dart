@@ -1,5 +1,5 @@
 import 'package:core/safe_request.dart';
-import 'package:data/entities/dish_type_enity/dish_type_entity.dart';
+import 'package:data/entities/dish_type/dish_type_entity.dart';
 import 'package:data/mappers/dish_type_mapper.dart';
 import 'package:data/providers/local/hive_provider.dart';
 import 'package:data/providers/remote/firebase_provider.dart';

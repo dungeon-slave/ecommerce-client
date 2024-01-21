@@ -15,6 +15,6 @@ class SignOutUseCase implements AsyncUseCase<NoParams, void> {
   @override
   Future<void> execute(NoParams input) async {
     await _authenticationRepository.signOut();
-    await _userRepository.removeUser();
+    await _userRepository.removeUserLocally();
   }
 }

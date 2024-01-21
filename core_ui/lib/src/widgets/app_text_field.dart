@@ -17,30 +17,34 @@ class AppTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeData themeData = Theme.of(context);
+
     return TextField(
       obscureText: _isObscure,
-      cursorColor: Theme.of(context).indicatorColor,
+      cursorColor: themeData.indicatorColor,
       style: AppFonts.normal20.copyWith(
-        color: Theme.of(context).primaryColor,
+        color: themeData.primaryColor,
       ),
       decoration: InputDecoration(
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(
-            color: Theme.of(context).indicatorColor,
+            color: themeData.indicatorColor,
           ),
-          borderRadius:
-              const BorderRadius.all(Radius.circular(AppDimens.radius10)),
+          borderRadius: const BorderRadius.all(
+            Radius.circular(AppDimens.radius10),
+          ),
         ),
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(
-            color: Theme.of(context).indicatorColor,
+            color: themeData.indicatorColor,
           ),
-          borderRadius:
-              const BorderRadius.all(Radius.circular(AppDimens.radius10)),
+          borderRadius: const BorderRadius.all(
+            Radius.circular(AppDimens.radius10),
+          ),
         ),
         labelText: _label,
         labelStyle: AppFonts.normal20.copyWith(
-          color: Theme.of(context).indicatorColor,
+          color: themeData.indicatorColor,
         ),
       ),
       controller: _textController,

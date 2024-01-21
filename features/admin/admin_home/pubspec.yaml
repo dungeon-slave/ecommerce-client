@@ -1,0 +1,33 @@
+name: admin_home
+version: 0.0.1
+publish_to: none
+description: Admin screen library.
+
+environment:
+  sdk: '>=3.1.0 <4.0.0'
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  core:
+    path: ../../../core
+  core_ui:
+    path: ../../../core_ui
+
+
+  admin_menu:
+    path: ../admin_menu
+  users:
+    path: ../users
+
+
+  settings:
+    path: ../../common/settings
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  auto_route_generator: ^7.3.2
+  build_runner: ^2.4.7
