@@ -1,3 +1,3 @@
 # Info
 
-This flutter project designed to provide functionality of default food app.
+This flutter project designed to provide functionality of default e-commerce app.
