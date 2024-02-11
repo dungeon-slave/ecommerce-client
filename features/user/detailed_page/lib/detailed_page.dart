@@ -7,5 +7,5 @@ import 'detailed_page.gm.dart';
 export 'detailed_page.gm.dart';
 export 'src/ui/detailed_page_screen.dart';
 
-@AutoRouterConfig.module()
+@AutoRouterConfig.module(replaceInRouteName: 'Module|Screen,Route')
 class DetailedPageModule extends $DetailedPageModule {}

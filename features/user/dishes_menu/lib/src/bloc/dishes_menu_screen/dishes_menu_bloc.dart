@@ -35,7 +35,7 @@ class MenuBloc extends Bloc<MenuEvent, MenuState> {
 
   void _openDetailed(OpenDetailedEvent event, _) {
     _stackRouter.push(
-      DetailedRoute(
+      DetailedPageRoute(
         model: event.model,
         addToCartHandler: event.handler,
       ),

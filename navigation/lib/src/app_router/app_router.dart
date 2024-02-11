@@ -81,7 +81,7 @@ class AppRouter extends _$AppRouter {
                     ),
                     AutoRoute(
                       path: 'detailedPage',
-                      page: DetailedRoute.page,
+                      page: DetailedPageRoute.page,
                     ),
                   ],
                 ),
