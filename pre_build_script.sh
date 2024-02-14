@@ -15,7 +15,7 @@ pre_build_package() {
     flutter clean
 
     if [ -e "$PUBSPEC_LOCK" ]; then
-        rm pubspec.lock
+        rm "$PUBSPEC_LOCK" 
     fi
 
     flutter pub get
@@ -34,7 +34,7 @@ pre_build_project() {
   fi
 
   for folder in "$path"/*/; do
-    cd "$folder" || continue
+    cd "$folder" 2>/dev/null || continue
 
     if [ -e "$PUBSPEC" ]; then
         pre_build_package "$folder"
