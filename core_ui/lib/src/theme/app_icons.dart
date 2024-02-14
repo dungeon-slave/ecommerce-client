@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-final class AppIconsData {
+abstract class AppIconsData {
   static const IconData unselectedAdminMenu = Icons.assignment_outlined;
   static const IconData selectedAdminMenu = Icons.assignment_rounded;
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart' show Color;
 
-final class AppColors {
+abstract class AppColors {
   static const Color absWhite = Color.fromARGB(255, 255, 255, 255);
   static const Color absBlack = Color.fromARGB(255, 0, 0, 0);
   static const Color yellow = Color.fromARGB(255, 248, 193, 52);

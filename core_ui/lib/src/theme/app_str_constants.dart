@@ -1,4 +1,4 @@
-final class AppStrConstants {
+abstract class AppStrConstants {
   static const String menuCollection = 'dishes_menu';
   static const String usersCollection = 'users';
   static const String userOrdersCollection = 'orders';

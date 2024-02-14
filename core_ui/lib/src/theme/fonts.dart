@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart' show TextStyle, FontWeight;
 
-final class AppFonts {
+abstract class AppFonts {
   static const normal25 = TextStyle(
     fontSize: 25,
     fontWeight: FontWeight.normal,

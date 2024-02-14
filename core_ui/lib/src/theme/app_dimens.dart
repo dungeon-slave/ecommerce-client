@@ -1,4 +1,4 @@
-final class AppDimens {
+abstract class AppDimens {
   static const double width25 = 25;
   static const double margin5 = 5;
   static const double radius10 = 10;
